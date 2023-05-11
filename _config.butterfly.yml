@@ -38,8 +38,10 @@ code_word_wrap: false
 # formal:
 #   icon: link || the description || color
 social:
-  fab fa-github: https://github.com/wang-weijun || Github
+  fab fa-weixin: /img/wechat.jpg || weixin
+  fab fa-qq: https://res.abeim.cn/api/qq/?qq=1191206969 || qq
   fas fa-envelope: mailto:1191206969@qq.com || Email
+
 
 # Image (圖片設置)
 # --------------------------------------
@@ -49,7 +51,7 @@ favicon: /img/favicon.ico
 
 # Avatar (头像)
 avatar:
-  img: /img/favicon.ico
+  img: /img/head.jpg
   effect: false
 
 # Disable all banner image
@@ -114,7 +116,7 @@ post_meta:
     date_type: both # created or updated or both 主頁文章日期是創建日或者更新日或都顯示
     date_format: relative # date/relative 顯示日期還是相對日期
     categories: true # true or false 主頁是否顯示分類
-    tags: false # true or false 主頁是否顯示標籤
+    tags: true # true or false 主頁是否顯示標籤
     label: true # true or false 顯示描述性文字
   post:
     date_type: both # created or updated or both 文章頁日期是創建日或者更新日或都顯示
@@ -166,20 +168,20 @@ toc:
 post_copyright:
   enable: true
   decode: false
-  author_href:
+  author_href: 王伟军
   license: CC BY-NC-SA 4.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 # Sponsor/reward
 reward:
   enable: false
-  QR_code:
-    # - img: /img/wechat.jpg
-    #   link:
-    #   text: wechat
-    # - img: /img/alipay.jpg
-    #   link:
-    #   text: alipay
+  # QR_code:
+  #   - img: /img/wechat.jpg
+  #     link:
+  #     text: wechat
+  #   - img: /img/wechat.jpg
+  #     link:
+  #     text: alipay
 
 # Post edit
 # Easily browse and edit blog source code online.
@@ -220,7 +222,7 @@ footer:
   custom_text:
   copyright: false # Copyright of theme and framework
 
-# aside (側邊欄)
+# aside (侧边栏)
 # --------------------------------------
 
 aside:
@@ -250,7 +252,7 @@ aside:
     sort: date # date or updated
     sort_order: # Don't modify the setting unless you know how it works
   card_categories:
-    enable: false
+    enable: true
     limit: 8 # if set 0 will show all
     expand: none # none/true/false
     sort_order: # Don't modify the setting unless you know how it works
@@ -330,7 +332,7 @@ darkmode:
   end: # 22
 
 # show scroll percent in scroll-to-top button
-rightside_scroll_percent: false
+rightside_scroll_percent: true
 
 # Don't modify the following settings unless you know how they work (非必要請不要修改 )
 # Choose: readmode,translate,darkmode,hideAside,toc,chat,comment
@@ -727,14 +729,14 @@ beautify:
 font:
   global-font-size: 15px
   code-font-size: 14px
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
-  code-font-family: Consolas, Monaco, Menlo, "Ubuntu Mono", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif
+  font-family: font
+  code-font-family: font
 
 # Font settings for the site title and site subtitle
 # 左上角網站名字 主頁居中網站名字
 blog_title_font:
   font_link:
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"
+  font-family: font
 
 # The setting of divider icon (水平分隔線圖標設置)
 hr_icon:
@@ -883,7 +885,7 @@ lazyload:
 Open_Graph_meta:
   enable: true
   option:
-    # twitter_card:
+    twitter_card:
     # twitter_image:
     # twitter_id:
     # twitter_site:

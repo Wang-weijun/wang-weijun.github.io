@@ -4,9 +4,9 @@ description:
 date: 2023-05-9 16:10:00
 updated: 2023-05-9 16:10:00
 tags:
-  - 高级语言
-categories:
   - Python
+categories:
+  - 开发
 swiper_index: 1
 ---
 
