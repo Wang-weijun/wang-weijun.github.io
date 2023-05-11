@@ -1,6 +1,6 @@
 ---
-title: python常用工具
-description:
+title: Python常用工具
+description: Python常用小工具记录
 date: 2023-05-12 1:0:00
 updated: 2023-05-12 1:0:00
 tags:

@@ -1,6 +1,6 @@
 ---
 title: Python打包exe
-description:
+description: pyinstaller使用
 date: 2023-05-9 16:10:00
 updated: 2023-05-9 16:10:00
 tags:
