@@ -8,10 +8,22 @@
       siteshot: https://source.fomal.cc/siteshot/hexo.io.jpg
       
 - class_name: 2.友情链接
-  class_desc: 一些好朋友~~
+  class_desc: 其他博客
   link_list:
     - name: Fomalhaut🥝
       link: https://fomal.cc/
       avatar: /assets/head.jpg
       descr: Future is now 🍭🍭🍭
       siteshot: https://source.fomal.cc/siteshot/www.fomal.cn.jpg
+    - name: 唐志远の博客
+      link: https://tzy1997.com/
+      avatar: https://bu.dusays.com/2022/01/14/cd5ffd485f867.jpg
+      descr: 古今之成大事者，不惟有超世之才，亦必有坚忍不拔之志。
+
+- class_name: 网站
+  class_desc: 值得推荐的网站
+  link_list:
+    - name: Twitter
+      link: https://twitter.com/
+      avatar: https://i.loli.net/2020/05/14/5VyHPQqR6LWF39a.png
+      descr: 社交分享平台

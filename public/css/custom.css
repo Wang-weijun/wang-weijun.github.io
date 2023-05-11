@@ -52,10 +52,10 @@
   left: 0px;
 }
 .menus_items .menus_item:nth-child(4) .menus_item_child {
-  left: 0px;
+  left: -38px;
 }
 
-/* 日间模式不生效 */
+/* 白天模式不生效 */
 [data-theme="light"] #site-name,
 [data-theme="light"] #site-title,
 [data-theme="light"] #site-subtitle,
@@ -291,7 +291,7 @@
 }
 
 :root {
-  --trans-light: rgba(255, 255, 255, 0.75);
+  --trans-light: rgba(255, 255, 255, 0.88);
   --trans-dark: rgba(25, 25, 25, 0.88);
   --border-style: 1px solid rgb(169, 169, 169);
   --backdrop-filter: none;
