@@ -49,7 +49,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 > git config --list    #查看git配置信息
 
-![image-20230307101516684](../img/image-20230307101516684.png)
+![image-20230512200827202](https://cdn.staticaly.com/gh/Wang-weijun/pic_bed@main/img/image-20230512200827202.png)
 
 
 
@@ -114,11 +114,11 @@ git branch -a
 ssh-keygen -t rsa
 ~~~
 
-![image-20230222173117354](../img/image-20230222173117354.png)
+![image-20230512201232227](https://cdn.staticaly.com/gh/Wang-weijun/pic_bed@main/img/image-20230512201232227.png)
 
 3. 添加密钥到码云
 
-![image-20230222173328690](../img/image-20230222173328690.png)
+![image-20230512201245102](https://cdn.staticaly.com/gh/Wang-weijun/pic_bed@main/img/image-20230512201245102.png)
 
 4. 使用码云创建自己的仓库
 
@@ -128,7 +128,7 @@ ssh-keygen -t rsa
 
 5. 克隆自己的仓库
 
-![image-20230222175655348](../img/image-20230222175655348.png)
+![image-20230512201252646](https://cdn.staticaly.com/gh/Wang-weijun/pic_bed@main/img/image-20230512201252646.png)
 
 
 

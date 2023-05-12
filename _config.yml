@@ -111,7 +111,7 @@ deploy:
 search:
   path: search.xml
   field: post
-  content: true
+  content: false
 
   # envelope_comment
 # see https://akilar.top/posts/e2d3c450/
@@ -263,3 +263,19 @@ markdown_it_plus:
       enable: true
       options:
         strict: false
+
+algolia:
+  appId: "3GAT6MPAXR"
+  apiKey: "4cd4cc0c5d8b605792f9bf3dd1366898"
+  adminApiKey: "d4e496b8b8f7cdd5b73f173d6b627e01"
+  chunkSize: 5000
+  indexName: "hexo-blog"
+  fields:
+    - content:strip:truncate,0,500
+    - excerpt:strip
+    - gallery
+    - permalink
+    - photos
+    - slug
+    - tags
+    - title

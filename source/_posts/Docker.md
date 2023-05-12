@@ -116,14 +116,14 @@ systemctl start docker
 # 6、使用 docker version 是否安装成功！
 ~~~
 
-![image-20230130172339188](../img/image-20230130172339188.png)
+![image-20230512200658618](https://cdn.staticaly.com/gh/Wang-weijun/pic_bed@main/img/image-20230512200658618.png)
 
 ~~~shell
 # 7、hello-world
 docker run hello-world
 ~~~
 
-![image-20230130172623721](../img/image-20230130172623721.png)
+![image-20230512200710748](https://cdn.staticaly.com/gh/Wang-weijun/pic_bed@main/img/image-20230512200710748.png)
 
 ~~~shell
 # 8、查看一下下载的这个hello-world镜像
@@ -149,7 +149,7 @@ rm -rf /var/lib/containerd
 
 1、登录阿里云找到容器镜像服务
 
-![image-20230130173819786](../img/image-20230130173819786.png)
+![image-20230512200727031](https://cdn.staticaly.com/gh/Wang-weijun/pic_bed@main/img/image-20230512200727031.png)
 
 2、配置使用
 
@@ -704,66 +704,3 @@ Commercial support is available at
 </body>
 </html>
 ~~~
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
