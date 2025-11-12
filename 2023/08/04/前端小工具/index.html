@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/iconfont.png">
+  <link rel="mask-icon" href="/img/iconfont.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wang-weijun.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="记录前端的一些样式小细节">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端小工具">
+<meta property="og:url" content="http://wang-weijun.github.io/2023/08/04/%E5%89%8D%E7%AB%AF%E5%B0%8F%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="Phils的杂货铺">
+<meta property="og:description" content="记录前端的一些样式小细节">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230831163046332.png">
+<meta property="article:published_time" content="2023-08-04T06:15:10.000Z">
+<meta property="article:modified_time" content="2025-11-12T02:52:26.862Z">
+<meta property="article:author" content="Phils">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="Js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wang-weijun.github.io/images/image-20230831163046332.png">
+
+
+<link rel="canonical" href="http://wang-weijun.github.io/2023/08/04/%E5%89%8D%E7%AB%AF%E5%B0%8F%E5%B7%A5%E5%85%B7/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wang-weijun.github.io/2023/08/04/%E5%89%8D%E7%AB%AF%E5%B0%8F%E5%B7%A5%E5%85%B7/","path":"2023/08/04/前端小工具/","title":"前端小工具"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>前端小工具 | Phils的杂货铺</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phils的杂货铺</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number">1.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#video%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">video样式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue"><span class="nav-number">2.</span> <span class="nav-text">Vue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#element-plus"><span class="nav-number">2.1.</span> <span class="nav-text">element-plus</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E8%AE%BE%E7%BD%AE%E4%B8%BA%E4%B8%AD%E6%96%87"><span class="nav-number">2.1.1.</span> <span class="nav-text">组件设置为中文</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E8%A7%88office"><span class="nav-number">2.2.</span> <span class="nav-text">预览office</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E9%A2%84%E8%A7%88Markdown"><span class="nav-number">2.3.</span> <span class="nav-text">编写预览Markdown</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SVG%E7%BB%84%E4%BB%B6"><span class="nav-number">2.4.</span> <span class="nav-text">SVG组件</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phils"
+      src="/img/profile.png">
+  <p class="site-author-name" itemprop="name">Phils</p>
+  <div class="site-description" itemprop="description">个人博客，IT，技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wang-weijun" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wang-weijun" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1191206969@qq.com" title="E-Mail → mailto:1191206969@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wang-weijun.github.io/2023/08/04/%E5%89%8D%E7%AB%AF%E5%B0%8F%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/profile.png">
+      <meta itemprop="name" content="Phils">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phils的杂货铺">
+      <meta itemprop="description" content="个人博客，IT，技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="前端小工具 | Phils的杂货铺">
+      <meta itemprop="description" content="记录前端的一些样式小细节">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          前端小工具
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-08-04 14:15:10" itemprop="dateCreated datePublished" datetime="2023-08-04T14:15:10+08:00">2023-08-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-12 10:52:26" itemprop="dateModified" datetime="2025-11-12T10:52:26+08:00">2025-11-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">高级语言</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">记录前端的一些样式小细节</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="video样式"><a href="#video样式" class="headerlink" title="video样式"></a>video样式</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">  <span class="comment">/*video默认setting按钮*/</span></span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">video</span>::-internal-media-controls-overflow-button&#123; <span class="attribute">display</span>: none <span class="meta">!important</span>;&#125;</span></span><br><span class="line"><span class="language-css">  </span></span><br><span class="line"><span class="language-css">  <span class="comment">/*更改是否显示播放秒数*/</span></span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">video</span>::-webkit-media-controls-current-time-display&#123;<span class="attribute">display</span>: none; !important;&#125;</span></span><br><span class="line"><span class="language-css">  </span></span><br><span class="line"><span class="language-css">  <span class="comment">/*更改是否显示进度条*/</span></span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">video</span>::-webkit-media-controls-timeline &#123;<span class="attribute">display</span>: none; !important;&#125;</span></span><br><span class="line"><span class="language-css">  </span></span><br><span class="line"><span class="language-css">  <span class="comment">/*更改是否显示视频总时间*/</span></span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">video</span>::-webkit-media-controls-time-remaining-display &#123;<span class="attribute">display</span>: none; !important;&#125;</span></span><br><span class="line"><span class="language-css">  </span></span><br><span class="line"><span class="language-css">  <span class="comment">/*更改是否显示播放暂停按钮 */</span></span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">video</span>::-webkit-media-controls-play-button &#123;<span class="attribute">display</span>: none; !important;&#125;</span></span><br><span class="line"><span class="language-css">  </span></span><br><span class="line"><span class="language-css">  <span class="comment">/*更改是否显示下载按钮 */</span></span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">video</span>::-internal-media-controls-download-button &#123; <span class="attribute">display</span>:none; !important;&#125;</span></span><br><span class="line"><span class="language-css">  </span></span><br><span class="line"><span class="language-css">  <span class="comment">/*更改是否显示全屏按钮*/</span></span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">video</span>::-webkit-media-controls-fullscreen-button &#123; <span class="attribute">display</span>: none; &#125;</span></span><br><span class="line"><span class="language-css">  </span></span><br><span class="line"><span class="language-css">  <span class="comment">/*更改是否显示声音*/</span></span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">video</span>::-webkit-media-controls-mute-button &#123; <span class="attribute">display</span>: none;&#125;</span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">video</span>::-webkit-media-controls-toggle-closed-captions-button &#123;<span class="attribute">display</span>: none;&#125;</span></span><br><span class="line"><span class="language-css">  </span></span><br><span class="line"><span class="language-css">  <span class="comment">/*更改是否显示音量的控制条*/</span></span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">video</span>::-webkit-media-controls-volume-slider &#123;<span class="attribute">display</span>: none;&#125;</span></span><br><span class="line"><span class="language-css">  </span></span><br><span class="line"><span class="language-css">  <span class="comment">/*整个控制栏都隐藏掉*/</span></span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">video</span>::-webkit-media-controls-enclosure&#123; <span class="attribute">overflow</span>: hidden; &#125;</span></span><br><span class="line"><span class="language-css">  </span></span><br><span class="line"><span class="language-css">  <span class="comment">/*重置audio和video的边框和圆角样式*/</span></span></span><br><span class="line"><span class="language-css">  <span class="selector-tag">video</span>::-webkit-media-controls-panel&#123; <span class="attribute">width</span>: <span class="built_in">calc</span>(<span class="number">100%</span> + <span class="number">30px</span>); &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h2><h3 id="element-plus"><a href="#element-plus" class="headerlink" title="element-plus"></a>element-plus</h3><h4 id="组件设置为中文"><a href="#组件设置为中文" class="headerlink" title="组件设置为中文"></a>组件设置为中文</h4><p>在<code>App.vue</code>中，设置为中文，即可全局都为中文</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;el-config-provider :locale=&quot;zhCn&quot;&gt;</span><br><span class="line">    &lt;router-view/&gt;</span><br><span class="line">  &lt;/el-config-provider&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">import zhCn from &#x27;element-plus/es/locale/lang/zh-cn&#x27;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped lang=&quot;scss&quot;&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>也可对某个组件单独设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script setup&gt;</span><br><span class="line">import zhCn from &#x27;element-plus/es/locale/lang/zh-cn&#x27;</span><br><span class="line">zhCn.el.pagination.goto = &#x27;🛩️&#x27;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/image-20230831163046332.png" alt="image-20230831163046332"></p>
+<h3 id="预览office"><a href="#预览office" class="headerlink" title="预览office"></a>预览office</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//docx文档预览组件</span><br><span class="line">npm install @vue-office/docx</span><br><span class="line"></span><br><span class="line">//excel文档预览组件</span><br><span class="line">npm install @vue-office/excel</span><br><span class="line"></span><br><span class="line">//pdf文档预览组件</span><br><span class="line">npm install @vue-office/pdf</span><br></pre></td></tr></table></figure>
+
+<p><code>docx</code>演示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;vue-office-docx :src=&quot;docx&quot; @rendered=&quot;rendered&quot;/&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">//引入VueOfficeDocx组件</span><br><span class="line">import VueOfficeDocx from &#x27;@vue-office/docx&#x27;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  components:&#123;</span><br><span class="line">    VueOfficeDocx</span><br><span class="line">  &#125;,</span><br><span class="line">  data()&#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      docx: &#x27;http://static.shanhuxueyuan.com/test6.docx&#x27; //设置文档地址</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    rendered()&#123;</span><br><span class="line">      console.log(&quot;渲染完成&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>excel</code>文档</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;vue-office-excel :src=&quot;excel&quot; @rendered=&quot;rendered&quot;/&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">//引入VueOfficeExcel组件</span><br><span class="line">import VueOfficeExcel from &#x27;@vue-office/excel&#x27;</span><br><span class="line">//引入相关样式</span><br><span class="line">import &#x27;@vue-office/excel/lib/index.css&#x27;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  components:&#123;</span><br><span class="line">    VueOfficeExcel</span><br><span class="line">  &#125;,</span><br><span class="line">  data()&#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      excel: &#x27;http://static.shanhuxueyuan.com/demo/excel.xlsx&#x27;//设置文档地址</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    rendered()&#123;</span><br><span class="line">      console.log(&quot;渲染完成&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>pdf</code>文档</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;vue-office-pdf :src=&quot;pdf&quot; @rendered=&quot;rendered&quot;/&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">//引入VueOfficePdf组件</span><br><span class="line">import VueOfficePdf from &#x27;@vue-office/pdf&#x27;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  components:&#123;</span><br><span class="line">    VueOfficePdf</span><br><span class="line">  &#125;,</span><br><span class="line">  data()&#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      pdf: &#x27;http://static.shanhuxueyuan.com/test.pdf&#x27; //设置文档地址</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    rendered()&#123;</span><br><span class="line">      console.log(&quot;渲染完成&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写预览Markdown"><a href="#编写预览Markdown" class="headerlink" title="编写预览Markdown"></a>编写预览Markdown</h3><p><a target="_blank" rel="noopener" href="https://github.com/Tencent/cherry-markdown/blob/main/README.CN.md"><strong>Cherry Markwodn Editor</strong></a></p>
+<p>Cherry Markdown Editor 是一款 Javascript Markdown 编辑器，具有开箱即用、轻量简洁、易于扩展等特点. 它可以运行在浏览器或服务端(NodeJs).</p>
+<p><strong>开箱即用</strong></p>
+<p>开发者可以使用非常简单的方式调用并实例化 Cherry Markdown 编辑器，实例化的编辑器默认支持大部分常用的 markdown 语法（如标题、目录、流程图、公式等）。</p>
+<p><strong>易于拓展</strong></p>
+<p>当 Cherry Markdown 编辑器支持的语法不满足开发者需求时，可以快速的进行二次开发或功能扩展。同时，CherryMarkdown 编辑器应该由纯 JavaScript 实现，不应该依赖 angular、vue、react 等框架技术，框架只提供容器环境即可。</p>
+<p><strong>安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install cherry-markdown --save</span><br></pre></td></tr></table></figure>
+
+<p>如果需要开启 <code>mermaid</code> 画图、表格自动转图表功能，需要同时添加<code>mermaid</code> 与<code>echarts</code>包。</p>
+<p>目前<strong>Cherry</strong>推荐的插件版本为<code>echarts@4.6.0</code>、<code>mermaid@9.4.3</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装mermaid依赖开启mermaid画图功能</span></span><br><span class="line">npm i mermaid@9.4.3</span><br><span class="line"><span class="comment"># 安装echarts依赖开启表格自动转图表功能</span></span><br><span class="line">npm i echarts@4.6.0</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="SVG组件"><a href="#SVG组件" class="headerlink" title="SVG组件"></a>SVG组件</h3><p>为了在vue项目中使用SVG，首先进行安装插件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pnpm install vite-plugin-svg-icons -D</span><br></pre></td></tr></table></figure>
+
+<p>在<code>vite.config.ts</code>中引入插件：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入SVG需要用到插件</span></span><br><span class="line"><span class="keyword">import</span> &#123;createSvgIconsPlugin&#125; <span class="keyword">from</span> <span class="string">&quot;vite-plugin-svg-icons&quot;</span>;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">defineConfig</span>(&#123;</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="title function_">vue</span>(),</span><br><span class="line">        <span class="title function_">createSvgIconsPlugin</span>(&#123;</span><br><span class="line">            <span class="attr">iconDirs</span>: [path.<span class="title function_">resolve</span>(process.<span class="title function_">cwd</span>(), <span class="string">&#x27;src/assets/icons&#x27;</span>)],</span><br><span class="line">            <span class="attr">symbolId</span>: <span class="string">&#x27;icon-[dir]-[name]&#x27;</span>,</span><br><span class="line">        &#125;)</span><br><span class="line">    ],</span><br><span class="line">    ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在<code>main.ts</code>中配置：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// svg插件需要配置代码</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;virtual:svg-icons-register&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>在页面中使用时：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- svg：图标外层容器节点，内部需要与use标签结合使用 --&gt;</span><br><span class="line">&lt;svg style=&quot;width: 90px; height: 90px;&quot;&gt;</span><br><span class="line">    &lt;!-- xlink:href 执行用哪一个图标,格式 #icon-[路径src/assets/icons下的SVG文件名]  --&gt;</span><br><span class="line">    &lt;!-- use标签fill属性可以设置图标的颜色 --&gt;</span><br><span class="line">    &lt;use xlink:href=&quot;#icon-phone&quot; fill=&quot;red&quot;&gt;&lt;/use&gt;</span><br><span class="line">&lt;/svg&gt;</span><br></pre></td></tr></table></figure>
+
+<p>为了方便使用将SVG封装为一个组件，新建一个组件在 <code>src/components/SvgIcon/index.vue</code>，写入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;!-- svg：图标外层容器节点，内部需要与use标签结合使用 --&gt;</span><br><span class="line">  &lt;svg :style=&quot;&#123;width,height&#125;&quot;&gt;</span><br><span class="line">    &lt;!-- xlink:href 执行用哪一个图标 --&gt;</span><br><span class="line">    &lt;!-- use标签fill属性可以设置图标的颜色 --&gt;</span><br><span class="line">    &lt;use :xlink:href=&quot;prefix + name&quot; :fill=&quot;color&quot;&gt;&lt;/use&gt;</span><br><span class="line">  &lt;/svg&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot; setup name=&quot;index&quot;&gt;</span><br><span class="line">defineProps(&#123;</span><br><span class="line">  // xlink:href属性值前缀</span><br><span class="line">  prefix: &#123;</span><br><span class="line">    type: String,</span><br><span class="line">    default: &#x27;#icon-&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">  // 提供使用的图标名字</span><br><span class="line">  name: String,</span><br><span class="line">  // 接收父组件传递颜色</span><br><span class="line">  color: &#123;</span><br><span class="line">    type: String,</span><br><span class="line">    default: &#x27;&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">  // 接收父组件传递的图标宽度</span><br><span class="line">  width: &#123;</span><br><span class="line">    type: String,</span><br><span class="line">    default: &#x27;16px&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">  // 接收父组件传递的图标高度</span><br><span class="line">  height: &#123;</span><br><span class="line">    type: String,</span><br><span class="line">    default: &#x27;16px&#x27;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在其他组件使用时：可传入，<code>name</code>:路径<code>src/assets/icons</code>下SVG图标名称 <code>color</code>:图标颜色 <code>width、height</code>:图标宽高</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;svg-icon name=&quot;home&quot; color=&quot;pink&quot; width=&quot;100px&quot; height=&quot;100px&quot; /&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script lang=&quot;ts&quot; setup name=&quot;App&quot;&gt;</span><br><span class="line">import SvgIcon from &#x27;@/components/SvgIcon/index.vue&#x27;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+              <a href="/tags/Js/" rel="tag"># Js</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/07/26/%E6%99%BA%E8%83%BD%E4%BA%91%E7%9B%98/" rel="prev" title="智能云盘">
+                  <i class="fa fa-angle-left"></i> 智能云盘
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/09/14/hexo%E6%90%AD%E5%BB%BA/" rel="next" title="hexo搭建">
+                  hexo搭建 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phils</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
