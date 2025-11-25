@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/iconfont.png">
+  <link rel="mask-icon" href="/img/iconfont.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wang-weijun.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="记录Java集成各种技术栈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java技术栈">
+<meta property="og:url" content="http://wang-weijun.github.io/2023/09/22/Java%E6%8A%80%E6%9C%AF%E6%A0%88/index.html">
+<meta property="og:site_name" content="Phils的杂货铺">
+<meta property="og:description" content="记录Java集成各种技术栈">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-01.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/video-sse.gif">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230922141123048.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230922144605883.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230922144622450.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230925094542451.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230925102018009.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230925102056677.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230925102125367.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230925102347281.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230925134928246.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230925134933915.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230925141103100.png">
+<meta property="article:published_time" content="2023-09-22T02:17:31.000Z">
+<meta property="article:modified_time" content="2025-11-25T06:17:21.267Z">
+<meta property="article:author" content="Phils">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="SSE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wang-weijun.github.io/images/image-01.png">
+
+
+<link rel="canonical" href="http://wang-weijun.github.io/2023/09/22/Java%E6%8A%80%E6%9C%AF%E6%A0%88/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wang-weijun.github.io/2023/09/22/Java%E6%8A%80%E6%9C%AF%E6%A0%88/","path":"2023/09/22/Java技术栈/","title":"Java技术栈"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Java技术栈 | Phils的杂货铺</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phils的杂货铺</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSE-%E5%AE%9E%E7%8E%B0%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81"><span class="nav-number">1.</span> <span class="nav-text">SSE 实现消息推送</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ElasticSearch"><span class="nav-number">2.</span> <span class="nav-text">ElasticSearch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ElasticSearch-%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.1.</span> <span class="nav-text">ElasticSearch 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ElasticSearch-%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.1.</span> <span class="nav-text">ElasticSearch 概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95-Index"><span class="nav-number">2.1.2.</span> <span class="nav-text">索引(Index)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B-Type"><span class="nav-number">2.1.3.</span> <span class="nav-text">类型(Type)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%A1%A3-Document"><span class="nav-number">2.1.4.</span> <span class="nav-text">文档(Document)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5-Field"><span class="nav-number">2.1.5.</span> <span class="nav-text">字段(Field)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%A0%E5%B0%84-Mapping"><span class="nav-number">2.1.6.</span> <span class="nav-text">映射(Mapping)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ElasticSearch-%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">ElasticSearch 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E8%BD%AF%E4%BB%B6"><span class="nav-number">2.2.1.</span> <span class="nav-text">下载软件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#windows-%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.2.</span> <span class="nav-text">windows 安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ik-%E5%88%86%E8%AF%8D%E5%99%A8%E5%AE%89%E8%A3%85"><span class="nav-number">2.3.</span> <span class="nav-text">ik 分词器安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IK-%E5%88%86%E8%AF%8D%E5%99%A8%E7%AE%80%E4%BB%8B"><span class="nav-number">2.3.1.</span> <span class="nav-text">IK 分词器简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IK-%E5%88%86%E8%AF%8D%E5%99%A8%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.3.2.</span> <span class="nav-text">IK 分词器的安装</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kibana-%E5%AE%89%E8%A3%85-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">2.4.</span> <span class="nav-text">kibana 安装-客户端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RabbitMQ"><span class="nav-number">3.</span> <span class="nav-text">RabbitMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RabbitMQ-%E7%AE%80%E4%BB%8B"><span class="nav-number">3.1.</span> <span class="nav-text">RabbitMQ 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-rabbitMQ"><span class="nav-number">3.2.</span> <span class="nav-text">安装 rabbitMQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#abbitMQ-%E6%9C%8D%E5%8A%A1%E5%90%8E%E5%8F%B0"><span class="nav-number">3.3.</span> <span class="nav-text">abbitMQ 服务后台</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phils"
+      src="/img/profile.png">
+  <p class="site-author-name" itemprop="name">Phils</p>
+  <div class="site-description" itemprop="description">个人博客，IT，技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wang-weijun" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wang-weijun" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1191206969@qq.com" title="E-Mail → mailto:1191206969@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wang-weijun.github.io/2023/09/22/Java%E6%8A%80%E6%9C%AF%E6%A0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/profile.png">
+      <meta itemprop="name" content="Phils">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phils的杂货铺">
+      <meta itemprop="description" content="个人博客，IT，技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Java技术栈 | Phils的杂货铺">
+      <meta itemprop="description" content="记录Java集成各种技术栈">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java技术栈
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-22 10:17:31" itemprop="dateCreated datePublished" datetime="2023-09-22T10:17:31+08:00">2023-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-25 14:17:21" itemprop="dateModified" datetime="2025-11-25T14:17:21+08:00">2025-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">高级语言</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">记录Java集成各种技术栈</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="SSE-实现消息推送"><a href="#SSE-实现消息推送" class="headerlink" title="SSE 实现消息推送"></a>SSE 实现消息推送</h2><p><strong>SSE（Server-Sent Events）</strong></p>
+<p>当涉及到部分请求，后端处理时间较长，使用常规 Http 请求，页面等待时间太长，对用户不友好，故考虑使用长链接进行消息推送，</p>
+<p>可选方案有<strong>WebSocket</strong>、<strong>SSE</strong>。WebSocket 可实现双工通信，SSE 仅支持服务端向客户端推送消息，根据实际使用场景，SSE 即可满足，故选用 SSE。</p>
+<p>在<code>SpringBoot</code>中，先编写 SSE 服务<code>SseEmitterServer</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SseEmitterServer</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> Map&lt;String, SseEmitter&gt; SSE_CACHE = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 创建新连接</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">synchronized</span> SseEmitter <span class="title function_">createSession</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">		<span class="comment">// 设置过期时间为0 表示永不过期</span></span><br><span class="line">		<span class="type">SseEmitter</span> <span class="variable">sseEmitter</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SseEmitter</span>(<span class="number">0L</span>);</span><br><span class="line">		<span class="type">String</span> <span class="variable">id</span> <span class="operator">=</span> UUID.randomUUID().toString().replaceAll(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">		<span class="keyword">if</span> (!SSE_CACHE.containsKey(id)) &#123;</span><br><span class="line">			SSE_CACHE.put(id, sseEmitter);</span><br><span class="line">			log.info(<span class="string">&quot;客户端：[&#123;&#125;]新建成功，当前客户端总数为：[&#123;&#125;]&quot;</span>, id, SSE_CACHE.size());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> sseEmitter;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">closeSession</span><span class="params">(String clientId)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> (SSE_CACHE.containsKey(clientId))&#123;</span><br><span class="line">			SSE_CACHE.get(clientId).complete();</span><br><span class="line">			SSE_CACHE.remove(clientId);</span><br><span class="line">			log.info(<span class="string">&quot;客户端：[&#123;&#125;]关闭成功，当前剩余客户端总数为：[&#123;&#125;]&quot;</span>, clientId, SSE_CACHE.size());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 定时任务</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Scheduled(fixedDelay = 3, initialDelay = 1)</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">job</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (SSE_CACHE.size() &gt; <span class="number">0</span>)&#123;</span><br><span class="line">			<span class="type">String</span> <span class="variable">msg</span> <span class="operator">=</span> UUID.randomUUID().toString();</span><br><span class="line">			System.out.println(<span class="string">&quot;定时任务发送消息：&quot;</span> + msg);</span><br><span class="line">			<span class="keyword">for</span> (Map.Entry&lt;String, SseEmitter&gt; entry : SSE_CACHE.entrySet()) &#123;</span><br><span class="line">				<span class="type">SseEmitter</span> <span class="variable">sseEmitter</span> <span class="operator">=</span> SSE_CACHE.get(entry.getKey());</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					sseEmitter.send(SseEmitter.event().reconnectTime(<span class="number">1000</span>).id(entry.getKey()).data(msg));</span><br><span class="line">				&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">					SSE_CACHE.remove(entry.getKey());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendMessageToClient</span><span class="params">(String clientId, String message)</span> &#123;</span><br><span class="line">		<span class="type">SseEmitter</span> <span class="variable">sseEmitter</span> <span class="operator">=</span> SSE_CACHE.get(clientId);</span><br><span class="line">		<span class="keyword">if</span> (sseEmitter != <span class="literal">null</span>) &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				sseEmitter.send(SseEmitter.event().reconnectTime(<span class="number">1000</span>).id(clientId).data(message));</span><br><span class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">				SSE_CACHE.remove(clientId);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">sendMessageToAllClients</span><span class="params">(String message)</span> &#123;</span><br><span class="line">		<span class="keyword">for</span> (Map.Entry&lt;String, SseEmitter&gt; entry : SSE_CACHE.entrySet()) &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				entry.getValue().send(SseEmitter.event().reconnectTime(<span class="number">1000</span>).id(entry.getKey()).data(message));</span><br><span class="line">			&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">				SSE_CACHE.remove(entry.getKey());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接口使用：<code>SseController</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@CrossOrigin</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SseController</span> &#123;</span><br><span class="line">	<span class="meta">@Resource</span></span><br><span class="line">	<span class="keyword">private</span> SseEmitterServer sseEmitterServer;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@GetMapping(&quot;/connect&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> SseEmitter <span class="title function_">connect</span><span class="params">()</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">		<span class="keyword">return</span> sseEmitterServer.createSession();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@GetMapping(&quot;/disconnect&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> String <span class="title function_">disconnect</span><span class="params">(<span class="meta">@RequestParam</span> String clientId)</span> &#123;</span><br><span class="line">		sseEmitterServer.closeSession(clientId);</span><br><span class="line">		<span class="keyword">return</span> <span class="string">&quot;Disconnected&quot;</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@PostMapping(&quot;/send&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> Result <span class="title function_">send</span><span class="params">(<span class="meta">@RequestParam</span> String msg)</span> &#123;</span><br><span class="line">		sseEmitterServer.sendMessageToAllClients(msg);</span><br><span class="line">		<span class="keyword">return</span> Result.ok(<span class="literal">null</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在前端使用也非常的方便，下面是 vue 的一个小示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个 EventSource 对象实例</span></span><br><span class="line"><span class="keyword">let</span> eventSource = <span class="literal">null</span>;</span><br><span class="line"><span class="title function_">onMounted</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  eventSource = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="string">&quot;http://localhost:9091/connect&quot;</span>);</span><br><span class="line">  eventSource.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 获取到后端返回的值</span></span><br><span class="line">    message.<span class="property">value</span> += <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(event.<span class="property">data</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用接口</span></span><br><span class="line"><span class="keyword">await</span> request.<span class="title function_">post</span>(</span><br><span class="line">  <span class="string">&quot;http://localhost:9091/send?msg=&quot;</span> + <span class="built_in">encodeURIComponent</span>(text.<span class="property">value</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>我们在后端提供两个接口，一个是前端进页面就进行 SSE 链接，另一个是调用接口，使用 SSE 返回给前端</p>
+<blockquote>
+<p>初次进入页面时，进行连接</p>
+</blockquote>
+<p><img src="/../images/image-01.png" alt="image-01"></p>
+<p>当发送消息调用接口，此处调用语言模型接口，以流式返回：</p>
+<p><img src="/../images/video-sse.gif" alt="video-sse"></p>
+<h2 id="ElasticSearch"><a href="#ElasticSearch" class="headerlink" title="ElasticSearch"></a>ElasticSearch</h2><h3 id="ElasticSearch-介绍"><a href="#ElasticSearch-介绍" class="headerlink" title="ElasticSearch 介绍"></a>ElasticSearch 介绍</h3><h4 id="ElasticSearch-概述"><a href="#ElasticSearch-概述" class="headerlink" title="ElasticSearch 概述"></a>ElasticSearch 概述</h4><p>Elasticsearch (简称 ES)是一个分布式、高扩展、高实时的、RESTful 风格的搜索与数据分析引擎。它能很方便的使大量数据具有搜索、分析和探索的能力。充分利用 Elasticsearch 的水平伸缩性，能使数据在生产环境变得更有价值。Elasticsearch 的实现原理主要分为以下几个步骤，首先用户将数据提交到 Elasticsearch 数据库中，再通过分词控制器去将对应的语句分词，将其权重和分词结果一并存入数据，当用户搜索数据时候，再根据权重将结果排名，打分，再将返回结果呈现给用户。</p>
+<p>Elasticsearch 是面向文档型数据库，一条数据在这里就是一个文档，用 JSON 作为文档序列化的格式，比如下面这条用户数据：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;John&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;sex&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Male&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="number">25</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;birthDate&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1990/05/01&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;about&quot;</span><span class="punctuation">:</span> <span class="string">&quot;I love to go rock climbing&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;interests&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;sports&quot;</span><span class="punctuation">,</span> <span class="string">&quot;music&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>用 Mysql 这样的数据库存储就会容易想到建立一张 User 表，有各个字段等，在 ElasticSearch 里这就是一个文档，当然这个文档会属于一个 User 的类型，各种各样的类型存在于一个索引当中。这里有一份简易的将 Elasticsearch 和关系型数据术语对照表:</p>
+<p><img src="/../images/image-20230922141123048.png" alt="image-20230922141123048"></p>
+<h4 id="索引-Index"><a href="#索引-Index" class="headerlink" title="索引(Index)"></a>索引(Index)</h4><p>一个索引就是一个拥有几分相似特征的文档的集合。比如说，你可以有一个客户数据的索引，另一个产品目录的索引，还有一个订单数据的索引。一个索引由一个名字来标识（必须全部是小写字母），并且当我们要对这个索引中的文档进行索引、搜索、更新和删除的时候，都要使用到这个名字。在一个集群中，可以定义任意多的索引。</p>
+<p>能搜索的数据必须索引，这样的好处是可以<strong>提高查询速度</strong>，比如：新华字典前面的目录就是索引的意思，目录可以提高查询速度。</p>
+<p><strong>Elasticsearch 索引的精髓：一切设计都是为了提高搜索的性能。</strong></p>
+<h4 id="类型-Type"><a href="#类型-Type" class="headerlink" title="类型(Type)"></a>类型(Type)</h4><p>在一个索引中，你可以定义一种或多种类型。</p>
+<p>一个类型是你的索引的一个逻辑上的分类&#x2F;分区，其语义完全由你来定。通常，会为具有一组共同字段的文档定义一个类型。不同的版本，类型发生了不同的变化</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5.x</td>
+<td>支持多种 type</td>
+</tr>
+<tr>
+<td>6.x</td>
+<td>只能有一种 type</td>
+</tr>
+<tr>
+<td><strong>7.x</strong></td>
+<td><strong>默认不再支持自定义索引类型（默认类型为：_doc）</strong></td>
+</tr>
+</tbody></table>
+<h4 id="文档-Document"><a href="#文档-Document" class="headerlink" title="文档(Document)"></a>文档(Document)</h4><p>一个文档是一个可被索引的基础信息单元，也就是一条数据</p>
+<p>比如：你可以拥有某一个客户的文档，某一个产品的一个文档，当然，也可以拥有某个订单的一个文档。文档以<strong>JSON（Javascript Object Notation）格式</strong>来表示，而 JSON 是一个到处存在的互联网数据交互格式。</p>
+<p>在一个 index&#x2F;type 里面，你可以存储任意多的文档。</p>
+<h4 id="字段-Field"><a href="#字段-Field" class="headerlink" title="字段(Field)"></a>字段(Field)</h4><p>相当于是数据表的字段，对文档数据根据不同属性进行的分类标识。</p>
+<h4 id="映射-Mapping"><a href="#映射-Mapping" class="headerlink" title="映射(Mapping)"></a>映射(Mapping)</h4><p>mapping 是处理数据的方式和规则方面做一些限制，如：某个字段的数据类型、默认值、分析器、是否被索引等等。这些都是映射里面可以设置的，其它就是处理 ES 里面数据的一些使用规则设置也叫做映射，按着最优规则处理数据对性能提高很大，因此才需要建立映射，并且需要思考如何建立映射才能对性能更好。</p>
+<h3 id="ElasticSearch-安装"><a href="#ElasticSearch-安装" class="headerlink" title="ElasticSearch 安装"></a>ElasticSearch 安装</h3><h4 id="下载软件"><a href="#下载软件" class="headerlink" title="下载软件"></a>下载软件</h4><p>下载地址：<a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/past-releases#elasticsearch">ElasticSearch</a></p>
+<p>推荐下载<code>7.8版本</code>：<a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/past-releases/elasticsearch-7-8-0">Elasticsearch 7.8.0</a></p>
+<h4 id="windows-安装"><a href="#windows-安装" class="headerlink" title="windows 安装"></a>windows 安装</h4><p>解压文件，目录结构如下：</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bin</td>
+<td>可执行脚本目录</td>
+</tr>
+<tr>
+<td>config</td>
+<td>配置目录</td>
+</tr>
+<tr>
+<td>jdk</td>
+<td>内置 jdk 目录</td>
+</tr>
+<tr>
+<td>lib</td>
+<td>类库</td>
+</tr>
+<tr>
+<td>logs</td>
+<td>日志目录</td>
+</tr>
+<tr>
+<td>modules</td>
+<td>模块目录</td>
+</tr>
+<tr>
+<td>plugins</td>
+<td>插件目录</td>
+</tr>
+</tbody></table>
+<p>解压完成后进入 bin 目录，双击运行<strong>elasticsearch.bat</strong></p>
+<p><img src="/../images/image-20230922144605883.png" alt="image-20230922144605883"></p>
+<p>测试访问: <a target="_blank" rel="noopener" href="http://localhost:9200/">http://localhost:9200/</a></p>
+<p><img src="/../images/image-20230922144622450.png" alt="image-20230922144622450"></p>
+<p><strong>注意事项一：</strong></p>
+<p>ElasticSearch 是使用 java 开发的，且本版本的<strong>ES</strong>需要 JDK 版本要是 1.8 以上，所以安装 ElasticSearch 之前保证 JDK1.8+安装完毕，并正确的配置好 JDK 环境变量，否则启动 ElasticSearch 失败。</p>
+<p><strong>注意事项二</strong>：</p>
+<p>出现闪退，通过路径访问发现“空间不足”</p>
+<p><strong>修改 config&#x2F;jvm.options 文件</strong>的 22 行 23 行，把 2 改成 1，让 Elasticsearch 启动的时候占用 1 个 G 的内存。</p>
+<p>-Xmx512m：设置 JVM 最大可用内存为 512M。</p>
+<p>-Xms512m：设置 JVM 初始内存 512m。此值可设置与-Xmx 相同，以避免每次垃圾回收完成后 JVM 重新分配内存。</p>
+<h3 id="ik-分词器安装"><a href="#ik-分词器安装" class="headerlink" title="ik 分词器安装"></a>ik 分词器安装</h3><h4 id="IK-分词器简介"><a href="#IK-分词器简介" class="headerlink" title="IK 分词器简介"></a>IK 分词器简介</h4><p>IKAnalyzer 是一个开源的，基于 Java 语言开发的轻量级的中文分词工具包。从 2006 年 12 月推出 1.0 版开始，IKAnalyzer 已经推出 了 3 个大版本。最初，它是以开源项目 Lucene 为应用主体的，结合词典分词和文法分析算法的中文分词组件。新版本的 IKAnalyzer3.0 则发展为面向 Java 的公用分词组件，独立于 Lucene 项目，同时提供了对 Lucene 的默认优化实现。</p>
+<p>IK 分词器 3.0 的特性如下：</p>
+<p>1）采用了特有的“正向迭代最细粒度切分算法“，具有 60 万字&#x2F;秒的高速处理能力。</p>
+<p>2）采用了多子处理器分析模式，支持：英文字母（IP 地址、Email、URL）、数字（日期，常用中文数量词，罗马数字，科学计数法），中文词汇（姓名、地名处理）等分词处理。</p>
+<p>3）对中英联合支持不是很好,在这方面的处理比较麻烦.需再做一次查询，同时是支持个人词条的优化的词典存储，更小的内存占用。</p>
+<p>4）支持用户词典扩展定义。</p>
+<p>5）针对 Lucene 全文检索优化的查询分析器 IKQueryParser；采用歧义分析算法优化查询关键字的搜索排列组合，能极大的提高 Lucene 检索的命中率。</p>
+<h4 id="IK-分词器的安装"><a href="#IK-分词器的安装" class="headerlink" title="IK 分词器的安装"></a>IK 分词器的安装</h4><p><strong>下载：</strong></p>
+<p>GitHub 仓库地址：<a target="_blank" rel="noopener" href="https://github.com/medcl/elasticsearch-analysis-ik">https://github.com/medcl/elasticsearch-analysis-ik</a></p>
+<p>下载地址: <a target="_blank" rel="noopener" href="https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.8.0/elasticsearch-analysis-ik-7.8.0.zip">https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.8.0/elasticsearch-analysis-ik-7.8.0.zip</a></p>
+<p><strong>解压安装 IK 插件：</strong></p>
+<p>将<code>ik压缩包</code>直接<strong>解压到 ElasticSearch 的 plugins\ik\目录</strong>下，注意目录结构，解压后的 zip 不要放在 plugins 目录下</p>
+<p><img src="/../images/image-20230925094542451.png" alt="image-20230925094542451"></p>
+<h3 id="kibana-安装-客户端"><a href="#kibana-安装-客户端" class="headerlink" title="kibana 安装-客户端"></a>kibana 安装-客户端</h3><p>elasticsearch 服务是一个 restful 风格的 http 服务。我们可以采用 postman 作为客户端来进行操作，elastic stack 官方也给我们提供了 kibana 来进行客户端操作，这个相比 postman 要友好一点，因为里面有些自动补全的代码提示</p>
+<p>下载地址: <a target="_blank" rel="noopener" href="https://www.elastic.co/cn/downloads/past-releases/kibana-7-8-0">https://www.elastic.co/cn/downloads/past-releases/kibana-7-8-0</a></p>
+<p><strong>解压文件：进入到 config 目录，修改 kibana.yml 文件：</strong></p>
+<p><strong>Kibana</strong>默认端口：5601</p>
+<p><img src="/../images/image-20230925102018009.png" alt="image-20230925102018009"></p>
+<p>Kibana 连接 elasticsearch 服务器的地址：elasticsearch.hosts: [“<a target="_blank" rel="noopener" href="http://localhost:9200"]">http://localhost:9200&quot;]</a></p>
+<p><img src="/../images/image-20230925102056677.png" alt="image-20230925102056677"></p>
+<p>修改 kibana 配置支持中文：i18n.locale: “zh-CN”</p>
+<p><img src="/../images/image-20230925102125367.png" alt="image-20230925102125367"></p>
+<p><strong>运行访问</strong></p>
+<p>执行<code>kibana-7.8.0\bin\kibana.bat</code></p>
+<p><img src="/../images/image-20230925102347281.png" alt="image-20230925102347281"></p>
+<p>开始访问：<a target="_blank" rel="noopener" href="http://127.0.0.1:5601/">http://127.0.0.1:5601</a></p>
+<h2 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h2><h3 id="RabbitMQ-简介"><a href="#RabbitMQ-简介" class="headerlink" title="RabbitMQ 简介"></a>RabbitMQ 简介</h3><p><strong>以商品订单场景为例，</strong></p>
+<p>如果商品服务和订单服务是两个不同的微服务，在下单的过程中订单服务需要调用商品服务进行扣库存操作。按照传统的方式，下单过程要等到调用完毕之后才能返回下单成功，如果网络产生波动等原因使得商品服务扣库存延迟或者失败，会带来较差的用户体验，如果在高并发的场景下，这样的处理显然是不合适的，那怎么进行优化呢？这就需要消息队列登场了。</p>
+<p>消息队列提供一个异步通信机制，消息的发送者不必一直等待到消息被成功处理才返回，而是立即返回。消息中间件负责处理网络通信，如果网络连接不可用，消息被暂存于队列当中，当网络畅通的时候在将消息转发给相应的应用程序或者服务，当然前提是这些服务订阅了该队列。如果在商品服务和订单服务之间使用消息中间件，既可以提高并发量，又降低服务之间的耦合度。</p>
+<p>RabbitMQ 就是这样一款消息队列。RabbitMQ 是一个开源的消息代理的队列服务器，用来通过普通协议在完全不同的应用之间共享数据。</p>
+<p><strong>典型应用场景：</strong></p>
+<ul>
+<li>异步处理。把消息放入消息中间件中，等到需要的时候再去处理。</li>
+</ul>
+<p><img src="/../images/image-20230925134928246.png" alt="image-20230925134928246"></p>
+<ul>
+<li>流量削峰。例如秒杀活动，在短时间内访问量急剧增加，使用消息队列，当消息队列满了就拒绝响应，跳转到错误页面，这样就可以使得系统不会因为超负载而崩溃</li>
+</ul>
+<p><img src="/../images/image-20230925134933915.png" alt="image-20230925134933915"></p>
+<h3 id="安装-rabbitMQ"><a href="#安装-rabbitMQ" class="headerlink" title="安装 rabbitMQ"></a>安装 rabbitMQ</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#拉取镜像</span></span><br><span class="line">docker pull rabbitmq:3.8-management</span><br><span class="line"><span class="comment">#创建容器启动</span></span><br><span class="line">docker run -d --restart=always -p 5672:5672 -p 15672:15672 --name rabbitmq rabbitmq:3.8-management</span><br></pre></td></tr></table></figure>
+
+<h3 id="abbitMQ-服务后台"><a href="#abbitMQ-服务后台" class="headerlink" title="abbitMQ 服务后台"></a>abbitMQ 服务后台</h3><p><strong>管理后台</strong>：<a target="_blank" rel="noopener" href="http://ip:15672/">http://IP:15672</a> ，用户名和密码默认：guest</p>
+<p><img src="/../images/image-20230925141103100.png" alt="image-20230925141103100"></p>
+<p>在 SpringBoot 中引入，导入依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--rabbitmq消息队列--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-bus-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>配置<code>application.yml</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">rabbitmq:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.10</span><span class="number">.100</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">5672</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">guest</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">guest</span></span><br><span class="line">    <span class="attr">publisher-confirm-type:</span> <span class="string">CORRELATED</span> <span class="comment">#发布确认模式，消息是否被成功发送到交换机</span></span><br><span class="line">    <span class="attr">publisher-returns:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">listener:</span></span><br><span class="line">      <span class="attr">simple:</span></span><br><span class="line">        <span class="attr">prefetch:</span> <span class="number">1</span></span><br><span class="line">        <span class="attr">concurrency:</span> <span class="number">3</span></span><br><span class="line">        <span class="attr">acknowledge-mode:</span> <span class="string">manual</span> <span class="comment">#消费端手动确认</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/SpringBoot/" rel="tag"># SpringBoot</a>
+              <a href="/tags/SSE/" rel="tag"># SSE</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/20/ffmpeg%E5%B7%A5%E5%85%B7/" rel="prev" title="ffmpeg工具">
+                  <i class="fa fa-angle-left"></i> ffmpeg工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/10/Electron/" rel="next" title="Electron框架">
+                  Electron框架 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phils</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

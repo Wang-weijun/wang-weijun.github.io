@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/iconfont.png">
+  <link rel="mask-icon" href="/img/iconfont.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wang-weijun.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Python常用小工具记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python工具类">
+<meta property="og:url" content="http://wang-weijun.github.io/2023/05/17/Python%E5%B7%A5%E5%85%B7%E7%B1%BB/index.html">
+<meta property="og:site_name" content="Phils的杂货铺">
+<meta property="og:description" content="Python常用小工具记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202310250942468.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202310250942390.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202310250924728.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202310250944065.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202310250944496.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202310250945006.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202310250946512.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202310250946427.png">
+<meta property="article:published_time" content="2023-05-17T08:05:18.000Z">
+<meta property="article:modified_time" content="2025-11-25T06:17:21.268Z">
+<meta property="article:author" content="Phils">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wang-weijun.github.io/images/202310250942468.png">
+
+
+<link rel="canonical" href="http://wang-weijun.github.io/2023/05/17/Python%E5%B7%A5%E5%85%B7%E7%B1%BB/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wang-weijun.github.io/2023/05/17/Python%E5%B7%A5%E5%85%B7%E7%B1%BB/","path":"2023/05/17/Python工具类/","title":"Python工具类"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python工具类 | Phils的杂货铺</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phils的杂货铺</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-pyinstaller-%E6%89%93%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">使用 pyinstaller 打包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99"><span class="nav-number">2.</span> <span class="nav-text">文件读写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%AC%E8%99%AB"><span class="nav-number">3.</span> <span class="nav-text">爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E6%A1%86%E6%9E%B6-Scrapy"><span class="nav-number">3.1.</span> <span class="nav-text">爬虫框架 Scrapy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy-%E7%88%AC%E5%8F%96-unsplash"><span class="nav-number">3.2.</span> <span class="nav-text">Scrapy 爬取 unsplash</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5-Mysql-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.</span> <span class="nav-text">连接 Mysql 数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%88%AC%E8%99%AB%E6%A1%88%E4%BE%8B%EF%BC%88%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">爬虫案例（写入数据库）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E8%BD%AC%E6%96%87%E5%AD%97%E7%94%BB"><span class="nav-number">6.</span> <span class="nav-text">图片转文字画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GUI"><span class="nav-number">7.</span> <span class="nav-text">GUI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E6%B5%8B%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">7.1.</span> <span class="nav-text">检测是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8"><span class="nav-number">7.2.</span> <span class="nav-text">开始使用</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phils"
+      src="/img/profile.png">
+  <p class="site-author-name" itemprop="name">Phils</p>
+  <div class="site-description" itemprop="description">个人博客，IT，技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wang-weijun" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wang-weijun" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1191206969@qq.com" title="E-Mail → mailto:1191206969@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wang-weijun.github.io/2023/05/17/Python%E5%B7%A5%E5%85%B7%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/profile.png">
+      <meta itemprop="name" content="Phils">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phils的杂货铺">
+      <meta itemprop="description" content="个人博客，IT，技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Python工具类 | Phils的杂货铺">
+      <meta itemprop="description" content="Python常用小工具记录">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python工具类
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-05-17 16:05:18" itemprop="dateCreated datePublished" datetime="2023-05-17T16:05:18+08:00">2023-05-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-25 14:17:21" itemprop="dateModified" datetime="2025-11-25T14:17:21+08:00">2025-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">高级语言</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Python常用小工具记录</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="使用-pyinstaller-打包"><a href="#使用-pyinstaller-打包" class="headerlink" title="使用 pyinstaller 打包"></a>使用 pyinstaller 打包</h2><p>在 pycharm 中点击<strong>新建环境</strong></p>
+<p><img src="/../images/202310250942468.png" alt="image-20231025094248422"></p>
+<p>进入文件后，会有一个文件夹<code>venv</code>，用来存放管理的库文件</p>
+<p><strong>创建 requirements.txt</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/202310250942390.png" alt="image-20231025094256358"></p>
+<p>可以看到虚拟环境下安装的包</p>
+<p><strong>安装 pyinstaller</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyinstaller</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后将终端关闭，<strong>重新打开</strong></p>
+<p>我们输入<code>pyinstaller</code>，当出现一下结果，说明安装成功</p>
+<p><img src="/../images/202310250924728.png"></p>
+<p><strong>单文件打包</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller -D app.py</span><br></pre></td></tr></table></figure>
+
+<p>开始打包</p>
+<p><img src="/../images/202310250944065.png" alt="image-20231025094420017"></p>
+<p>之后在当前文件夹会出现三个文件</p>
+<ul>
+<li><strong>build</strong>：中间编译时，产出的文件</li>
+<li><strong>dist</strong>：打包生成后的文件目录</li>
+<li><strong>xxx.spec</strong>：打包的配置文件</li>
+</ul>
+<p>在<code>dist</code>中可以看到有我们上面起的名字<code>app</code>，只需将<strong>app 文件夹</strong>发给他人，打开里面的<strong>app.exe</strong>文件，即可使用</p>
+<h2 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;xxx.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">	f.write(<span class="string">&#x27;xxx&#x27;</span> + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">    f.close()</span><br></pre></td></tr></table></figure>
+
+<h2 id="爬虫"><a href="#爬虫" class="headerlink" title="爬虫"></a>爬虫</h2><blockquote>
+<p>代码案例</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getHTMLText</span>(<span class="params">url</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        headers = &#123;</span><br><span class="line">            <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36&#x27;</span>&#125;</span><br><span class="line">        res = requests.get(url, headers=headers)</span><br><span class="line">        res.raise_for_status()</span><br><span class="line">        res.encoding = res.apparent_encoding</span><br><span class="line">        <span class="keyword">return</span> res.text</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;error&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_info</span>(<span class="params">url</span>):</span><br><span class="line">    demo = getHTMLText(url)</span><br><span class="line">    soup = BeautifulSoup(demo, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line">    table = soup.find(<span class="string">&#x27;table&#x27;</span>, &#123;<span class="string">&#x27;class&#x27;</span>: <span class="string">&#x27;rk-table&#x27;</span>&#125;)</span><br><span class="line">    tbody = table.find(<span class="string">&#x27;tbody&#x27;</span>)</span><br><span class="line">    rows = tbody.find_all(<span class="string">&#x27;tr&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> rows:</span><br><span class="line">        tds = row.find_all(<span class="string">&#x27;td&#x27;</span>)</span><br><span class="line">        rank = tds[<span class="number">0</span>].text.strip()</span><br><span class="line">        name = row.find(<span class="string">&#x27;a&#x27;</span>).text.strip()</span><br><span class="line">        location = tds[<span class="number">2</span>].text.strip()</span><br><span class="line">        total = tds[<span class="number">4</span>].text.strip()</span><br><span class="line">        data = &#123;</span><br><span class="line">            <span class="string">&#x27;排名&#x27;</span>: rank,</span><br><span class="line">            <span class="string">&#x27;学校名称&#x27;</span>: name,</span><br><span class="line">            <span class="string">&#x27;省市&#x27;</span>: location,</span><br><span class="line">            <span class="string">&#x27;总分&#x27;</span>: total</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">print</span>(data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url_2020 = <span class="string">&#x27;https://www.shanghairanking.cn/rankings/bcur/2020&#x27;</span></span><br><span class="line">url_2021 = <span class="string">&#x27;https://www.shanghairanking.cn/rankings/bcur/2021&#x27;</span></span><br><span class="line">get_info(url_2021)</span><br></pre></td></tr></table></figure>
+
+<h3 id="爬虫框架-Scrapy"><a href="#爬虫框架-Scrapy" class="headerlink" title="爬虫框架 Scrapy"></a><strong>爬虫框架 Scrapy</strong></h3><ul>
+<li><strong>简介</strong></li>
+</ul>
+<ol>
+<li><p>基本功能<br>Scrapy 是一个适用爬取网站数据、提取结构性数据的应用程序框架，它可以应用在广泛领域：Scrapy 常应用在包括数据挖掘，信息处理或存储历史数据等一系列的程序中。通常我们可以很简单的通过 Scrapy 框架实现一个爬虫，抓取指定网站的内容或图片。</p>
+</li>
+<li><p>架构<br>**Scrapy Engine(引擎)**：负责 Spider、ItemPipeline、Downloader、Scheduler 中间的通讯，信号、数据传递等。<br>**Scheduler(调度器)**：它负责接受引擎发送过来的 Request 请求，并按照一定的方式进行整理排列，入队，当引擎需要时，交还给引擎。<br><strong>Downloader（下载器）</strong>：负责下载 Scrapy Engine(引擎)发送的所有 Requests 请求，并将其获取到的 Responses 交还给 Scrapy Engine(引擎)，由引擎交给 Spider 来处理。<br><strong>Spider（爬虫）</strong>：它负责处理所有 Responses,从中分析提取数据，获取 Item 字段需要的数据，并将需要跟进的 URL 提交给引擎，再次进入 Scheduler(调度器)。<br>**Item Pipeline(管道)**：它负责处理 Spider 中获取到的 Item，并进行进行后期处理（详细分析、过滤、存储等）的地方。<br><strong>Downloader Middlewares（下载中间件）</strong>：一个可以自定义扩展下载功能的组件。<br><strong>Spider Middlewares（Spider 中间件）</strong>：一个可以自定扩展和操作引擎和 Spider 中间通信的功能组件。</p>
+</li>
+</ol>
+<p><img src="/../images/202310250944496.png" alt="image-20231025094458440"></p>
+<ol start="3">
+<li><p>scrapy 项目的结构</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">项目名字</span><br><span class="line">项目的名字</span><br><span class="line">spiders 文件夹（存储的是爬虫文件）</span><br><span class="line">init</span><br><span class="line">自定义的爬虫文件 核心功能文件</span><br><span class="line">init</span><br><span class="line">items 定义数据结构的地方 爬虫的数据都包含哪些</span><br><span class="line">middleware 中间件 代理</span><br><span class="line">pipelines 管道 用来处理下载的数据</span><br><span class="line">settings 配置文件 robots 协议 ua 定义等</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li><strong>环境搭建</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install scrapy</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>项目搭建</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject 工程名（img）</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">New Scrapy project <span class="string">&#x27;img&#x27;</span>, using template directory <span class="string">&#x27;D:\Environment\Anaconda3\Lib\site-packages\scrapy\templates\project&#x27;</span>, created <span class="keyword">in</span>:</span><br><span class="line">    C:\Users\Admin\Desktop\scrapy\img</span><br><span class="line"></span><br><span class="line">You can start your first spider with:</span><br><span class="line">    <span class="built_in">cd</span> img</span><br><span class="line">    scrapy genspider example example.com</span><br></pre></td></tr></table></figure>
+
+<p>转到项目，创建源文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> img</span><br><span class="line">scrapy genspider unsplash unsplash.com</span><br></pre></td></tr></table></figure>
+
+<p><strong>结果</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Created spider <span class="string">&#x27;unsplash&#x27;</span> using template <span class="string">&#x27;basic&#x27;</span> <span class="keyword">in</span> module:</span><br><span class="line">  img.spiders.unsplash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>运行</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl unsplash(为文件名)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Scrapy-爬取-unsplash"><a href="#Scrapy-爬取-unsplash" class="headerlink" title="Scrapy 爬取 unsplash"></a>Scrapy 爬取 unsplash</h3><p>一、分析网站</p>
+<ol>
+<li><p>高清图片网站<a target="_blank" rel="noopener" href="https://unsplash.com/">https://unsplash.com/</a>, 能展示超过 7w+张高清图片. 浏览时, 其通过 API 返回图片的 URl</p>
+</li>
+<li><p>在 chrome 浏览器中有此插件 unsplash, 在插件文件中找到对应 JS, 再找出 api 地址</p>
+</li>
+</ol>
+<p>根据插件安装的时间找到对应的 chrome 插件目录</p>
+<p>二、爬取图片 URL</p>
+<ul>
+<li><p>安装 Scrapy, pip install Scrapy</p>
+</li>
+<li><p>在工程目录中创建项目 scrapy startproject scrapy_unsplash E:\wendi1\pyplace\scrapy_unsplash</p>
+</li>
+<li><p>进入项目目录, 创建爬虫 scrapy genspider unsplash api.unsplash.com –template&#x3D;crawl</p>
+<ul>
+<li>此时在.&#x2F;scrapy_unsplash&#x2F;spiders 目录中生成 unsplash.py 文件.</li>
+<li>配置 settings.py , 并发连接数 CONCURRENT_REQUESTS &#x3D; 100 , 下载延迟 DOWNLOAD_DELAY &#x3D; 1.6</li>
+</ul>
+</li>
+<li><p>首先需要爬取网站, 然后将 raw 种类的图片 URL 存入 sqlite, unsplash.py 代码:</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> sqlite3</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> scrapy.spiders <span class="keyword">import</span> CrawlSpider</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UnsplashSpider</span>(<span class="title class_ inherited__">CrawlSpider</span>):</span><br><span class="line">    name = <span class="string">&#x27;unsplash&#x27;</span></span><br><span class="line">    allowed_domains = [<span class="string">&#x27;api.unsplash.com&#x27;</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">start_requests</span>(<span class="params">self</span>):</span><br><span class="line">        createDB()  <span class="comment"># 创建数据库</span></span><br><span class="line"></span><br><span class="line">        start, page = <span class="number">1</span>, <span class="number">2000</span>,  <span class="comment"># 要爬的页面数</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(start, page + <span class="number">1</span>):  <span class="comment"># 从第一页开始</span></span><br><span class="line">            url = <span class="string">&#x27;https://api.unsplash.com/photos/?client_id=fa60305aa82e74134cabc7093ef54c8e2c370c47e73152f72371c828daedfcd7&amp;page=&#x27;</span> + <span class="built_in">str</span>(</span><br><span class="line">                i) + <span class="string">&#x27;&amp;per_page=30&#x27;</span></span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(url=url, callback=<span class="variable language_">self</span>.parse_item)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">parse_item</span>(<span class="params">self, response</span>):</span><br><span class="line">        conn = sqlite3.connect(<span class="string">&quot;E:\\wendi1\\pyplace\\scrapy_unsplash\\database\\link.db&quot;</span>)  <span class="comment"># 连接数据库</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;-------------------&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        js = json.loads(<span class="built_in">str</span>(response.body_as_unicode()), <span class="string">&#x27;utf-8&#x27;</span>)  <span class="comment"># 读取响应body，并转化成可读取的json</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> js:</span><br><span class="line">            link = j[<span class="string">&quot;urls&quot;</span>][<span class="string">&quot;raw&quot;</span>]</span><br><span class="line">            sql = <span class="string">&quot;INSERT INTO LINK(LINK) VALUES (&#x27;%s&#x27;);&quot;</span> % link  <span class="comment"># 将link插入数据库</span></span><br><span class="line">            conn.execute(sql)</span><br><span class="line">        semaphore = threading.Semaphore(<span class="number">1</span>)  <span class="comment"># 引入线程信号量，避免写入数据库时死锁</span></span><br><span class="line">        semaphore.acquire()  <span class="comment"># P操作</span></span><br><span class="line">        conn.commit()  <span class="comment"># 写入数据库，此时数据库文件独占</span></span><br><span class="line">        semaphore.release()  <span class="comment"># V操作</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">createDB</span>():  <span class="comment"># 创建数据库</span></span><br><span class="line">    conn = sqlite3.connect(<span class="string">&quot;E:\\wendi1\\pyplace\\scrapy_unsplash\\database\\link.db&quot;</span>)  <span class="comment"># Sqlite是一个轻量数据库，不占端口，够用</span></span><br><span class="line">    conn.execute(<span class="string">&quot;DROP TABLE IF EXISTS LINK;&quot;</span>)  <span class="comment"># 重新运行删掉数据库</span></span><br><span class="line">    conn.execute(<span class="string">&quot;CREATE TABLE LINK (&quot;</span>  <span class="comment"># 创建属性ID：主键自增；属性LINK：存放图片链接</span></span><br><span class="line">                 <span class="string">&quot;ID INTEGER PRIMARY KEY AUTOINCREMENT,&quot;</span></span><br><span class="line">                 <span class="string">&quot;LINK VARCHAR(255));&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>执行 scrapy crawl unsplash . 在第 16 行可修改爬取的页面总数</p>
+<p>url 已存入 sqlite 中 :</p>
+<h2 id="连接-Mysql-数据库"><a href="#连接-Mysql-数据库" class="headerlink" title="连接 Mysql 数据库"></a>连接 Mysql 数据库</h2><p>使用<code>pymysql</code>官方库，封装公用代码</p>
+<p>新增一个<code>pymysql_comm.py</code>类, 代码如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">from</span> timeit <span class="keyword">import</span> default_timer</span><br><span class="line"></span><br><span class="line">host = <span class="string">&#x27;localhost&#x27;</span></span><br><span class="line">port = <span class="number">3306</span></span><br><span class="line">user = <span class="string">&#x27;root&#x27;</span></span><br><span class="line">password = <span class="string">&#x27;123456&#x27;</span></span><br><span class="line">db = <span class="string">&#x27;mysql_test&#x27;</span> <span class="comment"># 连接的数据库</span></span><br><span class="line">charset = <span class="string">&#x27;utf8mb4&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---- 用pymysql 操作数据库</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_connection</span>():</span><br><span class="line">    conn = pymysql.connect(host=host, port=port, db=db, user=user, password=password, charset=charset)</span><br><span class="line">    <span class="keyword">return</span> conn</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---- 使用 with 的方式来优化代码</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UsingMysql</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, commit=<span class="literal">True</span>, log_time=<span class="literal">True</span>, log_label=<span class="string">&#x27;总用时&#x27;</span></span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param commit: 是否在最后提交事务(设置为False的时候方便单元测试)</span></span><br><span class="line"><span class="string">        :param log_time:  是否打印程序运行总时间</span></span><br><span class="line"><span class="string">        :param log_label:  自定义log的文字</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="variable language_">self</span>._log_time = log_time</span><br><span class="line">        <span class="variable language_">self</span>._commit = commit</span><br><span class="line">        <span class="variable language_">self</span>._log_label = log_label</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__enter__</span>(<span class="params">self</span>):</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 如果需要记录时间</span></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>._log_time <span class="keyword">is</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="variable language_">self</span>._start = default_timer()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 在进入的时候自动获取连接和cursor</span></span><br><span class="line">        conn = get_connection()</span><br><span class="line">        cursor = conn.cursor()</span><br><span class="line">        <span class="comment"># cursor = conn.cursor(pymysql.cursors.DictCursor) 可使返回的结果不再是普通的元组列表，而是字典列表</span></span><br><span class="line">        conn.autocommit = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>._conn = conn</span><br><span class="line">        <span class="variable language_">self</span>._cursor = cursor</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__exit__</span>(<span class="params">self, *exc_info</span>):</span><br><span class="line">        <span class="comment"># 提交事务</span></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>._commit:</span><br><span class="line">            <span class="variable language_">self</span>._conn.commit()</span><br><span class="line">        <span class="comment"># 在退出的时候自动关闭连接和cursor</span></span><br><span class="line">        <span class="variable language_">self</span>._cursor.close()</span><br><span class="line">        <span class="variable language_">self</span>._conn.close()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>._log_time <span class="keyword">is</span> <span class="literal">True</span>:</span><br><span class="line">            diff = default_timer() - <span class="variable language_">self</span>._start</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;-- %s: %.6f 秒&#x27;</span> % (<span class="variable language_">self</span>._log_label, diff))</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">cursor</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>._cursor</span><br></pre></td></tr></table></figure>
+
+<p>当我们需要使用时，增删改查演示：</p>
+<blockquote>
+<p>先增加了一条记录, 然后接着查看这条记录</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pymysql_comm <span class="keyword">import</span> UsingMysql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">select_one</span>(<span class="params">cursor</span>):</span><br><span class="line">    cursor.execute(<span class="string">&quot;select * from Product&quot;</span>)</span><br><span class="line">    data = cursor.fetchone()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;-- 单条记录: &#123;0&#125; &quot;</span>.<span class="built_in">format</span>(data))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增单条记录</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_one</span>():</span><br><span class="line">    <span class="keyword">with</span> UsingMysql(log_time=<span class="literal">True</span>) <span class="keyword">as</span> um:</span><br><span class="line">        sql = <span class="string">&quot;insert into Product(name, remark) values(%s, %s)&quot;</span></span><br><span class="line">        params = (<span class="string">&#x27;男士双肩背包1&#x27;</span>, <span class="string">&#x27;这个是非常好的背包&#x27;</span>)</span><br><span class="line">        um.cursor.execute(sql, params)</span><br><span class="line">        <span class="comment"># 查看结果</span></span><br><span class="line">        select_one(um.cursor)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    create_one()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>删除某条记录</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pymysql_comm <span class="keyword">import</span> UsingMysql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">delete_one</span>(<span class="params">cursor, name</span>):</span><br><span class="line">    sql = <span class="string">&#x27;delete from Product where name = %s&#x27;</span></span><br><span class="line">    params = name</span><br><span class="line">    cursor.execute(sql, params)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;--- 已删除名字为%s的商品. &#x27;</span> % name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">select_one</span>(<span class="params">cursor</span>):</span><br><span class="line">    sql = <span class="string">&#x27;select * from Product&#x27;</span></span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    data = cursor.fetchone()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;--- 已找到名字为%s的商品. &#x27;</span> % data[<span class="string">&#x27;name&#x27;</span>])</span><br><span class="line">    <span class="keyword">return</span> data[<span class="string">&#x27;name&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">select_one_by_name</span>(<span class="params">cursor, name</span>):</span><br><span class="line">    sql = <span class="string">&#x27;select * from Product where name = %s&#x27;</span></span><br><span class="line">    params = name</span><br><span class="line">    cursor.execute(sql, params)</span><br><span class="line">    data = cursor.fetchone()</span><br><span class="line">    <span class="keyword">if</span> data:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;--- 已找到名字为%s的商品. &#x27;</span> % data[<span class="string">&#x27;name&#x27;</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;--- 名字为%s的商品已经没有了&#x27;</span> % name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除单条记录</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_delete_one</span>():</span><br><span class="line">    <span class="keyword">with</span> UsingMysql(log_time=<span class="literal">True</span>) <span class="keyword">as</span> um:</span><br><span class="line">        <span class="comment"># 查找一条记录</span></span><br><span class="line">        name = select_one(um.cursor)</span><br><span class="line">        <span class="comment"># 删除</span></span><br><span class="line">        delete_one(um.cursor, name)</span><br><span class="line">        <span class="comment"># 查看还在不在?</span></span><br><span class="line">        select_one_by_name(um.cursor, name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    check_delete_one()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>修改记录</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pymysql_comm <span class="keyword">import</span> UsingMysql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">update_by_pk</span>(<span class="params">cursor, name, pk</span>):</span><br><span class="line">    sql = <span class="string">&quot;update Product set name = &#x27;%s&#x27; where id = %d&quot;</span> % (name, pk)</span><br><span class="line"></span><br><span class="line">    cursor.execute(sql)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">select_one</span>(<span class="params">cursor</span>):</span><br><span class="line">    sql = <span class="string">&#x27;select * from Product&#x27;</span></span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    <span class="keyword">return</span> cursor.fetchone()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">select_one_by_name</span>(<span class="params">cursor, name</span>):</span><br><span class="line">    sql = <span class="string">&#x27;select * from Product where name = %s&#x27;</span></span><br><span class="line">    params = name</span><br><span class="line">    cursor.execute(sql, params)</span><br><span class="line">    data = cursor.fetchone()</span><br><span class="line">    <span class="keyword">if</span> data:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;--- 已找到名字为%s的商品. &#x27;</span> % data[<span class="string">&#x27;name&#x27;</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;--- 名字为%s的商品已经没有了&#x27;</span> % name)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改记录</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_update</span>():</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> UsingMysql(log_time=<span class="literal">True</span>) <span class="keyword">as</span> um:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 查找一条记录</span></span><br><span class="line">        data = select_one(um.cursor)</span><br><span class="line">        pk = data[<span class="string">&#x27;id&#x27;</span>]</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;--- 商品&#123;0&#125;: &#x27;</span>.<span class="built_in">format</span>(data))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 修改名字</span></span><br><span class="line">        new_name = <span class="string">&#x27;单肩包&#x27;</span></span><br><span class="line">        update_by_pk(um.cursor, new_name, pk)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 查看</span></span><br><span class="line">        select_one_by_name(um.cursor, new_name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    check_update()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>查询</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pymysql_comm <span class="keyword">import</span> UsingMysql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fetch_list_by_filter</span>(<span class="params">cursor, pk</span>):</span><br><span class="line">    sql = <span class="string">&#x27;select * from Product where id &gt; %d&#x27;</span> % pk</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    data_list = cursor.fetchall()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;-- 总数: %d&#x27;</span> % <span class="built_in">len</span>(data_list))</span><br><span class="line">    <span class="keyword">return</span> data_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fetch_list</span>():</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> UsingMysql(log_time=<span class="literal">True</span>) <span class="keyword">as</span> um:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 查找id 大于800的记录</span></span><br><span class="line">        data_list = fetch_list_by_filter(um.cursor, <span class="number">800</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 查找id 大于 10000 的记录</span></span><br><span class="line">        data_list = fetch_list_by_filter(um.cursor, <span class="number">10000</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    fetch_list()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>分页查询</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pymysql_comm <span class="keyword">import</span> UsingMysql</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">fetch_page_data</span>(<span class="params">cursor, pk, page_size, skip</span>):</span><br><span class="line">    sql = <span class="string">&#x27;select * from Product where id &gt; %d limit %d,%d&#x27;</span> % (pk, skip, page_size)</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    data_list = cursor.fetchall()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;-- 总数: %d&#x27;</span> % <span class="built_in">len</span>(data_list))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;-- 数据: &#123;0&#125;&#x27;</span>.<span class="built_in">format</span>(data_list))</span><br><span class="line">    <span class="keyword">return</span> data_list</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_page</span>():</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> UsingMysql(log_time=<span class="literal">True</span>) <span class="keyword">as</span> um:</span><br><span class="line"></span><br><span class="line">        page_size = <span class="number">10</span></span><br><span class="line">        pk = <span class="number">500</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> page_no <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">6</span>):</span><br><span class="line"></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;====== 第%d页数据&#x27;</span> % page_no)</span><br><span class="line">            skip = (page_no - <span class="number">1</span>) * page_size</span><br><span class="line"></span><br><span class="line">            fetch_page_data(um.cursor, pk, page_size, skip)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    check_page()</span><br></pre></td></tr></table></figure>
+
+<h2 id="爬虫案例（写入数据库）"><a href="#爬虫案例（写入数据库）" class="headerlink" title="爬虫案例（写入数据库）"></a>爬虫案例（写入数据库）</h2><blockquote>
+<p>实例</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">conn = pymysql.connect(host=<span class="string">&#x27;127.0.0.1&#x27;</span>  <span class="comment"># 连接名称，默认127.0.0.1</span></span><br><span class="line">                       , user=<span class="string">&#x27;root&#x27;</span>  <span class="comment"># 用户名</span></span><br><span class="line">                       , passwd=<span class="string">&#x27;123456&#x27;</span>  <span class="comment"># 密码</span></span><br><span class="line">                       , port=<span class="number">3306</span>  <span class="comment"># 端口，默认为3306</span></span><br><span class="line">                       , db=<span class="string">&#x27;python&#x27;</span>  <span class="comment"># 数据库名称</span></span><br><span class="line">                       , charset=<span class="string">&#x27;utf8&#x27;</span>  <span class="comment"># 字符编码</span></span><br><span class="line">                       )</span><br><span class="line">cur = conn.cursor()  <span class="comment"># 生成游标对象</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getHTMLText</span>(<span class="params">url</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        headers = &#123;</span><br><span class="line">            <span class="string">&#x27;User-Agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36&#x27;</span>&#125;</span><br><span class="line">        res = requests.get(url, headers=headers)</span><br><span class="line">        res.raise_for_status()</span><br><span class="line">        res.encoding = res.apparent_encoding</span><br><span class="line">        <span class="keyword">return</span> res.text</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;error&#x27;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>(<span class="params">url</span>):</span><br><span class="line">    res = getHTMLText(url)</span><br><span class="line">    regex = re.<span class="built_in">compile</span>(<span class="string">r&quot;(?=\()(.*)(?&lt;=\))&quot;</span>)</span><br><span class="line">    jsonString = regex.findall(res)[-<span class="number">1</span>]</span><br><span class="line">    jsonString = jsonString.strip(<span class="string">&#x27;()&#x27;</span>)</span><br><span class="line">    jsonData = json.loads(jsonString)</span><br><span class="line">    diffValue = jsonData[<span class="string">&#x27;data&#x27;</span>][<span class="string">&#x27;diff&#x27;</span>]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(diffValue)):</span><br><span class="line">        demo = diffValue[i][<span class="string">&#x27;f12&#x27;</span>]</span><br><span class="line">        name = diffValue[i][<span class="string">&#x27;f14&#x27;</span>]</span><br><span class="line">        sql = <span class="string">&quot;INSERT INTO money(demo,name) VALUES (&#x27;&#123;&#125;&#x27;, &#x27;&#123;&#125;&#x27;);&quot;</span>.<span class="built_in">format</span>(demo, name)</span><br><span class="line">        cur.execute(sql)</span><br><span class="line">        conn.commit()</span><br><span class="line">        <span class="built_in">print</span>(demo+name)</span><br><span class="line">    cur.close()</span><br><span class="line">    conn.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://85.push2.eastmoney.com/api/qt/clist/get?cb=jQuery1124007516892373587614_1682312504170&amp;pn=1&amp;pz=20&amp;po=1&amp;np=1&amp;ut=bd1d9ddb04089700cf9c27f6f7426281&amp;fltt=2&amp;invt=2&amp;wbp2u=|0|0|0|web&amp;fid=f3&amp;fs=m:0+t:6,m:0+t:80,m:1+t:2,m:1+t:23,m:0+t:81+s:2048&amp;fields=f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f12,f13,f14,f15,f16,f17,f18,f20,f21,f23,f24,f25,f22,f11,f62,f128,f136,f115,f152&amp;_=1682312504458&#x27;</span></span><br><span class="line">main(url)</span><br></pre></td></tr></table></figure>
+
+<h2 id="图片转文字画"><a href="#图片转文字画" class="headerlink" title="图片转文字画"></a>图片转文字画</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    start_time = time.time()</span><br><span class="line">    image_file = <span class="string">&#x27;lena.png&#x27;</span></span><br><span class="line">    height = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">    img = Image.<span class="built_in">open</span>(image_file)</span><br><span class="line">    img_width, img_height = img.size</span><br><span class="line">    width = <span class="built_in">int</span>(<span class="number">1.8</span> * height * img_width // img_height)</span><br><span class="line">    img = img.resize((width, height), Image.ANTIALIAS)</span><br><span class="line">    pixels = np.array(img.convert(<span class="string">&#x27;L&#x27;</span>))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;type(pixels) = &#x27;</span>, <span class="built_in">type</span>(pixels))</span><br><span class="line">    <span class="built_in">print</span>(pixels.shape)</span><br><span class="line">    <span class="built_in">print</span>(pixels)</span><br><span class="line">    chars = <span class="string">&quot;MNHQ$OC?7&gt;!:-;. &quot;</span></span><br><span class="line">    N = <span class="built_in">len</span>(chars)</span><br><span class="line">    step = <span class="number">256</span> // N</span><br><span class="line">    <span class="built_in">print</span>(N)</span><br><span class="line">    result = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(height):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(width):</span><br><span class="line">            result += chars[pixels[i][j] // step]</span><br><span class="line">        result += <span class="string">&#x27;\n&#x27;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;text.txt&#x27;</span>, mode=<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(result)</span><br><span class="line">    end_time = time.time()</span><br><span class="line">    elapsed_time = end_time - start_time</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;程序耗时：<span class="subst">&#123;elapsed_time:<span class="number">.2</span>f&#125;</span> 秒&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例</strong></p>
+<p><img src="/../images/202310250945006.png" alt="image-20231025094543977"></p>
+<h2 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h2><p>用 Python 来写 GUI 的库：pyqt、wxpython、tkinter、kivy</p>
+<p>比较常用的是 tkinter 它是 Python 内置的库</p>
+<h3 id="检测是否存在"><a href="#检测是否存在" class="headerlink" title="检测是否存在"></a>检测是否存在</h3><p>打开 cmd，输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m tkinter</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/202310250946512.png" alt="image-20231025094609475"></p>
+<h3 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h3><p>tkinter 把不同的组件都封装成了 Class</p>
+<p>每个组件都有一些属性可以设置，比如可以设置字体常用的宽高字体颜色</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line"></span><br><span class="line">app = tk.Tk()</span><br><span class="line">app.title(<span class="string">&quot;My App&quot;</span>) <span class="comment"># 定义窗口的标题</span></span><br><span class="line">app.geometry(<span class="string">&quot;600x400&quot;</span>)	<span class="comment"># 使用 geometry指定窗口的宽高</span></span><br><span class="line">lb = tk.Label(app, text=<span class="string">&quot;Hello World&quot;</span>)	<span class="comment"># 想要往里加入文本，可以使用 Label 对象</span></span><br><span class="line">lb.pack()	<span class="comment"># 用 pack 塞到窗口中去</span></span><br><span class="line">tk.mainloop()  <span class="comment"># 调用了 mainloop 方法，主要是让它去循环等待用户的交互</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>示例</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tkinter <span class="keyword">as</span> tk</span><br><span class="line"></span><br><span class="line">app = tk.Tk()</span><br><span class="line">app.title(<span class="string">&quot;Jarvis&quot;</span>)</span><br><span class="line">app.geometry(<span class="string">&quot;600x400&quot;</span>)</span><br><span class="line">lb = tk.Label(app, text=<span class="string">&quot;Hello World&quot;</span>, width=<span class="number">20</span>, height=<span class="number">10</span>, fg=<span class="string">&quot;blue&quot;</span>).pack()</span><br><span class="line">tk.Button(app, text=<span class="string">&quot;点我&quot;</span>, width=<span class="number">20</span>, background=<span class="string">&#x27;pink&#x27;</span>).pack()</span><br><span class="line">tk.mainloop()</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/202310250946427.png" alt="image-20231025094629392"></p>
+<p>按钮可以定义点击事件：当点击按钮的时候调用方法来修改 Lable 里面的内容（command 来绑定回调函数）</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/17/Git/" rel="prev" title="Git">
+                  <i class="fa fa-angle-left"></i> Git
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/05/17/Redis/" rel="next" title="Redis">
+                  Redis <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phils</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

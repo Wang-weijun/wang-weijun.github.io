@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/iconfont.png">
+  <link rel="mask-icon" href="/img/iconfont.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wang-weijun.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="hexo+Fluid博客搭建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo搭建">
+<meta property="og:url" content="http://wang-weijun.github.io/2023/09/14/hexo%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Phils的杂货铺">
+<meta property="og:description" content="hexo+Fluid博客搭建">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://hexo.fluid-dev.com/docs/assets/img/group_image.c1b58381.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202310251016647.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202310251023046.png">
+<meta property="article:published_time" content="2023-09-14T16:08:56.000Z">
+<meta property="article:modified_time" content="2025-11-25T06:17:21.269Z">
+<meta property="article:author" content="Phils">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="Fluid">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hexo.fluid-dev.com/docs/assets/img/group_image.c1b58381.png">
+
+
+<link rel="canonical" href="http://wang-weijun.github.io/2023/09/14/hexo%E6%90%AD%E5%BB%BA/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wang-weijun.github.io/2023/09/14/hexo%E6%90%AD%E5%BB%BA/","path":"2023/09/14/hexo搭建/","title":"hexo搭建"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>hexo搭建 | Phils的杂货铺</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phils的杂货铺</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2"><span class="nav-number">1.</span> <span class="nav-text">hexo 搭建博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">文章配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E8%AF%AD%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">文章语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tag-%E6%8F%92%E4%BB%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">Tag 插件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">2.</span> <span class="nav-text">工作流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%AE%A2%E5%B5%8C%E5%85%A5-PPT"><span class="nav-number">3.</span> <span class="nav-text">博客嵌入 PPT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nodeppt"><span class="nav-number">3.1.</span> <span class="nav-text">nodeppt</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E5%8A%A0%E5%AF%86"><span class="nav-number">4.</span> <span class="nav-text">文章加密</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phils"
+      src="/img/profile.png">
+  <p class="site-author-name" itemprop="name">Phils</p>
+  <div class="site-description" itemprop="description">个人博客，IT，技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wang-weijun" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wang-weijun" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1191206969@qq.com" title="E-Mail → mailto:1191206969@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wang-weijun.github.io/2023/09/14/hexo%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/profile.png">
+      <meta itemprop="name" content="Phils">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phils的杂货铺">
+      <meta itemprop="description" content="个人博客，IT，技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="hexo搭建 | Phils的杂货铺">
+      <meta itemprop="description" content="hexo+Fluid博客搭建">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hexo搭建
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-15 00:08:56" itemprop="dateCreated datePublished" datetime="2023-09-15T00:08:56+08:00">2023-09-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-25 14:17:21" itemprop="dateModified" datetime="2025-11-25T14:17:21+08:00">2025-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">博客</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">hexo+Fluid博客搭建</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="hexo-搭建博客"><a href="#hexo-搭建博客" class="headerlink" title="hexo 搭建博客"></a>hexo 搭建博客</h2><p><strong>更改端口：</strong>在 <code>/node_modules/hexo-server/index.js</code> 可修改启动端口：port</p>
+<p>下面是 hexo 的项目结构</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.yml</span>      <span class="string">//</span> <span class="string">站点配置文件</span></span><br><span class="line"><span class="string">├──</span> <span class="string">db.json</span>          <span class="string">//</span> <span class="string">缓存文件</span></span><br><span class="line"><span class="string">├──</span> <span class="string">node_modules</span>     <span class="string">//</span> <span class="string">安装的插件以及hexo所需的一些nodejs模块</span></span><br><span class="line"><span class="string">├──</span> <span class="string">package.json</span>     <span class="string">//</span> <span class="string">项目的依赖文件</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scaffolds</span>        <span class="string">//</span> <span class="string">模版文件</span></span><br><span class="line"><span class="string">├──</span> <span class="string">source</span>           <span class="string">//</span> <span class="string">源文件，用来存放你的文章</span> <span class="string">md</span> <span class="string">文件</span></span><br><span class="line"><span class="string">└──</span> <span class="string">themes</span>           <span class="string">//</span> <span class="string">主题文件</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>简约主题：fluid</strong>安装路径：<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid">hexo-theme-fluid</a></p>
+<h3 id="文章配置"><a href="#文章配置" class="headerlink" title="文章配置"></a>文章配置</h3><p><strong>隐藏文章</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">hide:</span> <span class="literal">true</span></span><br><span class="line"><span class="comment"># 文章排序 sticky 数值越大，该文章越靠前</span></span><br><span class="line"><span class="attr">sticky:</span> <span class="number">100</span></span><br><span class="line"><span class="comment"># 文章在首页的封面图</span></span><br><span class="line"><span class="attr">index_img:</span> <span class="string">/img/example.jpg</span></span><br><span class="line"><span class="comment"># 文章页顶部大图</span></span><br><span class="line"><span class="string">banner_img</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="文章语法"><a href="#文章语法" class="headerlink" title="文章语法"></a>文章语法</h3><h4 id="Tag-插件"><a href="#Tag-插件" class="headerlink" title="Tag 插件"></a>Tag 插件</h4><p><strong>标签</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% note success %&#125;</span><br><span class="line">文字 或者 <span class="code">`markdown`</span> 均可</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可选便签：</p>
+<div class="note primary"><p>primary</p>
+</div>
+
+<details class="note "><summary><p>secondary</p>
+</summary>
+<p>secondary</p>
+
+</details>
+
+<div class="note success"><p>success</p>
+</div>
+
+<div class="note danger"><p>danger</p>
+</div>
+
+<div class="note warning"><p>warning</p>
+</div>
+
+<div class="note info"><p>info</p>
+</div>
+
+<details class="note "><summary><p>light</p>
+</summary>
+<p>light</p>
+
+</details>
+
+<p><strong>行内标签</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 在 markdown 中加入如下的代码来使用 Label：</span></span><br><span class="line"></span><br><span class="line">&#123;% label primary @text %&#125;</span><br><span class="line"></span><br><span class="line"><span class="section"># 或者使用 HTML 形式：</span></span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;label label-primary&quot;</span>&gt;</span></span>Label<span class="language-xml"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>可选 Label：</p>
+<mark class="label primary">primary</mark> <mark class="label success">success</mark> <mark class="label info">info</mark> <mark class="label danger">danger</mark> <mark class="label warning">warning</mark><mark class="label default">default</mark>
+
+<blockquote>
+<p>若使用 <code>&#123;% label primary @text %&#125;</code>，text 不能以 @ 开头</p>
+</blockquote>
+<p><strong>按钮</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% btn url, text, title %&#125;</span><br><span class="line"></span><br><span class="line"><span class="section"># url：跳转链接</span></span><br><span class="line"></span><br><span class="line"><span class="section"># text：显示的文字</span></span><br><span class="line"></span><br><span class="line"><span class="section"># title：鼠标悬停时显示的文字（可选）</span></span><br></pre></td></tr></table></figure>
+
+<a class="btn" href="#"><i class="fa fa-#"></i>按钮</a>
+
+<p><strong>组图</strong></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 如果想把多张图片按一定布局组合显示，你可以在 markdown 中按如下格式：</span></span><br><span class="line"></span><br><span class="line">&#123;% gi total n1-n2-... %&#125;</span><br><span class="line">![](<span class="link">url</span>)</span><br><span class="line">![](<span class="link">url</span>)</span><br><span class="line">![](<span class="link">url</span>)</span><br><span class="line">![](<span class="link">url</span>)</span><br><span class="line">![](<span class="link">url</span>)</span><br><span class="line">&#123;% endgi %&#125;</span><br><span class="line"></span><br><span class="line"><span class="section"># total：图片总数量，对应中间包含的图片 url 数量 n1-n2-...：每行的图片数量，可以省略，默认单行最多 3 张图，求和必须相等于 total，否则按默认样式</span></span><br><span class="line"></span><br><span class="line"><span class="section"># 如下图为 &#123;% gi 5 3-2 %&#125; 示例，代表共 5 张图，第一行 3 张图，第二行 2 张图。</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://hexo.fluid-dev.com/docs/assets/img/group_image.c1b58381.png"></p>
+<h2 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h2><p>在根目录创建<code>.github</code>文件夹，在里面新建<code>workflows</code>文件夹，进入后新建<code>autodeploy.yml</code>，路径为：<code>/.github/workflows/autodeploy.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当有改动推送到master分支时，启动Action</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">自动部署</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span> <span class="comment">#2020年10月后github新建仓库默认分支改为main，注意更改</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">release:</span></span><br><span class="line">    <span class="attr">types:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">published</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">检查分支</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">ref:</span> <span class="string">main</span> <span class="comment">#2020年10月后github新建仓库默认分支改为main，注意更改</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装</span> <span class="string">Node</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">&quot;16.x&quot;</span> <span class="comment">#action使用的node版本，建议大版本和本地保持一致。可以在本地用node -v查询版本号。</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装</span> <span class="string">Hexo</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          export TZ=&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"><span class="string">          npm install hexo-cli -g</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">缓存</span> <span class="string">Hexo</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/cache@v1</span></span><br><span class="line">        <span class="attr">id:</span> <span class="string">cache</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">node_modules</span></span><br><span class="line">          <span class="attr">key:</span> <span class="string">$&#123;&#123;runner.OS&#125;&#125;-$&#123;&#123;hashFiles(&#x27;**/package-lock.json&#x27;)&#125;&#125;</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装依赖</span></span><br><span class="line">        <span class="attr">if:</span> <span class="string">steps.cache.outputs.cache-hit</span> <span class="type">!=</span> <span class="string">&#x27;true&#x27;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          npm install --save</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">生成静态文件</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          hexo clean</span></span><br><span class="line"><span class="string">          hexo generate</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">部署到仓库</span> <span class="comment">#此处master:master 指从本地的master分支提交到远程仓库的master分支，若远程仓库没有对应分支则新建一个。如有其他需要，可以根据自己的需求更改。</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          cd ./public</span></span><br><span class="line"><span class="string">          git init</span></span><br><span class="line"><span class="string">          git config --global user.name &#x27;$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;&#x27;</span></span><br><span class="line"><span class="string">          git config --global user.email &#x27;$&#123;&#123; secrets.GITHUBEMAIL &#125;&#125;&#x27;</span></span><br><span class="line"><span class="string">          git add .</span></span><br><span class="line"><span class="string">          git commit -m &quot;$&#123;&#123; github.event.head_commit.message &#125;&#125; $(date +&quot;%Z %Y-%m-%d %A %H:%M:%S&quot;) Updated By Github Actions&quot;</span></span><br><span class="line"><span class="string">          git push --force --quiet &quot;https://$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;:$&#123;&#123; secrets.GITHUBTOKEN &#125;&#125;@github.com/$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;/$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;.github.io.git&quot; master:main</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">部署到阿里云OSS</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">OSS_AccessKeyID:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.ACCESS_KEY_ID</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">OSS_AccessKeySecret:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.ACCESS_KEY_SECRET</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">OSS_EndPoint:</span> <span class="string">oss-cn-shanghai.aliyuncs.com</span></span><br><span class="line">          <span class="attr">OSS_Bucket:</span> <span class="string">xxxxx</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          wget -q http://gosspublic.alicdn.com/ossutil/1.6.10/ossutil64</span></span><br><span class="line"><span class="string">          chmod +x ./ossutil64</span></span><br><span class="line"><span class="string">          ./ossutil64 config -e $OSS_EndPoint -i $OSS_AccessKeyID -k $OSS_AccessKeySecret -L CH</span></span><br><span class="line"><span class="string">          ./ossutil64 rm -r -f oss://$OSS_Bucket/</span></span><br><span class="line"><span class="string">          ./ossutil64 cp -r -f ./public oss://$OSS_Bucket/</span></span><br></pre></td></tr></table></figure>
+
+<p>可选择上传源码到<code>GitHub</code>仓库，启动工作流，自动部署到另一个仓库为静态网页，或者讲静态网页部署到阿里云 OSS，</p>
+<p>部署需要在仓库中配置密钥：找到要上传的对应的仓库，点击<code>Settings</code>，选择<strong>Secrets and variables</strong>中的<code>Actions</code>：</p>
+<p><img src="/../images/202310251016647.png" alt="1698200170919"></p>
+<p>下面是我的工作流，上传到 Github，推送到 Gitee 和阿里云 OSS:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 当有改动推送到master分支时，启动Action</span></span><br><span class="line"><span class="attr">name:</span> <span class="string">自动部署</span></span><br><span class="line"></span><br><span class="line"><span class="attr">on:</span></span><br><span class="line">  <span class="attr">push:</span></span><br><span class="line">    <span class="attr">branches:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span> <span class="comment">#2020年10月后github新建仓库默认分支改为main，注意更改</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">release:</span></span><br><span class="line">    <span class="attr">types:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">published</span></span><br><span class="line"></span><br><span class="line"><span class="attr">jobs:</span></span><br><span class="line">  <span class="attr">deploy:</span></span><br><span class="line">    <span class="attr">runs-on:</span> <span class="string">ubuntu-latest</span></span><br><span class="line">    <span class="attr">steps:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">检查分支</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/checkout@v2</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">ref:</span> <span class="string">main</span> <span class="comment">#2020年10月后github新建仓库默认分支改为main，注意更改</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装</span> <span class="string">Node</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/setup-node@v1</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">node-version:</span> <span class="string">&quot;16.x&quot;</span> <span class="comment">#action使用的node版本，建议大版本和本地保持一致。可以在本地用node -v查询版本号。</span></span><br><span class="line"></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装</span> <span class="string">Hexo</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          export TZ=&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"><span class="string">          npm install hexo-cli -g</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">缓存</span> <span class="string">Hexo</span></span><br><span class="line">        <span class="attr">id:</span> <span class="string">cache-npm</span></span><br><span class="line">        <span class="attr">uses:</span> <span class="string">actions/cache@v3</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">cache-name:</span> <span class="string">cache-node-modules</span></span><br><span class="line">        <span class="attr">with:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">node_modules</span></span><br><span class="line">          <span class="attr">key:</span> <span class="string">$&#123;&#123;</span> <span class="string">runner.os</span> <span class="string">&#125;&#125;-build-$&#123;&#123;</span> <span class="string">env.cache-name</span> <span class="string">&#125;&#125;-$&#123;&#123;</span> <span class="string">hashFiles(&#x27;**/package-lock.json&#x27;)</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">restore-keys:</span> <span class="string">|</span></span><br><span class="line"><span class="string">            $&#123;&#123; runner.os &#125;&#125;-build-$&#123;&#123; env.cache-name &#125;&#125;-</span></span><br><span class="line"><span class="string">            $&#123;&#123; runner.os &#125;&#125;-build-</span></span><br><span class="line"><span class="string">            $&#123;&#123; runner.os &#125;&#125;-</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">安装依赖</span></span><br><span class="line">        <span class="attr">if:</span> <span class="string">steps.cache.outputs.cache-hit</span> <span class="type">!=</span> <span class="string">&#x27;true&#x27;</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          npm install --save</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">生成静态文件</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          hexo clean</span></span><br><span class="line"><span class="string">          hexo generate</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">部署到Gitee仓库</span> <span class="comment">#此处master:master 指从本地的master分支提交到远程仓库的master分支，若远程仓库没有对应分支则新建一个。如有其他需要，可以根据自己的需求更改。</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          cd ./public</span></span><br><span class="line"><span class="string">          git init</span></span><br><span class="line"><span class="string">          git config --global user.name &#x27;$&#123;&#123; secrets.GITHUBUSERNAME &#125;&#125;&#x27;</span></span><br><span class="line"><span class="string">          git config --global user.email &#x27;$&#123;&#123; secrets.GITHUBEMAIL &#125;&#125;&#x27;</span></span><br><span class="line"><span class="string">          git add .</span></span><br><span class="line"><span class="string">          git commit -m &quot;$&#123;&#123; github.event.head_commit.message &#125;&#125; $(date +&quot;%Z %Y-%m-%d %A %H:%M:%S&quot;) Updated By Github Actions&quot;</span></span><br><span class="line"><span class="string">          git push --force --quiet &quot;https://$&#123;&#123; secrets.GITEEUSERNAME &#125;&#125;:$&#123;&#123; secrets.GITEETOKEN &#125;&#125;@gitee.com/$&#123;&#123; secrets.GITEEUSERNAME &#125;&#125;/$&#123;&#123; secrets.GITEEUSERNAME &#125;&#125;.git&quot; master:main #gitee部署写法，需要的自行取消注释</span></span><br><span class="line"><span class="string"></span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">部署到阿里云OSS</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="attr">OSS_AccessKeyID:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.ACCESS_KEY_ID</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">OSS_AccessKeySecret:</span> <span class="string">$&#123;&#123;</span> <span class="string">secrets.ACCESS_KEY_SECRET</span> <span class="string">&#125;&#125;</span></span><br><span class="line">          <span class="attr">OSS_EndPoint:</span> <span class="string">oss-cn-shanghai.aliyuncs.com</span></span><br><span class="line">          <span class="attr">OSS_Bucket:</span> <span class="string">phils</span></span><br><span class="line">        <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">          wget -q http://gosspublic.alicdn.com/ossutil/1.6.10/ossutil64</span></span><br><span class="line"><span class="string">          chmod +x ./ossutil64</span></span><br><span class="line"><span class="string">          ./ossutil64 config -e $OSS_EndPoint -i $OSS_AccessKeyID -k $OSS_AccessKeySecret -L CH</span></span><br><span class="line"><span class="string">          ./ossutil64 rm -r -f oss://$OSS_Bucket/</span></span><br><span class="line"><span class="string">          ./ossutil64 cp -r -f ./public oss://$OSS_Bucket/</span></span><br></pre></td></tr></table></figure>
+
+<p>下面是实现图：</p>
+<p><img src="/../images/202310251023046.png" alt="1698200584306"></p>
+<h2 id="博客嵌入-PPT"><a href="#博客嵌入-PPT" class="headerlink" title="博客嵌入 PPT"></a>博客嵌入 PPT</h2><blockquote>
+<p><strong>可以通过鼠标和键盘控制</strong></p>
+<ul>
+<li>页面: ↑&#x2F;↓&#x2F;←&#x2F;→ Space Home End（空格,home 键,end 键）</li>
+<li>全屏: F</li>
+<li>Overview: -&#x2F;+</li>
+<li>演讲者笔记: N</li>
+<li>网格背景: Enter</li>
+</ul>
+</blockquote>
+<h3 id="nodeppt"><a href="#nodeppt" class="headerlink" title="nodeppt"></a>nodeppt</h3><p>首先可以看看官网给的<a target="_blank" rel="noopener" href="https://nodeppt.js.org/">demo</a>，非常的炫酷。</p>
+<iframe src="https://nodeppt.js.org/" width="100%" height="600" name="topFrame" scrolling="yes" noresize="noresize" frameborder="0" id="topFrame" style="box-sizing: border-box; color: rgb(44, 62, 80); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, Arial, &quot;Noto Sans&quot;, &quot;Liberation Sans&quot;, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;, &quot;Noto Color Emoji&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: 0.32px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; white-space: normal; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;"></iframe>
+
+<h2 id="文章加密"><a href="#文章加密" class="headerlink" title="文章加密"></a>文章加密</h2><p>安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-blog-encrypt</span><br></pre></td></tr></table></figure>
+
+<p>在需要加密的文件头加入</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">password:</span> <span class="string">wangweijun</span></span><br><span class="line"><span class="attr">abstract:</span> <span class="string">有东西被加密了,</span> <span class="string">请输入密码查看.</span></span><br><span class="line"><span class="attr">message:</span> <span class="string">您好,</span> <span class="string">这里需要密码.</span></span><br><span class="line"><span class="attr">wrong_pass_message:</span> <span class="string">抱歉,</span> <span class="string">这个密码看着不太对,</span> <span class="string">请再试试.</span></span><br><span class="line"><span class="attr">wrong_hash_message:</span> <span class="string">抱歉,</span> <span class="string">这个文章不能被校验,</span> <span class="string">不过您还是能看看解密后的内容.</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/Fluid/" rel="tag"># Fluid</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/08/04/%E5%89%8D%E7%AB%AF%E5%B0%8F%E5%B7%A5%E5%85%B7/" rel="prev" title="前端小工具">
+                  <i class="fa fa-angle-left"></i> 前端小工具
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/09/19/SpringCloud/" rel="next" title="SpringCloud">
+                  SpringCloud <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phils</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/iconfont.png">
+  <link rel="mask-icon" href="/img/iconfont.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wang-weijun.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="记录1Panel运维平台的使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="运维平台">
+<meta property="og:url" content="http://wang-weijun.github.io/2024/06/05/Zabbix%E8%BF%90%E7%BB%B4%E5%B9%B3%E5%8F%B0/index.html">
+<meta property="og:site_name" content="Phils的杂货铺">
+<meta property="og:description" content="记录1Panel运维平台的使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202408072129795.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202406061433653.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202406061444721.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202406061531498.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202406061534297.png">
+<meta property="article:published_time" content="2024-06-05T15:30:04.000Z">
+<meta property="article:modified_time" content="2025-11-25T06:17:21.269Z">
+<meta property="article:author" content="Phils">
+<meta property="article:tag" content="运维">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wang-weijun.github.io/images/202408072129795.png">
+
+
+<link rel="canonical" href="http://wang-weijun.github.io/2024/06/05/Zabbix%E8%BF%90%E7%BB%B4%E5%B9%B3%E5%8F%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wang-weijun.github.io/2024/06/05/Zabbix%E8%BF%90%E7%BB%B4%E5%B9%B3%E5%8F%B0/","path":"2024/06/05/Zabbix运维平台/","title":"运维平台"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>运维平台 | Phils的杂货铺</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phils的杂货铺</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1Panel-%E9%9D%A2%E6%9D%BF"><span class="nav-number">1.</span> <span class="nav-text">1Panel 面板</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">应用商店第三方库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-%E6%BA%90"><span class="nav-number">1.2.</span> <span class="nav-text">docker 源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Zabbix-%E9%83%A8%E7%BD%B2"><span class="nav-number">2.</span> <span class="nav-text">Zabbix 部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%9B%86%E7%BE%A4%E8%A7%84%E5%88%92"><span class="nav-number">2.1.</span> <span class="nav-text">1.集群规划</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.2.</span> <span class="nav-text">2.准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E5%85%B3%E9%97%AD%E9%9B%86%E7%BE%A4"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 关闭集群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E5%85%B3%E9%97%AD-3-%E5%8F%B0%E8%8A%82%E7%82%B9%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 关闭 3 台节点防火墙</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-%E5%85%B3%E9%97%AD-3-%E5%8F%B0%E8%8A%82%E7%82%B9%E4%B8%8A%E7%9A%84-SELinux"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 关闭 3 台节点上的 SELinux</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE-3-%E5%8F%B0%E8%8A%82%E7%82%B9%E7%9A%84-Zabbix-yum-%E6%BA%90"><span class="nav-number">2.3.</span> <span class="nav-text">3.配置 3 台节点的 Zabbix yum 源</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E5%AE%89%E8%A3%85-yum-%E4%BB%93%E5%BA%93"><span class="nav-number">2.3.1.</span> <span class="nav-text">3.1 安装 yum 仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E4%BF%AE%E6%94%B9-zabbix-%E4%BB%93%E5%BA%93%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.2.</span> <span class="nav-text">3.2 修改 zabbix 仓库配置文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%AE%89%E8%A3%85-Zabbix"><span class="nav-number">2.4.</span> <span class="nav-text">4.安装 Zabbix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E9%85%8D%E7%BD%AE-Zabbix"><span class="nav-number">2.5.</span> <span class="nav-text">5.配置 Zabbix</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-%E5%88%9B%E5%BB%BA-Zabbix-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.5.1.</span> <span class="nav-text">5.1 创建 Zabbix 数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-%E5%AF%BC%E5%85%A5-Zabbix-%E5%BB%BA%E8%A1%A8%E8%AF%AD%E5%8F%A5"><span class="nav-number">2.5.2.</span> <span class="nav-text">5.2 导入 Zabbix 建表语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-%E9%85%8D%E7%BD%AE-Zabbix-Server%EF%BC%88hadoop102%EF%BC%89"><span class="nav-number">2.5.3.</span> <span class="nav-text">5.3 配置 Zabbix_Server（hadoop102）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-4-%E9%85%8D%E7%BD%AE-Zabbix-Agent%EF%BC%88%E4%B8%89%E5%8F%B0%E8%8A%82%E7%82%B9%EF%BC%89"><span class="nav-number">2.5.4.</span> <span class="nav-text">5.4 配置 Zabbix_Agent（三台节点）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-5-%E9%85%8D%E7%BD%AE-Zabbix-Web-%E6%97%B6%E5%8C%BA"><span class="nav-number">2.5.5.</span> <span class="nav-text">5.5 配置 Zabbix_Web 时区</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%90%AF%E5%8A%A8%E5%81%9C%E6%AD%A2-Zabbix"><span class="nav-number">2.6.</span> <span class="nav-text">6.启动停止 Zabbix</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-%E5%90%AF%E5%8A%A8-Zabbiz"><span class="nav-number">2.6.1.</span> <span class="nav-text">6.1 启动 Zabbiz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-%E5%81%9C%E6%AD%A2-Zabbiz"><span class="nav-number">2.6.2.</span> <span class="nav-text">6.2 停止 Zabbiz</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-%E8%AE%BF%E9%97%AE-Web-%E7%BD%91%E9%A1%B5"><span class="nav-number">2.6.3.</span> <span class="nav-text">6.3 访问 Web 网页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-%E7%99%BB%E5%BD%95-Zabbix"><span class="nav-number">2.6.4.</span> <span class="nav-text">6.4 登录 Zabbix</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phils"
+      src="/img/profile.png">
+  <p class="site-author-name" itemprop="name">Phils</p>
+  <div class="site-description" itemprop="description">个人博客，IT，技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wang-weijun" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wang-weijun" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1191206969@qq.com" title="E-Mail → mailto:1191206969@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wang-weijun.github.io/2024/06/05/Zabbix%E8%BF%90%E7%BB%B4%E5%B9%B3%E5%8F%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/profile.png">
+      <meta itemprop="name" content="Phils">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phils的杂货铺">
+      <meta itemprop="description" content="个人博客，IT，技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="运维平台 | Phils的杂货铺">
+      <meta itemprop="description" content="记录1Panel运维平台的使用">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          运维平台
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-05 23:30:04" itemprop="dateCreated datePublished" datetime="2024-06-05T23:30:04+08:00">2024-06-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-25 14:17:21" itemprop="dateModified" datetime="2025-11-25T14:17:21+08:00">2025-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">服务器</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">记录1Panel运维平台的使用</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="1Panel-面板"><a href="#1Panel-面板" class="headerlink" title="1Panel 面板"></a>1Panel 面板</h2><h3 id="应用商店第三方库"><a href="#应用商店第三方库" class="headerlink" title="应用商店第三方库"></a>应用商店第三方库</h3><p>官方库的应用比较少，我们可以添加第三方库，在面板的<code>计划任务</code>新增一条<code>Shell脚本</code>，任务名称随意，执行周期建议每天，脚本内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 直接执行或复制此脚本到 1Panel-&gt;计划任务中定时执行即可</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1panel本地app的目录（如果不是默认安装，需修改该目录）</span></span><br><span class="line">app_local_dir=<span class="string">&quot;/opt/1panel/resource/apps/local&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># AppStore的git仓库地址（必选）</span></span><br><span class="line">git_repo_url=<span class="string">&quot;https://mirror.ghproxy.com/https://github.com//okxlin/appstore&quot;</span></span><br><span class="line"><span class="comment">#git_repo_url=&quot;https://gitee.com/svip520/1panel-appstore&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问git仓库的access token，访问私有仓库时用，优先级高于账密（可选）</span></span><br><span class="line"><span class="comment"># 建议使用access token，降低账密泄露的风险</span></span><br><span class="line">git_access_token=<span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问git仓库的用户名，访问私有仓库时用（可选）</span></span><br><span class="line">git_username=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="comment"># 访问git仓库的密码，访问私有仓库时用（可选）</span></span><br><span class="line">git_password=<span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定克隆的分支（可选）</span></span><br><span class="line">git_branch=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="comment"># 指定克隆的深度（可选）</span></span><br><span class="line">git_depth=1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拉取远程仓库前是否清空本地app目录（可选）</span></span><br><span class="line">clean_local_app=<span class="literal">true</span></span><br><span class="line"><span class="comment"># 拉取远程仓库前是否清空远程app缓存（可选）</span></span><br><span class="line">clean_remote_app_cache=<span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置克隆或拉取远程仓库时使用的代理（可选）</span></span><br><span class="line">proxyUrl=<span class="string">&quot;&quot;</span></span><br><span class="line"><span class="comment"># 设置示例：</span></span><br><span class="line"><span class="comment"># proxyUrl=&quot;http://127.0.0.1:7890&quot;</span></span><br><span class="line"><span class="comment"># proxyUrl=&quot;socks5://127.0.0.1:7890&quot;</span></span><br><span class="line"><span class="comment"># proxyUrl=&quot;socks5://user:password@host:port&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将远程app store工程克隆到本地的工作目录</span></span><br><span class="line">work_dir=<span class="string">&quot;/opt/1panel_hepler&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line"><span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$work_dir</span>/logs&quot;</span></span><br><span class="line">log_file=<span class="string">&quot;<span class="variable">$work_dir</span>/logs/local_appstore_sync_helper_<span class="subst">$(date +<span class="string">&quot;%Y-%m-%d&quot;</span>)</span>.log&quot;</span></span><br><span class="line"><span class="function"><span class="title">logs</span></span>() &#123;</span><br><span class="line">  <span class="built_in">local</span> message=<span class="string">&quot;<span class="variable">$1</span>&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [ -n <span class="string">&quot;<span class="variable">$log_file</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="subst">$(dirname <span class="string">&quot;<span class="variable">$log_file</span>&quot;</span>)</span>&quot;</span></span><br><span class="line">    <span class="keyword">if</span> [ $? -eq 0 ]; <span class="keyword">then</span></span><br><span class="line">      <span class="built_in">echo</span> -e <span class="string">&quot;[<span class="subst">$(date +<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)</span>] <span class="variable">$message</span>&quot;</span></span><br><span class="line">      <span class="built_in">echo</span> <span class="string">&quot;[<span class="subst">$(date +<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)</span>] <span class="variable">$message</span>&quot;</span> &gt;&gt;<span class="string">&quot;<span class="variable">$log_file</span>&quot;</span></span><br><span class="line">      <span class="built_in">return</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">echo</span> -e <span class="string">&quot;<span class="variable">$message</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 函数: url_encode</span></span><br><span class="line"><span class="comment"># 参数:</span></span><br><span class="line"><span class="comment">#   - url: 需要进行编码的字符串</span></span><br><span class="line"><span class="comment"># 返回值:</span></span><br><span class="line"><span class="comment">#   经过URL编码后的字符串</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">url_encode</span></span>() &#123;</span><br><span class="line">  <span class="built_in">local</span> string=<span class="variable">$1</span></span><br><span class="line">  <span class="built_in">local</span> length=<span class="string">&quot;<span class="variable">$&#123;#string&#125;</span>&quot;</span></span><br><span class="line">  <span class="built_in">local</span> url_encoded_string=<span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="built_in">local</span> c</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> ((i = <span class="number">0</span>; i &lt; length; i++)); <span class="keyword">do</span></span><br><span class="line">    c=<span class="variable">$&#123;string:i:1&#125;</span></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;<span class="variable">$c</span>&quot;</span> <span class="keyword">in</span></span><br><span class="line">    [a-zA-Z0-9.~_-]) url_encoded_string+=<span class="variable">$c</span> ;;</span><br><span class="line">    *) url_encoded_string+=$(<span class="built_in">printf</span> <span class="string">&#x27;%%%02X&#x27;</span> <span class="string">&quot;&#x27;<span class="variable">$c</span>&quot;</span>) ;;</span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line">  <span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$url_encoded_string</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义函数，接收一个URL参数和可选的替换字符串参数</span></span><br><span class="line"><span class="function"><span class="title">replace_protocol</span></span>() &#123;</span><br><span class="line">  <span class="built_in">local</span> url=<span class="variable">$1</span></span><br><span class="line">  <span class="built_in">local</span> replacement=<span class="variable">$2</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 如果没有提供替换字符串，则删除&quot;http://&quot;或&quot;https://&quot;</span></span><br><span class="line">  <span class="keyword">if</span> [[ -z <span class="variable">$replacement</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">local</span> new_url=$(<span class="built_in">echo</span> <span class="variable">$url</span> | sed <span class="string">&quot;s/http:\/\///&quot;</span> | sed <span class="string">&quot;s/https:\/\///&quot;</span>)</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">local</span> new_url=$(<span class="built_in">echo</span> <span class="variable">$url</span> | sed <span class="string">&quot;s/http:\/\//<span class="variable">$&#123;replacement&#125;</span>/&quot;</span> | sed <span class="string">&quot;s/https:\/\//<span class="variable">$&#123;replacement&#125;</span>/&quot;</span>)</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 输出替换后的URL</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="variable">$new_url</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 函数: clone_git_repo</span></span><br><span class="line"><span class="comment"># 参数:</span></span><br><span class="line"><span class="comment">#   - url: Git仓库URL</span></span><br><span class="line"><span class="comment">#   - username: 账号（可选）</span></span><br><span class="line"><span class="comment">#   - password: 密码（可选）</span></span><br><span class="line"><span class="comment">#   - access_token: 访问令牌（可选）</span></span><br><span class="line"><span class="comment">#   - branch: 克隆分支（可选）</span></span><br><span class="line"><span class="comment">#   - depth: 克隆深度（可选，默认为0，即克隆整个仓库）</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">clone_git_repo</span></span>() &#123;</span><br><span class="line">  <span class="built_in">local</span> url=<span class="variable">$1</span></span><br><span class="line">  <span class="built_in">local</span> username=<span class="variable">$2</span></span><br><span class="line">  <span class="built_in">local</span> password=<span class="variable">$3</span></span><br><span class="line">  <span class="built_in">local</span> access_token=<span class="variable">$4</span></span><br><span class="line">  <span class="built_in">local</span> branch=<span class="variable">$5</span></span><br><span class="line">  <span class="built_in">local</span> depth=<span class="variable">$6</span></span><br><span class="line"></span><br><span class="line">  branch=<span class="variable">$&#123;branch:+--branch $branch&#125;</span></span><br><span class="line">  depth=<span class="variable">$&#123;depth:+--depth $depth&#125;</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;branch: <span class="variable">$branch</span>, depth: <span class="variable">$depth</span>&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [[ -n <span class="variable">$access_token</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;use access_token to clone&quot;</span></span><br><span class="line">    <span class="built_in">local</span> fix_url=$(replace_protocol <span class="string">&quot;<span class="variable">$url</span>&quot;</span>)</span><br><span class="line">    git <span class="built_in">clone</span> <span class="string">&quot;https://oauth2:<span class="variable">$access_token</span>@<span class="variable">$fix_url</span>&quot;</span> <span class="variable">$branch</span> <span class="variable">$depth</span></span><br><span class="line">  <span class="keyword">elif</span> [[ -n <span class="variable">$username</span> &amp;&amp; -n <span class="variable">$password</span> ]]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">local</span> encoded_username=$(url_encode <span class="string">&quot;<span class="variable">$username</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">local</span> encoded_password=$(url_encode <span class="string">&quot;<span class="variable">$password</span>&quot;</span>)</span><br><span class="line">    <span class="built_in">local</span> fix_url=$(replace_protocol <span class="string">&quot;<span class="variable">$url</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># echo &quot;use username and password to clone, encoded_username: $encoded_username, encoded_password: $encoded_password, fix_url: $fix_url&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;use username and password to clone&quot;</span></span><br><span class="line"></span><br><span class="line">    git <span class="built_in">clone</span> <span class="string">&quot;https://<span class="variable">$encoded_username</span>:<span class="variable">$encoded_password</span>@<span class="variable">$fix_url</span>&quot;</span> <span class="variable">$branch</span> <span class="variable">$depth</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;use default clone&quot;</span></span><br><span class="line">    git <span class="built_in">clone</span> <span class="string">&quot;<span class="variable">$url</span>&quot;</span> <span class="variable">$branch</span> <span class="variable">$depth</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取消代理</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">proxy_off</span></span>() &#123;</span><br><span class="line">  <span class="built_in">unset</span> http_proxy</span><br><span class="line">  <span class="built_in">unset</span> https_proxy</span><br><span class="line">  <span class="built_in">unset</span> ALL_PROXY</span><br><span class="line">  <span class="built_in">unset</span> no_proxy</span><br><span class="line">  logs <span class="string">&quot;Proxy Off&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 开启代理</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">proxy_on</span></span>() &#123;</span><br><span class="line">  proxy_url=<span class="string">&quot;http://127.0.0.1:7890&quot;</span></span><br><span class="line">  match_str=<span class="string">&quot;://&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [ -n <span class="string">&quot;<span class="variable">$1</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="keyword">if</span> [[ <span class="variable">$1</span> =~ <span class="variable">$match_str</span> ]]; <span class="keyword">then</span></span><br><span class="line">      proxy_url=<span class="variable">$1</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      logs <span class="string">&quot;Incorrect proxy_url, use defualt proxy_url&quot;</span></span><br><span class="line">      <span class="built_in">return</span></span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">export</span> http_proxy=<span class="variable">$proxy_url</span></span><br><span class="line">  <span class="built_in">export</span> https_proxy=<span class="variable">$proxy_url</span></span><br><span class="line">  <span class="built_in">export</span> ALL_PROXY=<span class="variable">$proxy_url</span></span><br><span class="line">  <span class="built_in">export</span> no_proxy=<span class="string">&quot;localhost,127.0.0.1,localaddress,.localdomain.com&quot;</span></span><br><span class="line">  logs <span class="string">&quot;Proxy On <span class="variable">$proxy_url</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">scriptInfo</span></span>() &#123;</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line">  logs <span class="string">&quot;##################################################################&quot;</span></span><br><span class="line">  logs <span class="string">&quot;#  Name: local appstore sync helper for 1Panel                 #&quot;</span></span><br><span class="line">  logs <span class="string">&quot;#  Author: nameless                                              #&quot;</span></span><br><span class="line">  logs <span class="string">&quot;##################################################################&quot;</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">main</span></span>() &#123;</span><br><span class="line">  scriptInfo</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [ ! -d <span class="string">&quot;<span class="variable">$app_local_dir</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    logs <span class="string">&quot;未检测到1panel的app目录，请检查1panel是否安装正确，或修改脚本中的app_local_dir变量&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 检查地址结尾是否包含.git，如果不包含则自动补全</span></span><br><span class="line">  <span class="keyword">if</span> [[ <span class="string">&quot;<span class="variable">$git_repo_url</span>&quot;</span> != *<span class="string">&quot;.git&quot;</span> ]]; <span class="keyword">then</span></span><br><span class="line">    git_repo_url=<span class="string">&quot;<span class="variable">$&#123;git_repo_url&#125;</span>.git&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">local</span> repo_username=<span class="string">&quot;&quot;</span></span><br><span class="line">  <span class="built_in">local</span> repo_projectname=<span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 使用正则表达式匹配仓库地址中的用户名和项目名</span></span><br><span class="line">  <span class="keyword">if</span> [[ <span class="variable">$git_repo_url</span> =~ .*\/(.*)\/(.*)\.git ]]; <span class="keyword">then</span></span><br><span class="line">    repo_username=<span class="variable">$&#123;BASH_REMATCH[1]&#125;</span></span><br><span class="line">    repo_projectname=<span class="variable">$&#123;BASH_REMATCH[2]&#125;</span></span><br><span class="line">    <span class="comment"># logs &quot;用户名: $repo_username&quot;</span></span><br><span class="line">    <span class="comment"># logs &quot;项目名: $repo_projectname&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [ -z <span class="string">&quot;<span class="variable">$repo_username</span>&quot;</span> ] || [ -z <span class="string">&quot;<span class="variable">$repo_projectname</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    logs <span class="string">&quot;无法提取用户名和项目名，请检查git_repo_url变量提供的地址是否正确&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$work_dir</span>/temp&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">local</span> repo_user_dir=<span class="string">&quot;<span class="variable">$work_dir</span>/temp/<span class="variable">$repo_username</span>&quot;</span></span><br><span class="line">  <span class="built_in">local</span> repo_dir=<span class="string">&quot;<span class="variable">$repo_user_dir</span>/<span class="variable">$repo_projectname</span>&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 根据clean_remote_app_cache变量的值决定是否清空远程app的缓存数据</span></span><br><span class="line">  <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$clean_remote_app_cache</span>&quot;</span> = <span class="literal">true</span> ] &amp;&amp; [ -d <span class="string">&quot;<span class="variable">$repo_dir</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">rm</span> -rf <span class="string">&quot;<span class="variable">$repo_dir</span>&quot;</span></span><br><span class="line">    logs <span class="string">&quot;已清空远程app的缓存数据&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 根据proxyUrl变量的值决定是否开启代理</span></span><br><span class="line">  <span class="keyword">if</span> [ -n <span class="string">&quot;<span class="variable">$proxyUrl</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    proxy_on <span class="string">&quot;<span class="variable">$proxyUrl</span>&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># clone或拉取远程仓库最新代码</span></span><br><span class="line">  logs <span class="string">&quot;准备获取远程仓库最新代码：<span class="variable">$git_repo_url</span>&quot;</span></span><br><span class="line">  <span class="keyword">if</span> [ -d <span class="string">&quot;<span class="variable">$repo_dir</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    logs <span class="string">&quot;执行git pull操作&quot;</span></span><br><span class="line">    <span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$repo_dir</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 强行拉取最新代码</span></span><br><span class="line">    git pull --force 2&gt;&gt;<span class="string">&quot;<span class="variable">$log_file</span>&quot;</span></span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    logs <span class="string">&quot;执行git clone操作&quot;</span></span><br><span class="line">    <span class="built_in">mkdir</span> -p <span class="string">&quot;<span class="variable">$repo_user_dir</span>&quot;</span></span><br><span class="line">    <span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$repo_user_dir</span>&quot;</span></span><br><span class="line"></span><br><span class="line">    clone_git_repo <span class="string">&quot;<span class="variable">$git_repo_url</span>&quot;</span> <span class="string">&quot;<span class="variable">$git_username</span>&quot;</span> <span class="string">&quot;<span class="variable">$git_password</span>&quot;</span> <span class="string">&quot;<span class="variable">$git_access_token</span>&quot;</span> <span class="string">&quot;<span class="variable">$git_branch</span>&quot;</span> <span class="string">&quot;<span class="variable">$git_depth</span>&quot;</span> 2&gt;&gt;<span class="string">&quot;<span class="variable">$log_file</span>&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  logs <span class="string">&quot;远程仓库最新代码获取完成&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [ ! -d <span class="string">&quot;<span class="variable">$repo_dir</span>/apps&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    logs <span class="string">&quot;未检测到apps目录，请检查远程仓库是否正确&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 根据clean_local_app变量的值决定是否清空本地app目录</span></span><br><span class="line">  <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$clean_local_app</span>&quot;</span> = <span class="literal">true</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">rm</span> -rf <span class="string">&quot;<span class="variable">$app_local_dir</span>&quot;</span>/*</span><br><span class="line">    logs <span class="string">&quot;已清空本地原有的app&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 将远程仓库的apps目录下的所有app复制到本地app_local_dir目录下</span></span><br><span class="line">  <span class="built_in">cd</span> <span class="string">&quot;<span class="variable">$repo_dir</span>&quot;</span></span><br><span class="line">  <span class="built_in">cp</span> -rf apps/* <span class="string">&quot;<span class="variable">$app_local_dir</span>&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">pwd</span></span><br><span class="line">  <span class="built_in">ls</span> -lah</span><br><span class="line">  <span class="built_in">du</span> -sh</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 根据clean_remote_app_cache变量的值决定是否清空远程app的缓存数据</span></span><br><span class="line">  <span class="keyword">if</span> [ <span class="string">&quot;<span class="variable">$clean_remote_app_cache</span>&quot;</span> = <span class="literal">true</span> ]; <span class="keyword">then</span></span><br><span class="line">    <span class="built_in">rm</span> -rf <span class="string">&quot;<span class="variable">$repo_dir</span>&quot;</span></span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> [ -n <span class="string">&quot;<span class="variable">$proxyUrl</span>&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">    proxy_off</span><br><span class="line">  <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">  logs <span class="string">&quot;1panel本地app同步成功，enjoy it!&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main <span class="string">&quot;<span class="variable">$@</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>创建好后，点击执行，可在报告中查看详情：</p>
+<p><img src="/../images/202408072129795.png" alt="image-20240807212903607"></p>
+<h3 id="docker-源"><a href="#docker-源" class="headerlink" title="docker 源"></a>docker 源</h3><p>最近中国大陆无法连接到<code>docker</code>，在面板的容器-配置中，<code>镜像加速</code>使用下面连接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://docker.1panel.live/</span><br></pre></td></tr></table></figure>
+
+<h2 id="Zabbix-部署"><a href="#Zabbix-部署" class="headerlink" title="Zabbix 部署"></a>Zabbix 部署</h2><h3 id="1-集群规划"><a href="#1-集群规划" class="headerlink" title="1.集群规划"></a>1.集群规划</h3><table>
+<thead>
+<tr>
+<th>进程</th>
+<th>hadoop102 节点</th>
+<th>hadoop103 节点</th>
+<th>hadoop104 节点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>zabbix-agent</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>zabbix-server</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>MySQL</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>zabbix-web</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2.准备工作"></a>2.准备工作</h3><h4 id="2-1-关闭集群"><a href="#2-1-关闭集群" class="headerlink" title="2.1 关闭集群"></a>2.1 关闭集群</h4><p>如果集群开启，先关闭集群。因为安装<strong>Zabbix</strong>前，需要重启虚拟机。</p>
+<h4 id="2-2-关闭-3-台节点防火墙"><a href="#2-2-关闭-3-台节点防火墙" class="headerlink" title="2.2 关闭 3 台节点防火墙"></a>2.2 关闭 3 台节点防火墙</h4><p>分别在<code>hadoop102、103、104</code>上执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl stop firewalld.service</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">disable</span> firewalld.service</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-3-关闭-3-台节点上的-SELinux"><a href="#2-3-关闭-3-台节点上的-SELinux" class="headerlink" title="2.3 关闭 3 台节点上的 SELinux"></a>2.3 关闭 3 台节点上的 SELinux</h4><p>(1) 修改配置文件<code>/etc/selinux/config</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/selinux/config</span><br></pre></td></tr></table></figure>
+
+<p>修改为一下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># This file controls the state of SELinux on the system.</span></span><br><span class="line"><span class="comment"># SELINUX= can take one of these three values:</span></span><br><span class="line"><span class="comment">#     enforcing - SELinux security policy is enforced.</span></span><br><span class="line"><span class="comment">#     permissive - SELinux prints warnings instead of enforcing.</span></span><br><span class="line"><span class="comment">#     disabled - No SELinux policy is loaded.</span></span><br><span class="line">SELINUX=disabled</span><br><span class="line"><span class="comment"># SELINUXTYPE= can take one of three values:</span></span><br><span class="line"><span class="comment">#     targeted - Targeted processes are protected,</span></span><br><span class="line"><span class="comment">#     minimum - Modification of targeted policy. Only selected processes are protected.</span></span><br><span class="line"><span class="comment">#     mls - Multi Level Security protection.</span></span><br><span class="line">SELINUXTYPE=targeted</span><br></pre></td></tr></table></figure>
+
+<p>(2) 重启服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> reboot</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置-3-台节点的-Zabbix-yum-源"><a href="#3-配置-3-台节点的-Zabbix-yum-源" class="headerlink" title="3.配置 3 台节点的 Zabbix yum 源"></a>3.配置 3 台节点的 Zabbix yum 源</h3><h4 id="3-1-安装-yum-仓库"><a href="#3-1-安装-yum-仓库" class="headerlink" title="3.1 安装 yum 仓库"></a>3.1 安装 yum 仓库</h4><p>(1) 安装 zabbix 的软件仓库配置包</p>
+<p>这个包包含了 yum（软件包管理器）的配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[wwj@hadoop102 ~]$ <span class="built_in">sudo</span> rpm -Uvh https://mirrors.aliyun.com/zabbix/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm</span><br><span class="line">[wwj@hadoop103 ~]$ <span class="built_in">sudo</span> rpm -Uvh https://mirrors.aliyun.com/zabbix/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm</span><br><span class="line">[wwj@hadoop104 ~]$ <span class="built_in">sudo</span> rpm -Uvh https://mirrors.aliyun.com/zabbix/zabbix/5.0/rhel/7/x86_64/zabbix-release-5.0-1.el7.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+<p>(2) 安装 Software Collectiopns 仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[wwj@hadoop102 ~]$ <span class="built_in">sudo</span> yum install -y centos-release-scl</span><br><span class="line">[wwj@hadoop103 ~]$ <span class="built_in">sudo</span> yum install -y centos-release-scl</span><br><span class="line">[wwj@hadoop104 ~]$ <span class="built_in">sudo</span> yum install -y centos-release-scl</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-修改-zabbix-仓库配置文件"><a href="#3-2-修改-zabbix-仓库配置文件" class="headerlink" title="3.2 修改 zabbix 仓库配置文件"></a>3.2 修改 zabbix 仓库配置文件</h4><p><code>hadoop102、hadoop103、hadoop104</code>三台节点，依次执行如下步骤：</p>
+<p>(1) 查看原始 zabbix.repo 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[wwj@hadoop102 ~]$ <span class="built_in">sudo</span> <span class="built_in">cat</span> /etc/yum.repos.d/zabbix.repo</span><br></pre></td></tr></table></figure>
+
+<p>查看内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[zabbix]</span><br><span class="line">name=Zabbix Official Repository - <span class="variable">$basearch</span></span><br><span class="line">baseurl=http://repo.zabbix.com/zabbix/5.0/rhel/7/<span class="variable">$basearch</span>/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br><span class="line"></span><br><span class="line">[zabbix-frontend]</span><br><span class="line">name=Zabbix Official Repository frontend - <span class="variable">$basearch</span></span><br><span class="line">baseurl=http://repo.zabbix.com/zabbix/5.0/rhel/7/<span class="variable">$basearch</span>/frontend</span><br><span class="line">enabled=0</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br><span class="line"></span><br><span class="line">[zabbix-debuginfo]</span><br><span class="line">name=Zabbix Official Repository debuginfo - <span class="variable">$basearch</span></span><br><span class="line">baseurl=http://repo.zabbix.com/zabbix/5.0/rhel/7/<span class="variable">$basearch</span>/debuginfo/</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br><span class="line">gpgcheck=1</span><br><span class="line"></span><br><span class="line">[zabbix-non-supported]</span><br><span class="line">name=Zabbix Official Repository non-supported - <span class="variable">$basearch</span></span><br><span class="line">baseurl=http://repo.zabbix.com/non-supported/rhel/7/<span class="variable">$basearch</span>/</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX</span><br><span class="line">gpgcheck=1</span><br></pre></td></tr></table></figure>
+
+<p>(2) 执行以下命令完成全局替换，修改为阿里云镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[wwj@hadoop102 ~]$ <span class="built_in">sudo</span> sed -i <span class="string">&#x27;s/http:\/\/repo.zabbix.com/https:\/\/mirrors.aliyun.com\/zabbix/g&#x27;</span> /etc/yum.repos.d/zabbix.repo</span><br></pre></td></tr></table></figure>
+
+<p>(3) 查看修改后的 zabbix.repo 文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[wwj@hadoop102 ~]$ <span class="built_in">sudo</span> <span class="built_in">cat</span> /etc/yum.repos.d/zabbix.repo</span><br></pre></td></tr></table></figure>
+
+<p>查看内容如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[zabbix]</span><br><span class="line">name=Zabbix Official Repository - <span class="variable">$basearch</span></span><br><span class="line">baseurl=https://mirrors.aliyun.com/zabbix/zabbix/5.0/rhel/7/<span class="variable">$basearch</span>/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br><span class="line"></span><br><span class="line">[zabbix-frontend]</span><br><span class="line">name=Zabbix Official Repository frontend - <span class="variable">$basearch</span></span><br><span class="line">baseurl=https://mirrors.aliyun.com/zabbix/zabbix/5.0/rhel/7/<span class="variable">$basearch</span>/frontend</span><br><span class="line">enabled=0</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br><span class="line"></span><br><span class="line">[zabbix-debuginfo]</span><br><span class="line">name=Zabbix Official Repository debuginfo - <span class="variable">$basearch</span></span><br><span class="line">baseurl=https://mirrors.aliyun.com/zabbix/zabbix/5.0/rhel/7/<span class="variable">$basearch</span>/debuginfo/</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br><span class="line">gpgcheck=1</span><br><span class="line"></span><br><span class="line">[zabbix-non-supported]</span><br><span class="line">name=Zabbix Official Repository non-supported - <span class="variable">$basearch</span></span><br><span class="line">baseurl=https://mirrors.aliyun.com/zabbix/non-supported/rhel/7/<span class="variable">$basearch</span>/</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX</span><br><span class="line">gpgcheck=1</span><br></pre></td></tr></table></figure>
+
+<p>(4) 打开<code>/etc/yum.repos.d/zabbix.repo</code>文件，启用 zabbix-web 仓库</p>
+<p>将文件中<strong>zabbix-frontend</strong>的<strong>enabled&#x3D;0</strong>改为<strong>enabled&#x3D;1</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[zabbix-frontend]</span><br><span class="line">name=Zabbix Official Repository frontend - <span class="variable">$basearch</span></span><br><span class="line">baseurl=https://mirrors.aliyun.com/zabbix/zabbix/5.0/rhel/7/<span class="variable">$basearch</span>/frontend</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-安装-Zabbix"><a href="#4-安装-Zabbix" class="headerlink" title="4.安装 Zabbix"></a>4.安装 Zabbix</h3><p>在 hadoop102、hadoop103、hadoop104 三台节点分别执行以下安装命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[wwj@hadoop102 ~]$ <span class="built_in">sudo</span> yum install -y zabbix-server-mysql zabbix-agent zabbix-web-mysql-scl zabbix-apache-conf-scl</span><br><span class="line">[wwj@hadoop103 ~]$ <span class="built_in">sudo</span> yum install -y zabbix-agent</span><br><span class="line">[wwj@hadoop104 ~]$ <span class="built_in">sudo</span> yum install -y zabbix-agent</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-配置-Zabbix"><a href="#5-配置-Zabbix" class="headerlink" title="5.配置 Zabbix"></a>5.配置 Zabbix</h3><h4 id="5-1-创建-Zabbix-数据库"><a href="#5-1-创建-Zabbix-数据库" class="headerlink" title="5.1 创建 Zabbix 数据库"></a>5.1 创建 Zabbix 数据库</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[wwj@hadoop102 ~]$ mysql -uroot -p123456 -e<span class="string">&quot;create database zabbix character set utf8 collate utf8_bin&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-2-导入-Zabbix-建表语句"><a href="#5-2-导入-Zabbix-建表语句" class="headerlink" title="5.2 导入 Zabbix 建表语句"></a>5.2 导入 Zabbix 建表语句</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[wwj@hadoop102 ~]$ zcat /usr/share/doc/zabbix-server-mysql-5.0.42/create.sql.gz | mysql -uroot -p123456 zabbix</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-3-配置-Zabbix-Server（hadoop102）"><a href="#5-3-配置-Zabbix-Server（hadoop102）" class="headerlink" title="5.3 配置 Zabbix_Server（hadoop102）"></a>5.3 配置 Zabbix_Server（hadoop102）</h4><p>修改 zabbix-server 配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[wwj@hadoop102 ~]$ <span class="built_in">sudo</span> vim /etc/zabbix/zabbix_server.conf</span><br><span class="line"></span><br><span class="line">DBHost=hadoop102</span><br><span class="line">DBName=zabbix</span><br><span class="line">DBUser=root</span><br><span class="line">DBPassword=123456</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-4-配置-Zabbix-Agent（三台节点）"><a href="#5-4-配置-Zabbix-Agent（三台节点）" class="headerlink" title="5.4 配置 Zabbix_Agent（三台节点）"></a>5.4 配置 Zabbix_Agent（三台节点）</h4><p>修改<code>zabbix-agent</code>配置文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[wwj@hadoop102 ~]$ <span class="built_in">sudo</span> vim /etc/zabbix/zabbix_agentd.conf</span><br><span class="line">[wwj@hadoop103 ~]$ <span class="built_in">sudo</span> vim /etc/zabbix/zabbix_agentd.conf</span><br><span class="line">[wwj@hadoop104 ~]$ <span class="built_in">sudo</span> vim /etc/zabbix/zabbix_agentd.conf</span><br></pre></td></tr></table></figure>
+
+<p>修改以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Server=hadoop102</span><br><span class="line"><span class="comment">#ServerActive=127.0.0.1</span></span><br><span class="line"><span class="comment">#Hostname=Zabbix server</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-5-配置-Zabbix-Web-时区"><a href="#5-5-配置-Zabbix-Web-时区" class="headerlink" title="5.5 配置 Zabbix_Web 时区"></a>5.5 配置 Zabbix_Web 时区</h4><p>修改<code>/etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf</code>文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[wwj@hadoop102 ~]$ <span class="built_in">sudo</span> vim /etc/opt/rh/rh-php72/php-fpm.d/zabbix.conf</span><br></pre></td></tr></table></figure>
+
+<p>修改如下内容：（最后一行：php_value[date.timezone] &#x3D; Asia&#x2F;Shanghai）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[zabbix]</span><br><span class="line">user = apache</span><br><span class="line">group = apache</span><br><span class="line"></span><br><span class="line">listen = /var/opt/rh/rh-php72/run/php-fpm/zabbix.sock</span><br><span class="line">listen.acl_users = apache</span><br><span class="line">listen.allowed_clients = 127.0.0.1</span><br><span class="line"></span><br><span class="line">pm = dynamic</span><br><span class="line">pm.max_children = 50</span><br><span class="line">pm.start_servers = 5</span><br><span class="line">pm.min_spare_servers = 5</span><br><span class="line">pm.max_spare_servers = 35</span><br><span class="line">pm.max_requests = 200</span><br><span class="line"></span><br><span class="line">php_value[session.save_handler] = files</span><br><span class="line">php_value[session.save_path]    = /var/opt/rh/rh-php72/lib/php/session/</span><br><span class="line"></span><br><span class="line">php_value[max_execution_time] = 300</span><br><span class="line">php_value[memory_limit] = 128M</span><br><span class="line">php_value[post_max_size] = 16M</span><br><span class="line">php_value[upload_max_filesize] = 2M</span><br><span class="line">php_value[max_input_time] = 300</span><br><span class="line">php_value[max_input_vars] = 10000</span><br><span class="line">php_value[date.timezone] = Asia/Shanghai</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改 MySQL8.0 的密码加密规则</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter user <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> identified with mysql_native_password by <span class="string">&#x27;123456&#x27;</span>;</span><br><span class="line"><span class="keyword">select</span> user,host,plugin,authentication_string from user;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/202406061433653.png" alt="image-20240606143347532"></p>
+<h3 id="6-启动停止-Zabbix"><a href="#6-启动停止-Zabbix" class="headerlink" title="6.启动停止 Zabbix"></a>6.启动停止 Zabbix</h3><h4 id="6-1-启动-Zabbiz"><a href="#6-1-启动-Zabbiz" class="headerlink" title="6.1 启动 Zabbiz"></a>6.1 启动 Zabbiz</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wwj@hadoop102 ~$ <span class="built_in">sudo</span> systemctl restart zabbix-server zabbix-agent httpd rh-php72-php-fpm</span><br><span class="line">wwj@hadoop102 ~$ <span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> zabbix-server zabbix-agent httpd rh-php72-php-fpm</span><br><span class="line"></span><br><span class="line">[wwj@hadoop103 ~]$ <span class="built_in">sudo</span> systemctl start zabbix-agent</span><br><span class="line">[wwj@hadoop103 ~]$ <span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> zabbix-agent</span><br><span class="line"></span><br><span class="line">[wwj@hadoop104 ~]$ <span class="built_in">sudo</span> systemctl start zabbix-agent</span><br><span class="line">[wwj@hadoop104 ~]$ <span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> zabbix-agent</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-2-停止-Zabbiz"><a href="#6-2-停止-Zabbiz" class="headerlink" title="6.2 停止 Zabbiz"></a>6.2 停止 Zabbiz</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[wwj@hadoop102 ~]$ <span class="built_in">sudo</span> systemctl stop zabbix-server zabbix-agent httpd rh-php72-php-fpm</span><br><span class="line">[wwj@hadoop102 ~]$ <span class="built_in">sudo</span> systemctl <span class="built_in">disable</span> zabbix-server zabbix-agent httpd rh-php72-php-fpm</span><br><span class="line"></span><br><span class="line">[wwj@hadoop103 ~]$ <span class="built_in">sudo</span> systemctl stop zabbix-agent</span><br><span class="line">[wwj@hadoop103 ~]$ <span class="built_in">sudo</span> systemctl <span class="built_in">disable</span> zabbix-agent</span><br><span class="line"></span><br><span class="line">[wwj@hadoop104 ~]$ <span class="built_in">sudo</span> systemctl stop zabbix-agent</span><br><span class="line">[wwj@hadoop104 ~]$ <span class="built_in">sudo</span> systemctl <span class="built_in">disable</span> zabbix-agent</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-3-访问-Web-网页"><a href="#6-3-访问-Web-网页" class="headerlink" title="6.3 访问 Web 网页"></a>6.3 访问 Web 网页</h4><p>打开：<a target="_blank" rel="noopener" href="http://hadoop102/zabbix/">http://hadoop102/zabbix/</a> 即可访问 zabbix-server,点击下一步，对数据库进行配置：</p>
+<p><img src="/../images/202406061444721.png" alt="image-20240606144454655"></p>
+<p>配置 Zabbix server details</p>
+<p><img src="/../images/202406061531498.png" alt="image-20240606153121452"></p>
+<p>完成之后就可以登录 Zabbix 页面了</p>
+<h4 id="6-4-登录-Zabbix"><a href="#6-4-登录-Zabbix" class="headerlink" title="6.4 登录 Zabbix"></a>6.4 登录 Zabbix</h4><p>(1) 登录账号</p>
+<p>用户名：Admin 密码：zabbix</p>
+<p>(2) 设置界面语言</p>
+<p><img src="/../images/202406061534297.png" alt="image-20240606153428222"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%BF%90%E7%BB%B4/" rel="tag"># 运维</a>
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/02/17/%E5%B7%A5%E5%85%B7%E9%9B%86/" rel="prev" title="工具集">
+                  <i class="fa fa-angle-left"></i> 工具集
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/07/22/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="next" title="内网穿透">
+                  内网穿透 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phils</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/iconfont.png">
+  <link rel="mask-icon" href="/img/iconfont.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wang-weijun.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="记录SpringCloud笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringCloud">
+<meta property="og:url" content="http://wang-weijun.github.io/2023/09/19/SpringCloud/index.html">
+<meta property="og:site_name" content="Phils的杂货铺">
+<meta property="og:description" content="记录SpringCloud笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230919170752976.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230920100537437.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230920104317108.png">
+<meta property="article:published_time" content="2023-09-19T01:56:36.000Z">
+<meta property="article:modified_time" content="2025-11-25T06:17:21.268Z">
+<meta property="article:author" content="Phils">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="SpringCloud">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wang-weijun.github.io/images/image-20230919170752976.png">
+
+
+<link rel="canonical" href="http://wang-weijun.github.io/2023/09/19/SpringCloud/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wang-weijun.github.io/2023/09/19/SpringCloud/","path":"2023/09/19/SpringCloud/","title":"SpringCloud"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SpringCloud | Phils的杂货铺</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phils的杂货铺</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud"><span class="nav-number">1.</span> <span class="nav-text">SpringCloud</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-SpringCloud"><span class="nav-number">1.1.1.</span> <span class="nav-text">什么是 SpringCloud</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringCloud-%E4%B8%8E-SpringBoot-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.1.2.</span> <span class="nav-text">SpringCloud 与 SpringBoot 的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Spring-Cloud-%E4%B8%BB%E8%A6%81%E5%9F%BA%E7%A1%80%E6%9C%8D%E5%8A%A1%E7%BB%84%E4%BB%B6"><span class="nav-number">1.1.3.</span> <span class="nav-text">Spring Cloud 主要基础服务组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nacos-%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">Nacos 下载与安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringCloud-Nacos"><span class="nav-number">1.2.1.</span> <span class="nav-text">SpringCloud-Nacos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nacos-%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.2.</span> <span class="nav-text">Nacos 下载和安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C"><span class="nav-number">1.3.</span> <span class="nav-text">服务注册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8-service-%E6%A8%A1%E5%9D%97%E9%85%8D%E7%BD%AE-pom"><span class="nav-number">1.3.1.</span> <span class="nav-text">在 service 模块配置 pom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-number">1.3.2.</span> <span class="nav-text">添加服务配置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-Nacos-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.3.3.</span> <span class="nav-text">添加 Nacos 客户端注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="nav-number">1.3.4.</span> <span class="nav-text">启动客户端微服务</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phils"
+      src="/img/profile.png">
+  <p class="site-author-name" itemprop="name">Phils</p>
+  <div class="site-description" itemprop="description">个人博客，IT，技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wang-weijun" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wang-weijun" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1191206969@qq.com" title="E-Mail → mailto:1191206969@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wang-weijun.github.io/2023/09/19/SpringCloud/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/profile.png">
+      <meta itemprop="name" content="Phils">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phils的杂货铺">
+      <meta itemprop="description" content="个人博客，IT，技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SpringCloud | Phils的杂货铺">
+      <meta itemprop="description" content="记录SpringCloud笔记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringCloud
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-19 09:56:36" itemprop="dateCreated datePublished" datetime="2023-09-19T09:56:36+08:00">2023-09-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-25 14:17:21" itemprop="dateModified" datetime="2025-11-25T14:17:21+08:00">2025-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">高级语言</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">记录SpringCloud笔记</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="SpringCloud"><a href="#SpringCloud" class="headerlink" title="SpringCloud"></a>SpringCloud</h1><p>目前微服务的开发框架，最常用的有以下四个：</p>
+<p>Spring Cloud：<a target="_blank" rel="noopener" href="http://projects.spring.io/spring-cloud%EF%BC%88%E7%8E%B0%E5%9C%A8%E9%9D%9E%E5%B8%B8%E6%B5%81%E8%A1%8C%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%EF%BC%89">http://projects.spring.io/spring-cloud（现在非常流行的微服务架构）</a></p>
+<p>Dubbo：<a target="_blank" rel="noopener" href="http://dubbo.io/">http://dubbo.io</a></p>
+<p>Dropwizard：<a target="_blank" rel="noopener" href="http://www.dropwizard.io/">http://www.dropwizard.io</a> （关注单个微服务的开发）</p>
+<p>Consul、etcd&amp;etc.（微服务的模块）</p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="什么是-SpringCloud"><a href="#什么是-SpringCloud" class="headerlink" title="什么是 SpringCloud"></a>什么是 SpringCloud</h3><p>Spring Cloud 是一系列框架的集合。它利用 Spring Boot 的开发便利性简化了分布式系统基础设施的开发，如服务发现、服务注册、配置中心、消息总线、负载均衡、 熔断器、数据监控等，都可以用 Spring Boot 的开发风格做到一键启动和部署。Spring 并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过 SpringBoot 风格进行再封装屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包</p>
+<h3 id="SpringCloud-与-SpringBoot-的关系"><a href="#SpringCloud-与-SpringBoot-的关系" class="headerlink" title="SpringCloud 与 SpringBoot 的关系"></a>SpringCloud 与 SpringBoot 的关系</h3><ol>
+<li>Spring Boot 是 Spring 的一套快速配置脚手架，可以基于 Spring Boot 快速开发单个微服务，Spring Cloud 是一个基于 Spring Boot 实现的开发工具；</li>
+<li>Spring Boot 专注于快速、方便集成的单个微服务个体，Spring Cloud 关注全局的服务治理框架；</li>
+<li>Spring Boot 使用了默认大于配置的理念，很多集成方案已经帮你选择好了，能不配置就不配置，Spring Cloud 很大的一部分是基于 Spring Boot 来实现，必须基于 Spring Boot 开发。</li>
+<li>可以单独使用 Spring Boot 开发项目，但是 Spring Cloud 离不开 Spring Boot。</li>
+</ol>
+<h3 id="Spring-Cloud-主要基础服务组件"><a href="#Spring-Cloud-主要基础服务组件" class="headerlink" title="Spring Cloud 主要基础服务组件"></a>Spring Cloud 主要基础服务组件</h3><p>服务发现——Netflix Eureka （Nacos）</p>
+<p>服务调用——Netflix Feign</p>
+<p>熔断器——Netflix Hystrix （Sentinel）</p>
+<p>服务网关——Spring Cloud GateWay</p>
+<p>分布式配置——Spring Cloud Config （Nacos）</p>
+<h2 id="Nacos-下载与安装"><a href="#Nacos-下载与安装" class="headerlink" title="Nacos 下载与安装"></a>Nacos 下载与安装</h2><h3 id="SpringCloud-Nacos"><a href="#SpringCloud-Nacos" class="headerlink" title="SpringCloud-Nacos"></a>SpringCloud-Nacos</h3><p><strong>（1）</strong>Nacos 是阿里巴巴推出来的一个新开源项目，是一个更易于构建云原生应用的动态服务发现、配置管理和服务管理平台。Nacos 致力于帮助您发现、配置和管理微服务。Nacos 提供了一组简单易用的特性集，帮助您快速实现动态服务发现、服务配置、服务元数据及流量管理。Nacos 帮助您更敏捷和容易地构建、交付和管理微服务平台。 Nacos 是构建以“服务”为中心的现代应用架构 (例如微服务范式、云原生范式) 的服务基础设施。</p>
+<p>（2）常见的注册中心：</p>
+<ol>
+<li><p>Eureka（原生，2.0 遇到性能瓶颈，停止维护）</p>
+</li>
+<li><p>Zookeeper（支持，专业的独立产品。例如：dubbo）</p>
+</li>
+<li><p>Consul（原生，GO 语言开发）</p>
+</li>
+<li><p>Nacos</p>
+</li>
+</ol>
+<p>相对于 Spring Cloud Eureka 来说，Nacos 更强大。Nacos &#x3D; Spring Cloud Eureka + Spring Cloud Config</p>
+<p>Nacos 可以与 Spring, Spring Boot, Spring Cloud 集成，并能代替 Spring Cloud Eureka, Spring Cloud Config</p>
+<p>- 通过 Nacos Server 和 spring-cloud-starter-alibaba-nacos-discovery 实现服务的注册与发现。</p>
+<p><strong>（3）</strong>Nacos 是以服务为主要服务对象的中间件，Nacos 支持所有主流的服务发现、配置和管理。</p>
+<p>Nacos 主要提供以下四大功能：</p>
+<ol>
+<li><p>服务发现和服务健康监测</p>
+</li>
+<li><p>动态配置服务</p>
+</li>
+<li><p>动态 DNS 服务</p>
+</li>
+<li><p>服务及其元数据管理</p>
+</li>
+</ol>
+<p><strong>（4）</strong>Nacos 结构图</p>
+<p><img src="/../images/image-20230919170752976.png" alt="image-20230919170752976"></p>
+<h3 id="Nacos-下载和安装"><a href="#Nacos-下载和安装" class="headerlink" title="Nacos 下载和安装"></a>Nacos 下载和安装</h3><p><strong>（1）下载地址和版本</strong></p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/alibaba/nacos/releases">https://github.com/alibaba/nacos/releases</a></p>
+<p>下载版本：nacos-server-2.2.1.tar.gz 或 nacos-server-2.2.1.zip，解压没有中文没有空格目录即可</p>
+<p><strong>（2）修改配置文件</strong></p>
+<p>参考官方文档：<a target="_blank" rel="noopener" href="https://nacos.io/zh-cn/docs/v2/guide/user/auth.html">https://nacos.io/zh-cn/docs/v2/guide/user/auth.html</a></p>
+<p>在<code>/nacos/conf/application.properties</code>中，修改<code>nacos.core.auth.plugin.nacos.token.secret.key</code>的，因为 2.2.0.1 以后无默认值</p>
+<table>
+<thead>
+<tr>
+<th align="left">nacos.core.auth.plugin.nacos.token.secret.key</th>
+<th>SecretKey012345678901234567890123456789012345678901234567890123456789(2.2.0.1 后无默认值)</th>
+<th>2.1.0 ~ latest</th>
+<th>默认鉴权插件用于生成用户登陆临时 accessToken 所使用的密钥，<strong>使用默认值有安全风险</strong></th>
+</tr>
+</thead>
+</table>
+<p><strong>（3）启动 nacos 服务</strong></p>
+<p>- Linux&#x2F;Unix&#x2F;Mac</p>
+<p>启动命令(standalone 代表着单机模式运行，非集群模式)</p>
+<p>启动命令：<strong>sh startup.sh -m standalone</strong></p>
+<p>- Windows</p>
+<p>启动方式，cmd 打开，执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startup.cmd -m standalone</span><br></pre></td></tr></table></figure>
+
+<p>访问：<a target="_blank" rel="noopener" href="http://localhost:8848/nacos">http://localhost:8848/nacos</a></p>
+<p>用户名密码：nacos&#x2F;nacos</p>
+<p><img src="/../images/image-20230920100537437.png" alt="image-20230920100537437"></p>
+<h2 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h2><p>把各个微服务注册到注册中心，其他模块步骤相同</p>
+<h3 id="在-service-模块配置-pom"><a href="#在-service-模块配置-pom" class="headerlink" title="在 service 模块配置 pom"></a>在 service 模块配置 pom</h3><p>配置 Nacos 客户端的 pom 依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--服务注册--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加服务配置信息"><a href="#添加服务配置信息" class="headerlink" title="添加服务配置信息"></a>添加服务配置信息</h3><p>配置 application.yml，在客户端微服务中添加注册 Nacos 服务的配置信息</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">nacos:</span></span><br><span class="line">      <span class="attr">server-addr:</span> <span class="string">localhost:8848</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="添加-Nacos-客户端注解"><a href="#添加-Nacos-客户端注解" class="headerlink" title="添加 Nacos 客户端注解"></a>添加 Nacos 客户端注解</h3><p>在客户端微服务启动类中添加注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="启动客户端微服务"><a href="#启动客户端微服务" class="headerlink" title="启动客户端微服务"></a>启动客户端微服务</h3><p>启动注册中心</p>
+<p>启动已注册的微服务，可以在 Nacos 服务列表中看到被注册的微服务</p>
+<p><img src="/../images/image-20230920104317108.png" alt="image-20230920104317108"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/SpringCloud/" rel="tag"># SpringCloud</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/14/hexo%E6%90%AD%E5%BB%BA/" rel="prev" title="hexo搭建">
+                  <i class="fa fa-angle-left"></i> hexo搭建
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/09/20/ffmpeg%E5%B7%A5%E5%85%B7/" rel="next" title="ffmpeg工具">
+                  ffmpeg工具 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phils</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

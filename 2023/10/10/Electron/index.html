@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/iconfont.png">
+  <link rel="mask-icon" href="/img/iconfont.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wang-weijun.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Electron框架学习指南">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Electron框架">
+<meta property="og:url" content="http://wang-weijun.github.io/2023/10/10/Electron/index.html">
+<meta property="og:site_name" content="Phils的杂货铺">
+<meta property="og:description" content="Electron框架学习指南">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20231010131410852.png">
+<meta property="article:published_time" content="2023-10-10T04:51:04.000Z">
+<meta property="article:modified_time" content="2025-11-25T06:17:21.266Z">
+<meta property="article:author" content="Phils">
+<meta property="article:tag" content="electron">
+<meta property="article:tag" content="nodejs">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wang-weijun.github.io/images/image-20231010131410852.png">
+
+
+<link rel="canonical" href="http://wang-weijun.github.io/2023/10/10/Electron/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wang-weijun.github.io/2023/10/10/Electron/","path":"2023/10/10/Electron/","title":"Electron框架"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Electron框架 | Phils的杂货铺</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phils的杂货铺</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Electron"><span class="nav-number">1.</span> <span class="nav-text">Electron</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Electron%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.1.</span> <span class="nav-text">Electron介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Electron"><span class="nav-number">1.2.</span> <span class="nav-text">安装Electron</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.3.</span> <span class="nav-text">初始化项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E7%BA%A7%E6%95%99%E7%A8%8B"><span class="nav-number">1.4.</span> <span class="nav-text">初级教程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%AA%97%E5%8F%A3"><span class="nav-number">1.4.1.</span> <span class="nav-text">设置窗口</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phils"
+      src="/img/profile.png">
+  <p class="site-author-name" itemprop="name">Phils</p>
+  <div class="site-description" itemprop="description">个人博客，IT，技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wang-weijun" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wang-weijun" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1191206969@qq.com" title="E-Mail → mailto:1191206969@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wang-weijun.github.io/2023/10/10/Electron/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/profile.png">
+      <meta itemprop="name" content="Phils">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phils的杂货铺">
+      <meta itemprop="description" content="个人博客，IT，技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Electron框架 | Phils的杂货铺">
+      <meta itemprop="description" content="Electron框架学习指南">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Electron框架
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-10-10 12:51:04" itemprop="dateCreated datePublished" datetime="2023-10-10T12:51:04+08:00">2023-10-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-25 14:17:21" itemprop="dateModified" datetime="2025-11-25T14:17:21+08:00">2025-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E7%BA%A7%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">高级语言</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Electron框架学习指南</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Electron"><a href="#Electron" class="headerlink" title="Electron"></a>Electron</h1><p>官方地址：<a target="_blank" rel="noopener" href="https://www.electronjs.org/">Electron (electronjs.org)</a></p>
+<h2 id="Electron介绍"><a href="#Electron介绍" class="headerlink" title="Electron介绍"></a>Electron介绍</h2><p><strong>Electron</strong>是<strong>GitHub</strong>开发的一个开源框架。它通过使用<code>Node.js</code>和<code>Chromium</code>的渲染引擎完成跨平台的<strong>桌面GUI</strong>应用程序的开发。<strong>Electron</strong>现已被多个开源Web应用程序用于前端与后端的开发，著名项目包括GitHub的<strong>Atom</strong>和微软的<strong>Visual Studio Code</strong>。</p>
+<h2 id="安装Electron"><a href="#安装Electron" class="headerlink" title="安装Electron"></a>安装Electron</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">npm install electron  <span class="comment"># 国内可能会失败，推荐下面的</span></span><br><span class="line">cnpm install electron</span><br><span class="line"><span class="comment"># 建议全局安装</span></span><br><span class="line">npm install -g electron</span><br><span class="line">cnpm install -g electron <span class="comment"># 推荐</span></span><br><span class="line"><span class="comment"># 查看electron版本</span></span><br><span class="line">electron -v</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><ul>
+<li><p><strong>官方的快速开始</strong></p>
+<p>通过使用Electron创建一个极简的 Hello World 应用一步步的带你了解，该应用与<a target="_blank" rel="noopener" href="https://github.com/electron/electron-quick-start"><code>electron/electron-quick-start</code></a>类似。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Clone this repository</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/electron/electron-quick-start</span><br><span class="line"><span class="comment"># Go into the repository</span></span><br><span class="line"><span class="built_in">cd</span> electron-quick-start</span><br><span class="line"><span class="comment"># Install dependencies</span></span><br><span class="line">npm install</span><br><span class="line">cnpm install <span class="comment"># 推荐</span></span><br><span class="line"><span class="comment"># Run the app</span></span><br><span class="line">npm start</span><br></pre></td></tr></table></figure>
+
+<p>启动后，就可以看到初始的GUI了</p>
+<p><img src="/../images/image-20231010131410852.png" alt="image-20231010131410852"></p>
+</li>
+<li><p><strong>自建项目</strong></p>
+<p>在空文件夹中，使用npm初始化项目<code>npm init</code>，流程如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br><span class="line">This utility will walk you through creating a package.json file.</span><br><span class="line">It only covers the most common items, and tries to guess sensible defaults.</span><br><span class="line"></span><br><span class="line">See `npm <span class="built_in">help</span> init` <span class="keyword">for</span> definitive documentation on these fields</span><br><span class="line">and exactly what they <span class="keyword">do</span>.</span><br><span class="line"></span><br><span class="line">Use `npm install &lt;pkg&gt;` afterwards to install a package and</span><br><span class="line">save it as a dependency <span class="keyword">in</span> the package.json file.</span><br><span class="line"></span><br><span class="line">Press ^C at any <span class="keyword">time</span> to quit.</span><br><span class="line">package name: (electron) electron</span><br><span class="line">version: (1.0.0) 1.0.0</span><br><span class="line">description: electron初始化项目</span><br><span class="line">entry point: (index.js) main.js</span><br><span class="line"><span class="built_in">test</span> <span class="built_in">command</span>:</span><br><span class="line">git repository:</span><br><span class="line">keywords:</span><br><span class="line">author: wjwang</span><br><span class="line">license: (ISC)</span><br><span class="line">About to write to C:\Users\Admin\Desktop\electron\package.json:</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;electron&quot;</span>,</span><br><span class="line">  <span class="string">&quot;version&quot;</span>: <span class="string">&quot;1.0.0&quot;</span>,</span><br><span class="line">  <span class="string">&quot;description&quot;</span>: <span class="string">&quot;electron初始化项目&quot;</span>,</span><br><span class="line">  <span class="string">&quot;main&quot;</span>: <span class="string">&quot;main.js&quot;</span>,</span><br><span class="line">  <span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;test&quot;</span>: <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;author&quot;</span>: <span class="string">&quot;wjwang&quot;</span>,</span><br><span class="line">  <span class="string">&quot;license&quot;</span>: <span class="string">&quot;ISC&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Is this OK? (<span class="built_in">yes</span>) <span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
+
+<p>进入项目，安装<code>electron</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install electron</span><br><span class="line"><span class="comment"># 如果报错，使用cnpm</span></span><br><span class="line">cnpm install electron</span><br></pre></td></tr></table></figure>
+
+<p>安装成功后，在<code>package.json</code>中，编写electron启动命令<code>electron .</code>：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;electron&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;electron初始化项目&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;main.js&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;test&quot;</span><span class="punctuation">:</span> <span class="string">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;start&quot;</span><span class="punctuation">:</span> <span class="string">&quot;electron .&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;author&quot;</span><span class="punctuation">:</span> <span class="string">&quot;wjwang&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;license&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ISC&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;electron&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^27.0.0&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>新建<code>main.js</code>，编写一个简单的Hello World</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123;app, <span class="title class_">BrowserWindow</span>&#125; = <span class="built_in">require</span>(<span class="string">&#x27;electron&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建窗口</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createWindow</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> mainWin = <span class="keyword">new</span> <span class="title class_">BrowserWindow</span>(&#123;</span><br><span class="line">        <span class="attr">show</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">width</span>: <span class="number">800</span>,</span><br><span class="line">        <span class="attr">height</span>: <span class="number">600</span>,</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&quot;Hello World&quot;</span>,</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    mainWin.<span class="title function_">loadFile</span>(<span class="string">&#x27;index.html&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    mainWin.<span class="title function_">on</span>(<span class="string">&#x27;close&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;close&#x27;</span>)</span><br><span class="line">        mainWin = <span class="literal">null</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">on</span>(<span class="string">&#x27;ready&#x27;</span>, createWindow);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">on</span>(<span class="string">&#x27;window-all-closed&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    app.<span class="title function_">quit</span>()</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>还需要创建一个<code>index.html</code>,</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://junyyds.top/2023/10/10/Electron/&quot;</span>&gt;</span>跳转到Electron学习小站<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>之后就可以启动了，使用<code>npm start</code>。</p>
+</li>
+</ul>
+<h2 id="初级教程"><a href="#初级教程" class="headerlink" title="初级教程"></a>初级教程</h2><h3 id="设置窗口"><a href="#设置窗口" class="headerlink" title="设置窗口"></a>设置窗口</h3><p><code>new BrowserWindow([options])</code></p>
+<p><code>options</code> <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/api/structures/browser-window-options">浏览器窗口构造函数选项</a>（可选）</p>
+<ul>
+<li><p><code>width</code> 整数（可选）- 窗口的宽度（以像素为单位）。 默认为 <code>800</code>。</p>
+</li>
+<li><p><code>height</code> 整数（可选）- 窗口的高度（以像素为单位）。 默认为 <code>600</code>。</p>
+</li>
+<li><p><code>x</code> 整数（可选）-（如果使用 y，则为 <strong>required</strong>）窗口距屏幕的左侧偏移量。 默认是将窗口居中。</p>
+</li>
+<li><p><code>y</code> 整数（可选）-（如果使用 x，则为 <strong>required</strong>）窗口距屏幕的顶部偏移量。 默认是将窗口居中。</p>
+</li>
+<li><p><code>useContentSize</code> 布尔值（可选）- <code>width</code> 和 <code>height</code> 将用作网页大小，这意味着实际窗口的大小将包括窗口框架的大小并稍大一些。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>center</code> 布尔值（可选）- 在屏幕中央显示窗口。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>minWidth</code> 整数（可选）- 窗口的最小宽度。 默认为 <code>0</code>。</p>
+</li>
+<li><p><code>minHeight</code> 整数（可选）- 窗口的最小高度。 默认为 <code>0</code>。</p>
+</li>
+<li><p><code>maxWidth</code> 整数（可选）- 窗口的最大宽度。 默认没有限制。</p>
+</li>
+<li><p><code>maxHeight</code> 整数（可选）- 窗口的最大高度。 默认没有限制。</p>
+</li>
+<li><p><code>resizable</code> 布尔值（可选）- 窗口是否可调整大小。 默认为 <code>true</code>。</p>
+</li>
+<li><p><code>movable</code> 布尔值（可选） macOS Windows - 窗口是否可移动。 这在 Linux 上没有实现。 默认为 <code>true</code>。</p>
+</li>
+<li><p><code>minimizable</code> 布尔值（可选） macOS Windows - 窗口是否可最小化。 这在 Linux 上没有实现。 默认为 <code>true</code>。</p>
+</li>
+<li><p><code>maximizable</code> 布尔值（可选） macOS Windows - 窗口是否可最大化。 这在 Linux 上没有实现。 默认为 <code>true</code>。</p>
+</li>
+<li><p><code>closable</code> 布尔值（可选） macOS Windows - 窗口是否可关闭。 这在 Linux 上没有实现。 默认为 <code>true</code>。</p>
+</li>
+<li><p><code>focusable</code> 布尔值（可选）- 窗口是否可以聚焦。 默认为 <code>true</code>。 在 Windows 上，设置 <code>focusable: false</code> 也意味着设置 <code>skipTaskbar: true</code>。 在 Linux 上，设置 <code>focusable: false</code> 使窗口停止与 wm 交互，因此窗口将始终位于所有工作区的顶部。</p>
+</li>
+<li><p><code>alwaysOnTop</code> 布尔值（可选）- 窗口是否应始终位于其他窗口之上。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>fullscreen</code> 布尔值（可选）- 窗口是否应全屏显示。 当明确设置为 <code>false</code> 时，全屏按钮将在 macOS 上隐藏或禁用。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>fullscreenable</code> 布尔值（可选）- 窗口是否可以进入全屏模式。 在 macOS 上，还包括最大化&#x2F;缩放按钮是否应切换全屏模式或最大化窗口。 默认为 <code>true</code>。</p>
+</li>
+<li><p><code>simpleFullscreen</code> 布尔值（可选） macOS - 在 macOS 上使用 pre-Lion 全屏。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>skipTaskbar</code> 布尔值（可选） macOS Windows - 是否在任务栏中显示窗口。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>hiddenInMissionControl</code> 布尔值（可选） macOS - 当用户切换到任务控制时是否应隐藏窗口。</p>
+</li>
+<li><p><code>kiosk</code> 布尔值（可选）- 窗口是否处于 kiosk 模式。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>title</code> 字符串（可选）- 默认窗口标题。 默认为 <code>&quot;Electron&quot;</code>。 如果 <code>loadURL()</code> 加载的 HTML 文件中定义了 HTML 标签 <code>&lt;title&gt;</code>，则该属性将被忽略。</p>
+</li>
+<li><p><code>icon</code>（<a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/api/native-image">NativeImage</a>） | string) (可选) - 窗口图标。 在 Windows 上，建议使用 <code>ICO</code> 图标以获得最佳视觉效果，你也可以将其保留为未定义，以便使用可执行文件的图标。</p>
+</li>
+<li><p><code>show</code> 布尔值（可选）- 创建窗口时是否应显示。 默认为 <code>true</code>。</p>
+</li>
+<li><p><code>paintWhenInitiallyHidden</code> 布尔值（可选）- 当 <code>show</code> 为 <code>false</code> 并且刚刚创建时，渲染器是否应处于活动状态。 为了使 <code>document.visibilityState</code> 在第一次加载 <code>show: false</code> 时能够正常工作，你应该将其设置为 <code>false</code>。 将其设置为 <code>false</code> 将导致 <code>ready-to-show</code> 事件不触发。 默认为 <code>true</code>。</p>
+</li>
+<li><p><code>frame</code> 布尔值（可选）- 指定 <code>false</code> 以创建 <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/tutorial/window-customization#create-frameless-windows">无框窗</a>。 默认为 <code>true</code>。</p>
+</li>
+<li><p><code>parent</code> BrowserWindow（可选）- 指定父窗口。 默认为 <code>null</code>。</p>
+</li>
+<li><p><code>modal</code> 布尔值（可选）- 这是否是模式窗口。 仅当窗口是子窗口时才有效。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>acceptFirstMouse</code> 布尔值（可选） macOS - 单击非活动窗口是否也会单击进入 Web 内容。 macOS 上的默认值为 <code>false</code>。 此选项在其他平台上不可配置。</p>
+</li>
+<li><p><code>disableAutoHideCursor</code> 布尔值（可选）- 键入时是否隐藏光标。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>autoHideMenuBar</code> 布尔值（可选）- 自动隐藏菜单栏，除非按下 <code>Alt</code> 键。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>enableLargerThanScreen</code> 布尔值（可选） macOS - 允许将窗口大小调整为大于屏幕。 仅与 macOS 相关，因为其他操作系统默认允许大于屏幕的窗口。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>backgroundColor</code> 字符串（可选）- 窗口的背景颜色，采用 Hex、RGB、RGBA、HSL、HSLA 或命名的 CSS 颜色格式。 如果 <code>transparent</code> 设置为 <code>true</code>，则支持 #AARRGGBB 格式的 Alpha。 默认为 <code>#FFF</code>（白色）。 请参阅 <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/api/browser-window#winsetbackgroundcolorbackgroundcolor">win.setBackgroundColor</a> 了解更多信息。</p>
+</li>
+<li><p><code>hasShadow</code> 布尔值（可选）- 窗口是否应该有阴影。 默认为 <code>true</code>。</p>
+</li>
+<li><p><code>opacity</code> 数字（可选） macOS Windows - 设置窗口的初始不透明度，介于 0.0（完全透明）和 1.0（完全不透明）之间。 这仅在 Windows 和 macOS 上实现。</p>
+</li>
+<li><p><code>darkTheme</code> 布尔值（可选）- 强制窗口使用深色主题，仅适用于某些 GTK+3 桌面环境。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>transparent</code> 布尔值（可选）- 使窗口为 <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/tutorial/window-customization#create-transparent-windows">transparent</a>。 默认为 <code>false</code>。 在 Windows 上，除非窗口是无框的，否则不起作用。</p>
+</li>
+<li><p><code>type</code> string (可选) - 窗口类型，默认为普通窗口。 请参阅下文了解更多相关信息。</p>
+</li>
+<li><p><code>visualEffectState</code>字符串（可选）macOS - 指定材质外观应如何反映 macOS 上的窗口活动状态。 必需<code>vibrancy</code></p>
+<p> 属性一起使用。 可能的值为：</p>
+<ul>
+<li><code>followWindow</code> - 当窗口处于活动状态时，背景应自动显示为活动状态，而当窗口处于非活动状态时，背景应自动显示为非活动状态。 这是默认设置。</li>
+<li><code>active</code> - 背景应该始终显示为活动状态。</li>
+<li><code>inactive</code> - 背景应该始终显示为非活动状态。</li>
+</ul>
+</li>
+<li><p><code>titleBarStyle</code>字符串（可选） macOS Windows - 窗口标题栏的样式。 默认为 <code>default</code>。 可能的值为：</p>
+<ul>
+<li><code>default</code> - 分别产生 macOS 或 Windows 的标准标题栏。</li>
+<li><code>hidden</code> - 结果是隐藏的标题栏和全尺寸的内容窗口。 在 macOS 上，窗口的左上角仍具有标准窗口控件 (“红绿灯”)。 在 Windows 上，当与 <code>titleBarOverlay: true</code> 结合使用时，它将激活窗口控件覆盖（有关详细信息，请参阅 <code>titleBarOverlay</code>），否则将不会显示任何窗口控件。</li>
+<li><code>hiddenInset</code> macOS - 仅在 macOS 上，会导致隐藏的标题栏具有另一种外观，其中交通灯按钮从窗口边缘稍微内嵌。</li>
+<li><code>customButtonsOnHover</code> macOS - 仅在 macOS 上，导致隐藏标题栏和全尺寸内容窗口，将鼠标悬停在窗口左上角时将显示交通灯按钮。 <strong>注意：</strong> 此选项目前处于实验阶段。</li>
+</ul>
+</li>
+<li><p><code>trafficLightPosition</code> <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/api/structures/point">观点</a>（可选）macOS - 在无框窗口中设置交通灯按钮的自定义位置。</p>
+</li>
+<li><p><code>roundedCorners</code> 布尔值（可选） macOS - 无框窗口在 macOS 上是否应具有圆角。 默认为 <code>true</code>。 将此属性设置为 <code>false</code> 将阻止窗口全屏显示。</p>
+</li>
+<li><p><code>fullscreenWindowTitle</code> 布尔值（可选） macOS 已弃用 - 在 macOS 上以全屏模式在标题栏中显示 <code>hiddenInset</code> titleBarStyle 的标题。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>thickFrame</code> 布尔值（可选）- 在 Windows 上为无框窗口使用 <code>WS_THICKFRAME</code> 样式，这会添加标准窗框。 将其设置为 <code>false</code> 将删除窗口阴影和窗口动画。 默认为 <code>true</code>。</p>
+</li>
+<li><p><code>vibrancy</code> 字符串（可选） macOS - 向窗口添加一种活力效果，仅在 macOS 上。 可以是 <code>appearance-based</code>、<code>titlebar</code>、<code>selection</code>、<code>menu</code>、<code>popover</code>、<code>sidebar</code>、<code>header</code>、<code>sheet</code>、<code>window</code>、<code>hud</code>、<code>fullscreen-ui</code>、<code>tooltip</code>、<code>content</code>、<code>under-window</code> 或 <code>under-page</code>。</p>
+</li>
+<li><p><code>backgroundMaterial</code> 字符串（可选） Windows - 设置窗口的系统绘制背景材料，包括非客户区后面。 可以是 <code>auto</code>、<code>none</code>、<code>mica</code>、<code>acrylic</code> 或 <code>tabbed</code>。 请参阅 <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/api/browser-window#winsetbackgroundmaterialmaterial-windows">win.setBackgroundMaterial</a> 了解更多信息。</p>
+</li>
+<li><p><code>zoomToPageWidth</code> 布尔值（可选） macOS - 控制按住 Option 键单击工具栏上的绿色红绿灯按钮或单击“窗口”&gt;“缩放”菜单项时 macOS 上的行为。 如果是 <code>true</code>，则窗口在缩放时将增长到网页的首选宽度，<code>false</code> 将使其缩放到屏幕的宽度。 这也会影响直接调用 <code>maximize()</code> 时的行为。 默认为 <code>false</code>。</p>
+</li>
+<li><p><code>tabbingIdentifier</code> 字符串（可选）macOS - 选项卡组名称，允许将窗口作为原生选项卡打开。 具有相同选项卡标识符的窗口将被分组在一起。 这还会向窗口的选项卡栏添加一个原生新选项卡按钮，并允许 <code>app</code> 和窗口接收 <code>new-window-for-tab</code> 事件。</p>
+</li>
+<li><p><code>webPreferences</code>（可选）- 网页功能设置。</p>
+<ul>
+<li><code>devTools</code> 布尔值（可选）- 是否启用 DevTools。 如果设置为 <code>false</code>，则无法使用 <code>BrowserWindow.webContents.openDevTools()</code> 打开 DevTools。 默认为 <code>true</code>。</li>
+<li><code>nodeIntegration</code> 布尔值（可选）- 是否启用节点集成。 默认为 <code>false</code>。</li>
+<li><code>nodeIntegrationInWorker</code> 布尔值（可选）- 是否在 Web Worker 中启用节点集成。 默认为 <code>false</code>。 有关此内容的更多信息，请参阅 <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/tutorial/multithreading">多线程</a>。</li>
+<li><code>nodeIntegrationInSubFrames</code> 布尔值（可选）- 在 iframe 和子窗口等子框架中启用 Node.js 支持的实验选项。 你的所有预加载将为每个 iframe 加载，你可以使用 <code>process.isMainFrame</code> 来确定你是否在主框架中。</li>
+<li><code>preload</code> 字符串（可选）- 指定将在页面中运行其他脚本之前加载的脚本。 无论节点集成是打开还是关闭，该脚本始终可以访问 Node API。 该值应该是脚本的绝对文件路径。 当节点集成关闭时，预加载脚本可以将节点全局符号重新引入全局作用域。 参见示例 <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/api/context-bridge#exposing-node-global-symbols">here</a>。</li>
+<li><code>sandbox</code> 布尔值（可选）- 如果设置，这将沙箱与窗口关联的渲染器，使其与 Chromium 操作系统级沙箱兼容并禁用 Node.js 引擎。 这与 <code>nodeIntegration</code> 选项不同，预加载脚本可用的 API 更加有限。 了解有关选项 <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/tutorial/sandbox">here</a> 的更多信息。</li>
+<li><code>session</code> <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/api/session#class-session">会议</a>（可选）- 设置页面使用的会话。 你还可以选择使用接受分区字符串的 <code>partition</code> 选项，而不是直接传递 Session 对象。 当同时提供 <code>session</code> 和 <code>partition</code> 时，优先选择 <code>session</code>。 默认是默认会话。</li>
+<li><code>partition</code> 字符串（可选）- 根据会话的分区字符串设置页面使用的会话。 如果 <code>partition</code> 以 <code>persist:</code> 开头，则页面将使用可用于应用中具有相同 <code>partition</code> 的所有页面的持久会话。 如果没有 <code>persist:</code> 前缀，页面将使用内存中会话。 通过分配相同的 <code>partition</code>，多个页面可以共享同一个会话。 默认是默认会话。</li>
+<li><code>zoomFactor</code> 数字（可选）-页面的默认缩放系数，<code>3.0</code> 代表 <code>300%</code>。 默认为 <code>1.0</code>。</li>
+<li><code>javascript</code> 布尔值（可选）- 启用 JavaScript 支持。 默认为 <code>true</code>。</li>
+<li><code>webSecurity</code> boolean (可选) - 当 <code>false</code> 时，它将禁用同源策略（通常由人们使用测试网站），如果用户未设置此选项，则将 <code>allowRunningInsecureContent</code> 设置为 <code>true</code>。 默认为 <code>true</code>。</li>
+<li><code>allowRunningInsecureContent</code> 布尔值（可选）- 允许 https 页面从 http URL 运行 JavaScript、CSS 或插件。 默认为 <code>false</code>。</li>
+<li><code>images</code> 布尔值（可选）- 启用图片支持。 默认为 <code>true</code>。</li>
+<li><code>imageAnimationPolicy</code> 字符串（可选）- 指定如何运行图片动画（例如 GIF）。 可以是 <code>animate</code>、<code>animateOnce</code> 或 <code>noAnimation</code>。 默认为 <code>animate</code>。</li>
+<li><code>textAreasAreResizable</code> 布尔值（可选）- 使 TextArea 元素可调整大小。 默认为 <code>true</code>。</li>
+<li><code>webgl</code> 布尔值（可选）- 启用 WebGL 支持。 默认为 <code>true</code>。</li>
+<li><code>plugins</code> 布尔值（可选）- 是否应启用插件。 默认为 <code>false</code>。</li>
+<li><code>experimentalFeatures</code> 布尔值（可选）- 启用 Chromium 的实验性功能。 默认为 <code>false</code>。</li>
+<li><code>scrollBounce</code> 布尔值（可选）macOS - 在 macOS 上启用滚动弹跳（橡皮筋）效果。 默认为 <code>false</code>。</li>
+<li><code>enableBlinkFeatures</code> 字符串（可选）- 由 <code>,</code> 分隔的功能字符串列表，如要启用的 <code>CSSVariables,KeyboardEventKey</code>。 支持的功能字符串的完整列表可以在 <a target="_blank" rel="noopener" href="https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/runtime_enabled_features.json5">RuntimeEnabledFeatures.json5</a> 文件中找到。</li>
+<li><code>disableBlinkFeatures</code> 字符串（可选）- 由 <code>,</code> 分隔的功能字符串列表，例如要禁用的 <code>CSSVariables,KeyboardEventKey</code>。 支持的功能字符串的完整列表可以在 <a target="_blank" rel="noopener" href="https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/runtime_enabled_features.json5">RuntimeEnabledFeatures.json5</a> 文件中找到。</li>
+<li><code>defaultFontFamily</code>对象（可选）- 设置字体系列的默认字体。<ul>
+<li><code>standard</code> 字符串（可选）- 默认为 <code>Times New Roman</code>。</li>
+<li><code>serif</code> 字符串（可选）- 默认为 <code>Times New Roman</code>。</li>
+<li><code>sansSerif</code> 字符串（可选）- 默认为 <code>Arial</code>。</li>
+<li><code>monospace</code> 字符串（可选）- 默认为 <code>Courier New</code>。</li>
+<li><code>cursive</code> 字符串（可选）- 默认为 <code>Script</code>。</li>
+<li><code>fantasy</code> 字符串（可选）- 默认为 <code>Impact</code>。</li>
+<li><code>math</code> 字符串（可选）- 默认为 <code>Latin Modern Math</code>。</li>
+</ul>
+</li>
+<li><code>defaultFontSize</code> 整数（可选）- 默认为 <code>16</code>。</li>
+<li><code>defaultMonospaceFontSize</code> 整数（可选）- 默认为 <code>13</code>。</li>
+<li><code>minimumFontSize</code> 整数（可选）- 默认为 <code>0</code>。</li>
+<li><code>defaultEncoding</code> 字符串（可选）- 默认为 <code>ISO-8859-1</code>。</li>
+<li><code>backgroundThrottling</code> 布尔值（可选）- 当页面变为背景时是否限制动画和计时器。 这也影响了 <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/api/browser-window#page-visibility">页面可见性 API</a>。 默认为 <code>true</code>。</li>
+<li><code>offscreen</code> 布尔值（可选）- 是否为浏览器窗口启用离屏渲染。 默认为 <code>false</code>。 有关详细信息，请参阅 <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/tutorial/offscreen-rendering">离屏渲染教程</a>。</li>
+<li><code>contextIsolation</code> 布尔值（可选）- 是否在单独的 JavaScript 上下文中运行 Electron API 和指定的 <code>preload</code> 脚本。 默认为 <code>true</code>。 <code>preload</code> 脚本运行的上下文只能访问其自己专用的 <code>document</code> 和 <code>window</code> 全局变量，以及其自己的一组 JavaScript 内置函数（<code>Array</code>、<code>Object</code>、<code>JSON</code> 等），这些对加载的内容都是不可见的。 Electron API 仅在 <code>preload</code> 脚本中可用，在加载的页面中不可用。 加载潜在不受信任的远程内容时应使用此选项，以确保加载的内容不会篡改 <code>preload</code> 脚本和正在使用的任何 Electron API。 此选项使用与 <a target="_blank" rel="noopener" href="https://developer.chrome.com/extensions/content_scripts#execution-environment">Chrome 内容脚本</a> 使用的技术相同的技术。 你可以通过在控制台选项卡顶部的组合框中选择 ‘Electron Isolated Context’ 条目来在开发工具中访问此上下文。</li>
+<li><code>webviewTag</code> 布尔值（可选）- 是否启用 **<a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/api/webview-tag">&lt;webview&gt;标签</a>**默认为 <code>false</code>。 <strong>注意：</strong> 为 <code>&lt;webview&gt;</code> 配置的 <code>preload</code> 脚本在执行时将启用节点集成，因此你应确保远程&#x2F;不受信任的内容无法使用可能是恶意的 <code>preload</code> 脚本创建 <code>&lt;webview&gt;</code> 标记。 你可以使用 <a target="_blank" rel="noopener" href="https://electron.nodejs.cn/docs/latest/api/web-contents">webContents</a> 上的 <code>will-attach-webview</code> 事件来删除 <code>preload</code> 脚本并验证或更改 <code>&lt;webview&gt;</code> 的初始设置。</li>
+<li><code>additionalArguments</code> string[]（可选）- 将在此应用的渲染器进程中附加到 <code>process.argv</code> 的字符串列表。 对于将少量数据传递到渲染器进程预加载脚本非常有用。</li>
+<li><code>safeDialogs</code> boolean (可选) - 是否启用浏览器风格的连续对话框保护。 默认为 <code>false</code>。</li>
+<li><code>safeDialogsMessage</code> 字符串（可选）- 触发连续对话保护时显示的消息。 如果未定义，将使用默认消息，请注意，当前默认消息是英文且未本地化。</li>
+<li><code>disableDialogs</code> 布尔值（可选）- 是否完全禁用对话框。 覆盖 <code>safeDialogs</code>。 默认为 <code>false</code>。</li>
+<li><code>navigateOnDragDrop</code> 布尔值（可选）- 将文件或链接拖放到页面上是否会导致导航。 默认为 <code>false</code>。</li>
+<li><code>autoplayPolicy</code> 字符串（可选）- 应用于窗口中内容的自动播放策略，可以是 <code>no-user-gesture-required</code>、<code>user-gesture-required</code>、<code>document-user-activation-required</code>。 默认为 <code>no-user-gesture-required</code>。</li>
+<li><code>disableHtmlFullscreenWindowResize</code> 布尔值（可选）- 进入 HTML 全屏时是否阻止窗口调整大小。 默认为 <code>false</code>。</li>
+<li><code>accessibleTitle</code> 字符串（可选）- 仅提供给屏幕阅读器等辅助工具的替代标题字符串。 用户不能直接看到该字符串。</li>
+<li><code>spellcheck</code> 布尔值（可选）- 是否启用内置拼写检查器。 默认为 <code>true</code>。</li>
+<li><code>enableWebSQL</code> 布尔值（可选）- 是否启用 <a target="_blank" rel="noopener" href="https://www.w3.org/TR/webdatabase/">WebSQL API</a>。 默认为 <code>true</code>。</li>
+<li><code>v8CacheOptions </code>字符串（可选）- 强制执行 Blink 使用的 v8 代码缓存策略。 接受的值为<ul>
+<li><code>none</code> - 禁用代码缓存</li>
+<li><code>code</code> - 基于启发式的代码缓存</li>
+<li><code>bypassHeatCheck</code> - 绕过代码缓存启发式但使用惰性编译</li>
+<li><code>bypassHeatCheckAndEagerCompile</code> - 与上面相同，只是编译是预先的。 默认策略是 <code>code</code>。</li>
+</ul>
+</li>
+<li><code>enablePreferredSizeMode</code> 布尔值（可选）- 是否启用首选尺寸模式。 首选尺寸是包含文档布局所需的最小尺寸—无需滚动。 启用此选项将导致当首选大小更改时在 <code>WebContents</code> 上发出 <code>preferred-size-changed</code> 事件。 默认为 <code>false</code>。</li>
+</ul>
+</li>
+<li><p><code>titleBarOverlay</code>目的 | 布尔值（可选）- 当在 macOS 上将无框窗口<code>win.setWindowButtonVisibility(true)</code>结合使用或使用<code>titleBarStyle</code>以使标准窗口控件（macOS 上的 “红绿灯”）可见时，此属性将启用窗口控件覆盖JavaScript API和CSS 环境变量。 指定<code>true</code>将导致使用默认系统颜色进行叠加。 默认为<code>false</code>。</p>
+<ul>
+<li><code>color</code> 字符串（可选） Windows - 启用时窗口控件覆盖的 CSS 颜色。 默认为系统颜色。</li>
+<li><code>symbolColor</code> 字符串（可选） Windows - 启用后窗口控件覆盖上符号的 CSS 颜色。 默认为系统颜色。</li>
+<li><code>height</code> 整数（可选） macOS Windows - 标题栏和窗口控件叠加层的高度（以像素为单位）。 默认为系统高度。</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/electron/" rel="tag"># electron</a>
+              <a href="/tags/nodejs/" rel="tag"># nodejs</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/09/22/Java%E6%8A%80%E6%9C%AF%E6%A0%88/" rel="prev" title="Java技术栈">
+                  <i class="fa fa-angle-left"></i> Java技术栈
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/16/nodejs%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%99%A8/" rel="next" title="nodejs版本管理器">
+                  nodejs版本管理器 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phils</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

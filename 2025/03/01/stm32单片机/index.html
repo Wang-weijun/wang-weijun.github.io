@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/iconfont.png">
+  <link rel="mask-icon" href="/img/iconfont.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wang-weijun.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="记录stm32单片机的学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="stm32单片机">
+<meta property="og:url" content="http://wang-weijun.github.io/2025/03/01/stm32%E5%8D%95%E7%89%87%E6%9C%BA/index.html">
+<meta property="og:site_name" content="Phils的杂货铺">
+<meta property="og:description" content="记录stm32单片机的学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202503012214128.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202503012222157.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202503012239101.png">
+<meta property="article:published_time" content="2025-03-01T13:47:01.000Z">
+<meta property="article:modified_time" content="2025-11-25T06:17:21.269Z">
+<meta property="article:author" content="Phils">
+<meta property="article:tag" content="stm32">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wang-weijun.github.io/images/202503012214128.png">
+
+
+<link rel="canonical" href="http://wang-weijun.github.io/2025/03/01/stm32%E5%8D%95%E7%89%87%E6%9C%BA/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wang-weijun.github.io/2025/03/01/stm32%E5%8D%95%E7%89%87%E6%9C%BA/","path":"2025/03/01/stm32单片机/","title":"stm32单片机"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>stm32单片机 | Phils的杂货铺</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phils的杂货铺</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#STM32-%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">STM32 入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#STM32-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">STM32 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-ARM-%E5%86%85%E6%A0%B8"><span class="nav-number">1.1.1.</span> <span class="nav-text">关于 ARM 内核</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-STM32"><span class="nav-number">1.1.2.</span> <span class="nav-text">什么是 STM32</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STM32-%E7%B3%BB%E5%88%97-MCU-%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="nav-number">1.1.3.</span> <span class="nav-text">STM32 系列 MCU 命名规则</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phils"
+      src="/img/profile.png">
+  <p class="site-author-name" itemprop="name">Phils</p>
+  <div class="site-description" itemprop="description">个人博客，IT，技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wang-weijun" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wang-weijun" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1191206969@qq.com" title="E-Mail → mailto:1191206969@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wang-weijun.github.io/2025/03/01/stm32%E5%8D%95%E7%89%87%E6%9C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/profile.png">
+      <meta itemprop="name" content="Phils">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phils的杂货铺">
+      <meta itemprop="description" content="个人博客，IT，技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="stm32单片机 | Phils的杂货铺">
+      <meta itemprop="description" content="记录stm32单片机的学习笔记">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          stm32单片机
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-01 21:47:01" itemprop="dateCreated datePublished" datetime="2025-03-01T21:47:01+08:00">2025-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-25 14:17:21" itemprop="dateModified" datetime="2025-11-25T14:17:21+08:00">2025-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">嵌入式</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">记录stm32单片机的学习笔记</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="STM32-入门"><a href="#STM32-入门" class="headerlink" title="STM32 入门"></a>STM32 入门</h1><h2 id="STM32-概述"><a href="#STM32-概述" class="headerlink" title="STM32 概述"></a>STM32 概述</h2><h3 id="关于-ARM-内核"><a href="#关于-ARM-内核" class="headerlink" title="关于 ARM 内核"></a>关于 ARM 内核</h3><p>要了解 <strong>STM32</strong>，就需要了解<strong>ARM</strong>，因为 STM32 是基于 ARM 构建的。</p>
+<p><code>ARM</code>首先是一家英国公司，后面卖给日本软银。</p>
+<p><strong>产品</strong>：ARM 架构处理器及相关外围组件的电路设计方案。</p>
+<p><code>ARM</code>然后是处理器架构，<strong>几乎所有</strong>的<strong>移动端</strong>处理器均采用 ARM 授权方案设计</p>
+<p>而在台式机电脑中常见的两大巨头 AMD、intel 使用的为 x86 架构。</p>
+<p>使用 ARM 架构的芯片：</p>
+<ul>
+<li>苹果：A17、M3、M3 pro、M3 max</li>
+<li>高通骁龙系列、联发科天玑系列</li>
+<li>STM32</li>
+</ul>
+<p>ARM 处理器架构发展：</p>
+<table>
+<thead>
+<tr>
+<th>1984</th>
+<th>2004</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ARM 1</td>
+<td>ARM 11</td>
+</tr>
+</tbody></table>
+<p>放弃数字命名，用<code>cortex</code>来命令处理器产品</p>
+<p><strong>Cortex-A</strong> 系列：主打高性能 手机，平板，智能电视等</p>
+<p><strong>Cortex-R</strong> 系列：主打实时 汽车，工业控制，医疗设备等</p>
+<p><strong>Cortex-M</strong> 系列：主打嵌入式 传感器、智能家居等</p>
+<h3 id="什么是-STM32"><a href="#什么是-STM32" class="headerlink" title="什么是 STM32"></a>什么是 STM32</h3><p><strong>ST 公司</strong>设计的<strong>一系列</strong>以 ARM <code>Cortext-M</code> 为核心的<code>32位</code>微控制器</p>
+<blockquote>
+<p>意法半导体(STMicroelectronics，简称 ST)集团于 I987 年成立，是由意大利的 SGS 微电子公司和法国 Thomson:半导体公司合并而成。</p>
+</blockquote>
+<p>ST 是世界最大的<strong>半导体公司</strong>之一</p>
+<p>如今的 32 位控制器中，STM32 大受工程师和市场的青睐，无芯能出其右</p>
+<p><img src="/../images/202503012214128.png" alt="STM芯片"></p>
+<p>而 STM32 主流使用 Cortex-M3 内核，简称：CM3</p>
+<h3 id="STM32-系列-MCU-命名规则"><a href="#STM32-系列-MCU-命名规则" class="headerlink" title="STM32 系列 MCU 命名规则"></a>STM32 系列 MCU 命名规则</h3><p>[STM32F 103ZET6]芯片实物图：</p>
+<p><img src="/../images/202503012222157.png" alt="STM32F103ZETb"></p>
+<p>命名规范：</p>
+<p><img src="/../images/202503012239101.png" alt="STM32命名规则"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/stm32/" rel="tag"># stm32</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/12/GPT%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E5%8F%8A%E5%BA%94%E7%94%A8/" rel="prev" title="GPT大模型部署及应用">
+                  <i class="fa fa-angle-left"></i> GPT大模型部署及应用
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/04/20/MCP%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="next" title="MCP服务器">
+                  MCP服务器 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phils</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/iconfont.png">
+  <link rel="mask-icon" href="/img/iconfont.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wang-weijun.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="记录ollama私有化部署deepseek-r1、RAGFlow知识库搭建、Dify搭建。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GPT大模型部署及应用">
+<meta property="og:url" content="http://wang-weijun.github.io/2025/02/12/GPT%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E5%8F%8A%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="Phils的杂货铺">
+<meta property="og:description" content="记录ollama私有化部署deepseek-r1、RAGFlow知识库搭建、Dify搭建。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202502121117321.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202502240020048.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202503040111666.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202503090054658.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202503090048319.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202504100022645.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202504100025459.png">
+<meta property="article:published_time" content="2025-02-12T02:34:00.000Z">
+<meta property="article:modified_time" content="2025-11-25T06:17:21.266Z">
+<meta property="article:author" content="Phils">
+<meta property="article:tag" content="ollama">
+<meta property="article:tag" content="RAGFlow">
+<meta property="article:tag" content="Dify">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wang-weijun.github.io/images/202502121117321.png">
+
+
+<link rel="canonical" href="http://wang-weijun.github.io/2025/02/12/GPT%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E5%8F%8A%E5%BA%94%E7%94%A8/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wang-weijun.github.io/2025/02/12/GPT%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E5%8F%8A%E5%BA%94%E7%94%A8/","path":"2025/02/12/GPT大模型部署及应用/","title":"GPT大模型部署及应用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>GPT大模型部署及应用 | Phils的杂货铺</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phils的杂货铺</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ollama%E9%83%A8%E7%BD%B2DS"><span class="nav-number">1.</span> <span class="nav-text">Ollama部署DS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-ollama"><span class="nav-number">1.1.</span> <span class="nav-text">安装 ollama</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-ollama"><span class="nav-number">1.2.</span> <span class="nav-text">配置 ollama</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ollama-%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">ollama 常见命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deepseek"><span class="nav-number">1.4.</span> <span class="nav-text">deepseek</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E4%BD%BF%E7%94%A8"><span class="nav-number">1.5.</span> <span class="nav-text">模型使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E8%BD%AF%E4%BB%B6"><span class="nav-number">1.6.</span> <span class="nav-text">可视化软件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RAGflow-%E7%9F%A5%E8%AF%86%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">RAGflow 知识库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.1.</span> <span class="nav-text">1.先决条件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-docker-%E5%8F%8A-docker-compose"><span class="nav-number">2.1.1.</span> <span class="nav-text">安装 docker 及 docker-compose</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-docker-compose"><span class="nav-number">2.1.2.</span> <span class="nav-text">安装 docker-compose</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">2.2.</span> <span class="nav-text">2.启动服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AE%E4%BF%9D-vm-max-map-count-%E2%89%A5-262144"><span class="nav-number">2.2.1.</span> <span class="nav-text">确保 vm.max_map_count ≥ 262144:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%8B%E9%9A%86%E5%AD%98%E5%82%A8%E5%BA%93%EF%BC%9A"><span class="nav-number">2.2.2.</span> <span class="nav-text">克隆存储库：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E9%A2%84%E6%9E%84%E5%BB%BA%E7%9A%84-Docker-%E6%98%A0%E5%83%8F%E5%B9%B6%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%9A"><span class="nav-number">2.2.3.</span> <span class="nav-text">构建预构建的 Docker 映像并启动服务器：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%AF%E5%8A%A8%E5%B9%B6%E8%BF%90%E8%A1%8C%E5%90%8E%E6%A3%80%E6%9F%A5%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8A%B6%E6%80%81"><span class="nav-number">2.2.4.</span> <span class="nav-text">服务器启动并运行后检查服务器状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%99%BB%E5%BD%95%E7%BD%91%E7%AB%99"><span class="nav-number">2.2.5.</span> <span class="nav-text">登录网站</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE-LLM"><span class="nav-number">2.3.</span> <span class="nav-text">3.配置 LLM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dify%E5%AE%9E%E7%8E%B0%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">3.</span> <span class="nav-text">Dify实现工作流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dify%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2"><span class="nav-number">3.1.</span> <span class="nav-text">Dify本地部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%89%E5%8F%96Dify%E4%BB%A3%E7%A0%81"><span class="nav-number">3.1.1.</span> <span class="nav-text">拉取Dify代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0Dify"><span class="nav-number">3.1.2.</span> <span class="nav-text">更新Dify</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AELLM"><span class="nav-number">3.1.3.</span> <span class="nav-text">配置LLM</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phils"
+      src="/img/profile.png">
+  <p class="site-author-name" itemprop="name">Phils</p>
+  <div class="site-description" itemprop="description">个人博客，IT，技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wang-weijun" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wang-weijun" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1191206969@qq.com" title="E-Mail → mailto:1191206969@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wang-weijun.github.io/2025/02/12/GPT%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E5%8F%8A%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/profile.png">
+      <meta itemprop="name" content="Phils">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phils的杂货铺">
+      <meta itemprop="description" content="个人博客，IT，技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="GPT大模型部署及应用 | Phils的杂货铺">
+      <meta itemprop="description" content="记录ollama私有化部署deepseek-r1、RAGFlow知识库搭建、Dify搭建。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GPT大模型部署及应用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-02-12 10:34:00" itemprop="dateCreated datePublished" datetime="2025-02-12T10:34:00+08:00">2025-02-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-25 14:17:21" itemprop="dateModified" datetime="2025-11-25T14:17:21+08:00">2025-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" itemprop="url" rel="index"><span itemprop="name">大模型</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">记录ollama私有化部署deepseek-r1、RAGFlow知识库搭建、Dify搭建。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Ollama部署DS"><a href="#Ollama部署DS" class="headerlink" title="Ollama部署DS"></a>Ollama部署DS</h1><p>私有化部署Deepseek，使用<code>ollama</code>运行，使用<code>Cherry Studio</code>最为客户端 UI 使用</p>
+<p>可以搭配<code>Page Assist</code>浏览器插件在浏览器中使用</p>
+<h2 id="安装-ollama"><a href="#安装-ollama" class="headerlink" title="安装 ollama"></a>安装 ollama</h2><p>前往<strong>Ollama</strong>官网进行下载：<a target="_blank" rel="noopener" href="https://ollama.com/download">Download Ollama on Windows</a></p>
+<h2 id="配置-ollama"><a href="#配置-ollama" class="headerlink" title="配置 ollama"></a>配置 ollama</h2><p>ollama 默认会将模型下载到<code>C盘</code>，对 ollama 进行配置</p>
+<p>打开系统环节变量，添加如下：</p>
+<p>更改模型存放位置：</p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>变量值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OLLAMA_MODELS</td>
+<td>D:\ollama\models</td>
+</tr>
+</tbody></table>
+<p>更改 ollama 启动<code>ip</code>（<strong>当需要外部访问时</strong>）与<code>端口</code>：不建议更改 ollama 默认端口 <strong>11434</strong></p>
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>变量值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OLLAMA_HOST</td>
+<td>0.0.0.0:11434</td>
+</tr>
+</tbody></table>
+<h2 id="ollama-常见命令"><a href="#ollama-常见命令" class="headerlink" title="ollama 常见命令"></a>ollama 常见命令</h2><p><strong>启动 ollma</strong>：要启动 Ollama 服务，可以使用以下命令：</p>
+<blockquote>
+<p>ollama serve</p>
+</blockquote>
+<p><strong>创建模型</strong>：从模型文件创建模型：</p>
+<blockquote>
+<p>ollama create -f .&#x2F;modelfile</p>
+</blockquote>
+<p><strong>运行模型</strong>：要运行一个模型，可以使用以下命令：</p>
+<blockquote>
+<p>ollama run 模型名称</p>
+<p>例如运行谷歌 gemma 模型：ollama run gemma</p>
+</blockquote>
+<p><strong>列出所有模型</strong>：要列出所有可用的模型，可以使用以下命令：</p>
+<blockquote>
+<p>ollama list</p>
+</blockquote>
+<p><strong>查看模型具体输出tokens&#x2F;s数值</strong></p>
+<blockquote>
+<p>ollama run 模型名称 –verbose</p>
+<p>例如：ollama run deepseek-r1:32b –verbose</p>
+</blockquote>
+<p>输出结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">administrator@win11&gt; </span><span class="language-bash">ollama run deepseek-r1:32b --verbose</span></span><br><span class="line"></span><br><span class="line">total duration:       1m31.2075255s</span><br><span class="line">load duration:        30.2214ms</span><br><span class="line">prompt eval count:    19 token(s)</span><br><span class="line">prompt eval duration: 595.6157ms</span><br><span class="line">prompt eval rate:     31.90 tokens/s</span><br><span class="line">eval count:           469 token(s)</span><br><span class="line">eval duration:        1m30.5816884s</span><br><span class="line">eval rate:            5.18 tokens/s</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>total duration: 1m31.2075255s (91.2075255 秒)<ul>
+<li><strong>含义</strong>: 从开始处理请求到完成整个过程的总时间，包括加载模型、评估提示和生成响应的所有阶段。</li>
+<li><strong>分析</strong>: 总时长约为 1 分 31 秒，表明这是一个相对耗时的操作。结合日志，模型在 <think> 阶段进行了详细的推理（约 1 分钟），这显著延长了总时长。实际生成响应的时间（eval duration）占主导，提示处理和加载时间较短。</li>
+</ul>
+</li>
+<li>load duration: 30.2214ms (0.0302214 秒)<ul>
+<li><strong>含义</strong>: 模型加载到内存中的时间，单位为毫秒。</li>
+<li><strong>分析</strong>: 加载时间仅约 30 毫秒，表明模型可能已预加载到内存中，或者 qwen3:32b（20 GB）的初始加载开销在之前的运行中已完成。此阶段开销极小。</li>
+</ul>
+</li>
+<li>prompt eval count: 19 token(s)<ul>
+<li><strong>含义</strong>: 输入提示（prompt）中处理的 token 总数，即 “Hello, I’m doing great! How about you?” 被分割成的语言单元数。</li>
+<li><strong>分析</strong>: 提示被拆分为 19 个 token，这与输入文本的长度和分词方式（如空格、标点）一致。较长的提示可能增加初始处理复杂度。</li>
+</ul>
+</li>
+<li>prompt eval duration: 595.6157ms (0.5956157 秒)<ul>
+<li><strong>含义</strong>: 处理输入提示所需的时间，单位为毫秒。</li>
+<li><strong>分析</strong>: 约 596 毫秒用于处理 19 个 token，反映了输入阶段的计算开销。结合 <think> 阶段的推理，这部分时间可能包括部分预处理。</li>
+</ul>
+</li>
+<li>prompt eval rate: 31.90 tokens&#x2F;s<ul>
+<li><strong>含义</strong>: 每秒处理的提示 token 数，计算方式为 prompt eval count &#x2F; (prompt eval duration &#x2F; 1000) &#x3D; 19 &#x2F; (595.6157 &#x2F; 1000) ≈ 31.90 tokens&#x2F;s。</li>
+<li><strong>分析</strong>: 处理提示的效率较高（31.90 tokens&#x2F;s），表明输入阶段优化良好，但这仅占总流程的很小部分（&lt;1 秒）。</li>
+</ul>
+</li>
+<li>eval count: 469 token(s)<ul>
+<li><strong>含义</strong>: 模型生成响应的 token 总数，即最终输出的 “Hi there! � Thank you for the cheerful greeting! …” 等内容的 token 数。</li>
+<li><strong>分析</strong>: 生成了 469 个 token，结合日志可见输出较长（包含 <think> 和最终响应）。这表明模型在推理和生成上进行了较多的扩展。</li>
+</ul>
+</li>
+<li>eval duration: 1m30.5816884s (90.5816884 秒)<ul>
+<li><strong>含义</strong>: 生成响应所需的时间，单位为秒。</li>
+<li><strong>分析</strong>: 约 1 分 30 秒用于生成，占总时长的绝大部分（91.2075255s - 0.5956157s - 0.0302214s ≈ 90.58s）。<think> 阶段的详细推理（约 1 分钟）是主要耗时来源，反映了模型在规划响应时的计算密集型工作。</li>
+</ul>
+</li>
+<li>eval rate: 5.18 tokens&#x2F;s<ul>
+<li><strong>含义</strong>: 每秒生成的 token 数，计算方式为 eval count &#x2F; eval duration &#x3D; 469 &#x2F; 90.5816884 ≈ 5.18 tokens&#x2F;s。</li>
+<li><strong>分析</strong>: 生成速率较低（5.18 tokens&#x2F;s），这是因为 qwen3:32b 是一个大型模型（20 GB），在单次推理中结合了复杂的 <think> 逻辑。较低的速率与硬件性能（可能仅使用 CPU）或模型优化程度有关。</li>
+</ul>
+</li>
+</ul>
+<h2 id="deepseek"><a href="#deepseek" class="headerlink" title="deepseek"></a>deepseek</h2><p>使用 ollama 下载<strong>deepseek-R1</strong>离线模型：</p>
+<p>进入 ollama 官网搜索对应模型：<a target="_blank" rel="noopener" href="https://ollama.com/library/deepseek-r1">deepseek-r1</a></p>
+<p>例如我们下载 deepseek-r1:32b 模型：<code>ollama run deepseek-r1:32b</code></p>
+<p><img src="/../images/202502121117321.png" alt="模型命令"></p>
+<p>打开 ollama，在命令行输入：<code>ollama serve</code></p>
+<p>然后运行 deepseek-r1:32b，<code>ollama run deepseek-r1:32b</code>，当没有这个模型时则自动下载</p>
+<p>下载完成后，继续运行<code>ollama run deepseek-r1:32b</code>，就启动了：</p>
+<p><img src="/../images/202502240020048.png" alt="测试deepseek模型"></p>
+<h2 id="模型使用"><a href="#模型使用" class="headerlink" title="模型使用"></a>模型使用</h2><p><strong>R1 提示词</strong></p>
+<p>提示词的本质：</p>
+<blockquote>
+<p>Prompt -&gt; 表达</p>
+</blockquote>
+<p>共识 1：DeepSeek-R1 的提示词技巧，就是没有技巧：</p>
+<ul>
+<li>不需要结构设定</li>
+<li>不需要结构化提示词</li>
+<li>不需要给示例</li>
+</ul>
+<p>共识 2：仍需要告诉 <code>AI</code>足够多的背景信息</p>
+<blockquote>
+<p>干什么？</p>
+</blockquote>
+<blockquote>
+<p>给谁干？</p>
+</blockquote>
+<blockquote>
+<p>目的是？（要什么）</p>
+</blockquote>
+<blockquote>
+<p>是约束？（不要什么）</p>
+</blockquote>
+<p>举例：我要写一个“如何理解爱因斯坦的相对论”的科普文章，给中小学生看，希望能通俗易懂、内容充实、幽默，且觉得非常实用，不要太 AI 或枯燥。</p>
+<p>技巧 1：要求明确</p>
+<p>万能提示词模板：<code>你是谁 + （背景信息）+ 你的目标</code></p>
+<ul>
+<li><p>你是谁：非常的有用</p>
+</li>
+<li><p>背景信息：告诉他你为什么做这件事，你面临的现实背景是什么或问题是什么</p>
+</li>
+<li><p>你的目标：说清楚它帮你做什么，做到什么程度</p>
+</li>
+</ul>
+<h2 id="可视化软件"><a href="#可视化软件" class="headerlink" title="可视化软件"></a>可视化软件</h2><p>当我们安装好了<strong>ollama</strong> 与 <strong>Deepseek-R1</strong> 模型，我们还需要一个方便美观的 UI 界面</p>
+<p>Windows 软件方面推荐：</p>
+<ol>
+<li><strong>Cherry Studio</strong>：<a target="_blank" rel="noopener" href="https://cherry-ai.com/">Cherry Studio 官网</a></li>
+<li><strong>Chat Box</strong>：<a target="_blank" rel="noopener" href="https://chatboxai.app/zh">Chatbox AI 官网</a></li>
+</ol>
+<p>浏览器 <strong>Web UI</strong> 插件：</p>
+<p><strong>Page Assist</strong>:<a target="_blank" rel="noopener" href="https://www.crxsoso.com/webstore/detail/jfgfiigpkhlkbnfnbobbkinehhfdhndo">Page Assis | Chrome 扩展</a></p>
+<p><strong>使用方法</strong>：</p>
+<blockquote>
+<p>选择<code>Ollama</code>设置，填入 ollama 地址，默认为：<code>http://localhost:11434</code>，添加模型</p>
+</blockquote>
+<h1 id="RAGflow-知识库"><a href="#RAGflow-知识库" class="headerlink" title="RAGflow 知识库"></a>RAGflow 知识库</h1><p>我们可以使用 <code>ollama</code> 与 <code>RAGflow</code> 结合搭建个人知识库</p>
+<p>我们开始安装<strong>RAGflow</strong>，需要使用 docker 进行安装，我们从头开始：</p>
+<p>首先，我们需要一台 Linux 服务器，我这里使用 CentOS 7 为例</p>
+<h2 id="1-先决条件"><a href="#1-先决条件" class="headerlink" title="1.先决条件"></a>1.先决条件</h2><ul>
+<li>CPU ≥ 4 核；</li>
+<li>RAM ≥ 16 GB；</li>
+<li>磁盘 ≥ 50 GB；</li>
+<li>Docker ≥ 24.0.0 &amp; Docker Compose ≥ v2.26.1。</li>
+</ul>
+<h3 id="安装-docker-及-docker-compose"><a href="#安装-docker-及-docker-compose" class="headerlink" title="安装 docker 及 docker-compose"></a>安装 docker 及 docker-compose</h3><p>安装 docker:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1、卸载旧的版本</span></span><br><span class="line">sudo yum remove docker \</span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-engine</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2、需要的安装包</span></span><br><span class="line">sudo yum install -y yum-utils</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3、设置镜像仓库</span></span><br><span class="line">sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo # 推荐使用阿里云的</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新yum软件包索引</span></span><br><span class="line">sudo yum makecache fast</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">4、安装docker相关的内容 docker-ce 社区</span></span><br><span class="line">sudo yum install docker-ce docker-ce-cli containerd.io</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">5、启动docker</span></span><br><span class="line">sudo systemctl start docker</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">测试docker是否正常</span></span><br><span class="line">sudo docker version</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">6、设置开机自启</span></span><br><span class="line">sudo systemctl enable docker --now</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">7、更改docker镜像，定期寻找可用的镜像源</span></span><br><span class="line">sudo vim /etc/docker/daemon.json</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编辑 daemon.json 文件，输入：</span></span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [</span><br><span class="line">    &quot;https://docker.1ms.run&quot;,</span><br><span class="line">    &quot;https://hub-mirror.c.163.com&quot;,</span><br><span class="line">    &quot;https://docker.mirrors.ustc.edu.cn&quot;,</span><br><span class="line">    &quot;https://registry.docker-cn.com&quot;,</span><br><span class="line">    &quot;https://reg-mirror.qiniu.com&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启docker</span></span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">通过检查是否镜像源已修改</span></span><br><span class="line">sudo docker info</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-docker-compose"><a href="#安装-docker-compose" class="headerlink" title="安装 docker-compose"></a>安装 docker-compose</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1、下载docker-compose</span></span><br><span class="line">sudo curl -SL \</span><br><span class="line">https://gitee.com/smilezgy/compose/releases/download/v2.20.2/docker-compose-linux-x86_64 \</span><br><span class="line">-o /usr/local/bin/docker-compose</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2、添加可执行权限</span></span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">3、测试</span></span><br><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-启动服务器"><a href="#2-启动服务器" class="headerlink" title="2.启动服务器"></a>2.启动服务器</h2><p>提供了在 Linux 上设置 RAGFlow 服务器的说明</p>
+<h3 id="确保-vm-max-map-count-≥-262144"><a href="#确保-vm-max-map-count-≥-262144" class="headerlink" title="确保 vm.max_map_count ≥ 262144:"></a>确保 <code>vm.max_map_count</code> ≥ 262144:</h3><p><code>vm.max_map_count</code>此值设置进程可能拥有的内存映射区域的最大数量。它的默认值是<strong>65530</strong>。虽然大多数应用程序需要少于一千个映射，但减少此值可能会导致异常行为，当进程达到限制时，系统会抛出内存不足错误。</p>
+<p>RAGFlow v0.10.0 使用 Elasticsearch 进行多次调用。正确设置 vm.max_map_count 的值对于 Elasticsearch 组件的正常运行至关重要。</p>
+<p><strong>Linux：</strong></p>
+<p>检查<code>vm.max_map_count</code>的值：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sysctl vm.max_map_count</span></span><br></pre></td></tr></table></figure>
+
+<p>重置<code>vm.max_map_count</code>到一个值至少<strong>大于等于</strong>262144。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">sudo</span> sysctl -w vm.max_map_count=262144</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>警告</p>
+</blockquote>
+<p>此更改将在系统重新启动后重置。如果下次启动服务器时忘记更新该值，您可能会收到<code>Can&#39;t connect to ES cluster</code>异常。</p>
+<p>为确保您的更改保持永久，请相应地添加或更新 <code>/etc/sysctl.conf</code> 中的<code>vm.max_map_count</code>值：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.max_map_count=262144</span><br></pre></td></tr></table></figure>
+
+<h3 id="克隆存储库："><a href="#克隆存储库：" class="headerlink" title="克隆存储库："></a>克隆存储库：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">拉取仓库</span></span><br><span class="line">git clone https://github.com/infiniflow/ragflow.git</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果没有git，使用下面命令：</span></span><br><span class="line">sudo yum install -y git</span><br></pre></td></tr></table></figure>
+
+<h3 id="构建预构建的-Docker-映像并启动服务器："><a href="#构建预构建的-Docker-映像并启动服务器：" class="headerlink" title="构建预构建的 Docker 映像并启动服务器："></a>构建预构建的 Docker 映像并启动服务器：</h3><p>运行以下命令会自动下载<em>开发</em>版本 RAGFlow Docker 映像。要下载并运行指定的 Docker 版本，请在运行以下命令之前将 <code>docker/.env</code> 中的<code>RAGFLOW_VERSION</code>更新到预期版本，例如<code>RAGFLOW_VERSION=v0.10.0</code>。</p>
+<blockquote>
+<p>如果需要修改默认镜像配置，在 ragflow&#x2F;docker&#x2F;.env</p>
+<p>查看隐藏文件：ls -al，进行编辑</p>
+<p>sudo vim .env</p>
+<p>在<code>.env</code>中，找到 <strong>RAGFLOW_IMAGE</strong></p>
+<p>注销掉：RAGFLOW_IMAGE&#x3D;infiniflow&#x2F;ragflow:v0.17.0-slim</p>
+<p>在下面取消注销：RAGFLOW_IMAGE&#x3D;infiniflow&#x2F;ragflow:v0.17.0</p>
+</blockquote>
+<p><img src="/../images/202503040111666.png" alt="修改模型镜像"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> ragflow/docker</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">chmod</span> +x ./entrypoint.sh</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker compose up -d</span></span><br></pre></td></tr></table></figure>
+
+<p>核心映像的大小约为 9 GB，可能需要一段时间才能加载。</p>
+<p><img src="/../images/202503090054658.png" alt="运行成功"></p>
+<h3 id="服务器启动并运行后检查服务器状态"><a href="#服务器启动并运行后检查服务器状态" class="headerlink" title="服务器启动并运行后检查服务器状态"></a>服务器启动并运行后检查服务器状态</h3><p><strong>这一步一定要做</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">docker logs -f ragflow-server</span></span><br></pre></td></tr></table></figure>
+
+<p>以下输出确认系统成功启动：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">    ____                 ______ __</span><br><span class="line">   / __ \ ____ _ ____ _ / ____// /____  _      __</span><br><span class="line">  / /_/ // __ `// __ `// /_   / // __ \| | /| / /</span><br><span class="line"> / _, _// /_/ // /_/ // __/  / // /_/ /| |/ |/ /</span><br><span class="line">/_/ |_| \__,_/ \__, //_/    /_/ \____/ |__/|__/</span><br><span class="line">              /____/</span><br><span class="line"></span><br><span class="line"> * Running on all addresses (0.0.0.0)</span><br><span class="line"> * Running on http://127.0.0.1:9380</span><br><span class="line"> * Running on http://x.x.x.x:9380</span><br><span class="line"> INFO:werkzeug:Press CTRL+C to quit</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果您跳过此确认步骤并直接登录 RAGFlow</strong>，您的浏览器可能会提示<code>network anomaly</code>错误，因为此时您的 RAGFlow 可能尚未完全初始化。</p>
+<blockquote>
+<p>如果日志中出现警告可以不用管，例如： WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.</p>
+</blockquote>
+<h3 id="登录网站"><a href="#登录网站" class="headerlink" title="登录网站"></a>登录网站</h3><p>在您的 Web 浏览器中，输入服务器的 IP 地址并登录 RAGFlow。</p>
+<p>警告：使用默认设置，您只需要输入<code>http://IP_OF_YOUR_MACHINE</code>（<strong>无端口号</strong>），因为使用默认配置时可以省略默认 HTTP 服务端口<code>80</code>。</p>
+<h2 id="3-配置-LLM"><a href="#3-配置-LLM" class="headerlink" title="3.配置 LLM"></a>3.配置 LLM</h2><p>RAGFlow 是一个 RAG 引擎，它需要与 LLM 一起工作以提供接地气、无幻觉的问答功能。目前，RAGFlow 支持以下 LLM，并且列表正在扩展：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://platform.openai.com/login?launch">OpenAI</a></li>
+<li><a target="_blank" rel="noopener" href="https://ai.azure.com/">Azure-OpenAI</a></li>
+<li><a target="_blank" rel="noopener" href="https://aistudio.google.com/">Gemini</a></li>
+<li><a target="_blank" rel="noopener" href="https://console.groq.com/">Groq</a></li>
+<li><a target="_blank" rel="noopener" href="https://mistral.ai/">Mistral</a></li>
+<li><a target="_blank" rel="noopener" href="https://aws.amazon.com/cn/bedrock/">Bedrock</a></li>
+<li><a target="_blank" rel="noopener" href="https://dashscope.console.aliyun.com/model">Tongyi-Qianwen</a></li>
+<li><a target="_blank" rel="noopener" href="https://open.bigmodel.cn/">ZHIPU-AI</a></li>
+<li><a target="_blank" rel="noopener" href="https://platform.minimaxi.com/">MiniMax</a></li>
+<li><a target="_blank" rel="noopener" href="https://platform.moonshot.cn/docs">Moonshot</a></li>
+<li><a target="_blank" rel="noopener" href="https://platform.deepseek.com/api-docs/">DeepSeek</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.baichuan-ai.com/home">Baichuan</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.volcengine.com/docs/82379">VolcEngine</a></li>
+<li><a target="_blank" rel="noopener" href="https://jina.ai/reader/">Jina</a></li>
+<li><a target="_blank" rel="noopener" href="https://openrouter.ai/">OpenRouter</a></li>
+<li><a target="_blank" rel="noopener" href="https://platform.stepfun.com/">StepFun</a></li>
+</ul>
+<p>注意：RAGFlow 还支持使用 Ollama、XINETH 或 LocalAI 在本地部署 LLM，但本文指南未涵盖这部分。</p>
+<p>我们可以将本地搭建的<strong>ollama</strong>配置到 RAGflow，点击右上角人物头像进入设置 -》 选择模型供应商 -》添加 ollama 模型</p>
+<p>我们还可以前往<a target="_blank" rel="noopener" href="https://bailian.console.aliyun.com/">阿里云百炼</a>，获取 APP Key，添加通义千问大模型：</p>
+<p><img src="/../images/202503090048319.png" alt="配置LLM"></p>
+<h1 id="Dify实现工作流"><a href="#Dify实现工作流" class="headerlink" title="Dify实现工作流"></a>Dify实现工作流</h1><p><strong>Dify的特点</strong></p>
+<ul>
+<li>开源，可本地部署、数据安全</li>
+<li>插件国际化，需要魔法</li>
+</ul>
+<p>官网：<a target="_blank" rel="noopener" href="https://dify.ai/zh">Dify.AI</a>		在线应用网站：<a target="_blank" rel="noopener" href="https://cloud.dify.ai/">cloud.dify.ai</a></p>
+<p>说明：开源的 LLM 应用开发平台。提供从 Agent 构建到 AI workflow 编排、RAG 检索、模型管理等能力，轻松构建和运营生成式 AI 原生应用。比 LangChain 更易用。</p>
+<hr>
+<h2 id="Dify本地部署"><a href="#Dify本地部署" class="headerlink" title="Dify本地部署"></a>Dify本地部署</h2><p>先决条件：确保<strong>已安装Docker</strong>、<strong>docker-compose</strong></p>
+<p>如未安装可前往安装教程：<a href="https://wang-weijun.github.io/2023/05/17/Docker">Docker - Phils的杂货铺</a></p>
+<h3 id="拉取Dify代码"><a href="#拉取Dify代码" class="headerlink" title="拉取Dify代码"></a>拉取Dify代码</h3><p>github仓库：<a target="_blank" rel="noopener" href="https://github.com/langgenius/dify">langgenius&#x2F;dify</a></p>
+<p>快速启动，如需修改配置，在<code>.env</code>中进行修改：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd dify</span><br><span class="line">cd docker</span><br><span class="line">cp .env.example .env</span><br><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>全部拉取成功后，访问 <code>localhost:80</code> 即可访问，进行管理员账户注册登录。</p>
+<h3 id="更新Dify"><a href="#更新Dify" class="headerlink" title="更新Dify"></a>更新Dify</h3><p>先在<code>Docker</code>中停止<code>Dify</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker compose down</span><br></pre></td></tr></table></figure>
+
+<p>进行备份，并重新在<code>Github</code>拉取新代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">备份docker compose数据，位置在dify/docker/</span></span><br><span class="line">cp docker-compose.yaml docker-compose.yaml.$(date +%Y.%m.%d).bak</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">拉取</span></span><br><span class="line">git pull origin main</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如有冲突解决（ymal文件）</span></span><br><span class="line">vim docker-compose.yaml</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新拉取并启动</span></span><br><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置LLM"><a href="#配置LLM" class="headerlink" title="配置LLM"></a>配置LLM</h3><p>点击右上角的<strong>设置</strong> -》选择<strong>安装模型供应商</strong>-》<strong>安装ollama</strong>-》<strong>配置ollama接口</strong></p>
+<p><img src="/../images/202504100022645.png" alt="安装模型供应商"></p>
+<p>配置好ollama后，在<strong>系统模型设置</strong>中，<strong>系统推理模型选择</strong>ollama的模型，点击<strong>保存</strong></p>
+<p><img src="/../images/202504100025459.png" alt="系统模型设置"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ollama/" rel="tag"># ollama</a>
+              <a href="/tags/RAGFlow/" rel="tag"># RAGFlow</a>
+              <a href="/tags/Dify/" rel="tag"># Dify</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/03/JupyterLab/" rel="prev" title="JupyterLab">
+                  <i class="fa fa-angle-left"></i> JupyterLab
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/01/stm32%E5%8D%95%E7%89%87%E6%9C%BA/" rel="next" title="stm32单片机">
+                  stm32单片机 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phils</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

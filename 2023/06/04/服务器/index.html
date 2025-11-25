@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/iconfont.png">
+  <link rel="mask-icon" href="/img/iconfont.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wang-weijun.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Linux服务器相关配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="服务器">
+<meta property="og:url" content="http://wang-weijun.github.io/2023/06/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/index.html">
+<meta property="og:site_name" content="Phils的杂货铺">
+<meta property="og:description" content="Linux服务器相关配置">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202404031425834.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202504212139828.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230713093337886.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230914170723270.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230914171118369.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230812155458152.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230812155718403.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230812155944811.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230812222852638.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230909201839632.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/20230221212701394.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/202312101553371.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20230222170646249.png">
+<meta property="article:published_time" content="2023-06-04T06:44:43.000Z">
+<meta property="article:modified_time" content="2025-11-25T06:17:21.271Z">
+<meta property="article:author" content="Phils">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="对象存储">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wang-weijun.github.io/images/202404031425834.png">
+
+
+<link rel="canonical" href="http://wang-weijun.github.io/2023/06/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wang-weijun.github.io/2023/06/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/","path":"2023/06/04/服务器/","title":"服务器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>服务器 | Phils的杂货铺</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phils的杂货铺</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">Linux相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">1.1.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">基础操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.</span> <span class="nav-text">目录操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">1.4.</span> <span class="nav-text">文件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90"><span class="nav-number">1.5.</span> <span class="nav-text">文件权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E5%8C%85%E4%B8%8E%E8%A7%A3%E5%8E%8B"><span class="nav-number">1.6.</span> <span class="nav-text">打包与解压</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.7.</span> <span class="nav-text">其他常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86"><span class="nav-number">1.8.</span> <span class="nav-text">系统管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">Ubuntu初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.</span> <span class="nav-text">初始化配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="nav-number">2.2.</span> <span class="nav-text">常用工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vm-tools"><span class="nav-number">2.2.1.</span> <span class="nav-text">vm-tools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E4%B8%AD%E5%BF%83"><span class="nav-number">2.2.2.</span> <span class="nav-text">软件中心</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD-deb%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">安装与卸载.deb文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CentOS%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">CentOS初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8D%A2%E6%BA%90"><span class="nav-number">3.1.</span> <span class="nav-text">换源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">3.2.</span> <span class="nav-text">常用软件安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99-%E5%8F%AF%E9%80%89"><span class="nav-number">3.3.</span> <span class="nav-text">关闭防火墙(可选)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows"><span class="nav-number">4.</span> <span class="nav-text">Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8ELinux%E4%BC%A0%E8%BE%93%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">与Linux传输文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">5.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1Panel%E9%9D%A2%E7%89%88"><span class="nav-number">5.1.</span> <span class="nav-text">1Panel面版</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK%E5%AE%89%E8%A3%85"><span class="nav-number">5.2.</span> <span class="nav-text">JDK安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven%E5%AE%89%E8%A3%85"><span class="nav-number">5.3.</span> <span class="nav-text">Maven安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%9E%84%E5%BB%BA"><span class="nav-number">6.</span> <span class="nav-text">项目构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#java%E9%A1%B9%E7%9B%AE"><span class="nav-number">6.1.</span> <span class="nav-text">java项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue%E9%A1%B9%E7%9B%AE"><span class="nav-number">6.2.</span> <span class="nav-text">Vue项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2"><span class="nav-number">6.3.</span> <span class="nav-text">docker一键部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8B%A5%E4%BE%9D%E6%A1%86%E6%9E%B6%E5%AE%9E%E6%88%98"><span class="nav-number">6.4.</span> <span class="nav-text">若依框架实战</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx%E9%85%8D%E7%BD%AE"><span class="nav-number">6.5.</span> <span class="nav-text">nginx配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8Windows%E4%B8%AD%E5%AE%89%E8%A3%85nginx"><span class="nav-number">6.6.</span> <span class="nav-text">在Windows中安装nginx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="nav-number">7.</span> <span class="nav-text">服务器配置代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86clash%E8%AE%BE%E4%B8%BA%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B"><span class="nav-number">7.1.</span> <span class="nav-text">将clash设为守护进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%B8%AD%E5%90%AF%E7%94%A8clash"><span class="nav-number">7.2.</span> <span class="nav-text">在终端中启用clash</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAVsCode-Web"><span class="nav-number">8.</span> <span class="nav-text">搭建VsCode Web</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jupyter"><span class="nav-number">9.</span> <span class="nav-text">Jupyter</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Anaconda"><span class="nav-number">9.1.</span> <span class="nav-text">安装 Anaconda</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83"><span class="nav-number">9.2.</span> <span class="nav-text">搭建环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C"><span class="nav-number">9.3.</span> <span class="nav-text">后台运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C%E7%9A%84Jupyter"><span class="nav-number">9.4.</span> <span class="nav-text">关闭后台运行的Jupyter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Minio%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8%E6%90%AD%E5%BB%BA"><span class="nav-number">10.</span> <span class="nav-text">Minio对象存储搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8docker%E4%B8%AD%E5%AE%89%E8%A3%85"><span class="nav-number">10.1.</span> <span class="nav-text">在docker中安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8SpringBoot%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="nav-number">10.2.</span> <span class="nav-text">在SpringBoot中使用</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phils"
+      src="/img/profile.png">
+  <p class="site-author-name" itemprop="name">Phils</p>
+  <div class="site-description" itemprop="description">个人博客，IT，技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wang-weijun" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wang-weijun" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1191206969@qq.com" title="E-Mail → mailto:1191206969@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wang-weijun.github.io/2023/06/04/%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/profile.png">
+      <meta itemprop="name" content="Phils">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phils的杂货铺">
+      <meta itemprop="description" content="个人博客，IT，技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="服务器 | Phils的杂货铺">
+      <meta itemprop="description" content="Linux服务器相关配置">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          服务器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-06-04 14:44:43" itemprop="dateCreated datePublished" datetime="2023-06-04T14:44:43+08:00">2023-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-25 14:17:21" itemprop="dateModified" datetime="2025-11-25T14:17:21+08:00">2025-11-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">服务器</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Linux服务器相关配置</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Linux相关命令"><a href="#Linux相关命令" class="headerlink" title="Linux相关命令"></a>Linux相关命令</h2><h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><ol>
+<li><strong>Linux系统的文件结构</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/bin        二进制文件，系统常规命令</span><br><span class="line">/boot       系统启动分区，系统启动时读取的文件</span><br><span class="line">/dev        设备文件</span><br><span class="line">/etc        大多数配置文件</span><br><span class="line">/home       普通用户的家目录</span><br><span class="line">/lib        32位函数库</span><br><span class="line">/lib64      64位库</span><br><span class="line">/media      手动临时挂载点</span><br><span class="line">/mnt        手动临时挂载点</span><br><span class="line">/opt        第三方软件安装位置</span><br><span class="line">/proc       进程信息及硬件信息</span><br><span class="line">/root       临时设备的默认挂载点</span><br><span class="line">/sbin       系统管理命令</span><br><span class="line">/srv        数据</span><br><span class="line">/var        数据</span><br><span class="line">/sys        内核相关信息</span><br><span class="line">/tmp        临时文件</span><br><span class="line">/usr        用户相关设定</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>Linux系统命令行的含义</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">示例：root@app00:~# </span><br><span class="line">root    //用户名，root为超级用户</span><br><span class="line">@       //分隔符</span><br><span class="line">app00   //主机名称</span><br><span class="line">~     //当前所在目录，默认用户目录为~，会随着目录切换而变化，例如：（root@app00:/bin# ，当前位置在bin目录下）</span><br><span class="line"><span class="comment">#     //表示当前用户是超级用户，普通用户为$，例如：（&quot;yao@app00:/root$&quot; ，表示使用用户&quot;yao&quot;访问/root文件夹）</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>命令组成</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">示例：命令 参数名 参数值</span><br></pre></td></tr></table></figure>
+
+<h3 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h3><ol>
+<li><strong>重启系统</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(1)立刻关机</span><br><span class="line">shutdown -h now 或者 poweroff</span><br><span class="line">(2)两分钟后关机</span><br><span class="line">shutdown -h 2</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>关闭系统</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(1)立刻重启</span><br><span class="line">shutdown -r now 或者 reboot</span><br><span class="line">(2)两分钟后重启</span><br><span class="line">shutdown -r 2 </span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><strong>帮助命令（help）</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig  --<span class="built_in">help</span>     //查看 ifconfig 命令的用法</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><strong>命令说明书（man）</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man shutdown         //打开命令说明后，可按<span class="string">&quot;q&quot;</span>键退出</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li><strong>切换用户（su）</strong></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su yao               //切换为用户<span class="string">&quot;yao&quot;</span>,输入后回车需要输入该用户的密码</span><br><span class="line"><span class="built_in">exit</span>                 //退出当前用户</span><br></pre></td></tr></table></figure>
+
+<h3 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h3><ol>
+<li><p><strong>切换目录（cd）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /                 //切换到根目录</span><br><span class="line"><span class="built_in">cd</span> /bin              //切换到根目录下的bin目录</span><br><span class="line"><span class="built_in">cd</span> ../               //切换到上一级目录 或者使用命令：<span class="built_in">cd</span> ..</span><br><span class="line"><span class="built_in">cd</span> ~                 //切换到home目录</span><br><span class="line"><span class="built_in">cd</span> -                 //切换到上次访问的目录</span><br><span class="line"><span class="built_in">cd</span> xx(文件夹名)       //切换到本目录下的名为xx的文件目录，如果目录不存在报错</span><br><span class="line"><span class="built_in">cd</span> /xxx/xx/x         //可以输入完整的路径，直接切换到目标目录，输入过程中可以使用tab键快速补全</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看目录（ls）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span>                   //查看当前目录下的所有目录和文件</span><br><span class="line"><span class="built_in">ls</span> -a                //查看当前目录下的所有目录和文件（包括隐藏的文件）</span><br><span class="line"><span class="built_in">ls</span> -l                //列表查看当前目录下的所有目录和文件（列表查看，显示更多信息），与命令<span class="string">&quot;ll&quot;</span>效果一样</span><br><span class="line"><span class="built_in">ls</span> /bin              //查看指定目录下的所有目录和文件 </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建目录（mkdir）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> tools          //在当前目录下创建一个名为tools的目录</span><br><span class="line"><span class="built_in">mkdir</span> /bin/tools     //在指定目录下创建一个名为tools的目录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>删除目录与文件（rm）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> tools          //删除一个名为tools的目录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>修改目录（mv）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> 当前目录名 新目录名        //修改目录名，同样适用与文件操作</span><br><span class="line"><span class="built_in">mv</span> /usr/tmp/tool /opt       //将/usr/tmp目录下的tool目录剪切到 /opt目录下面</span><br><span class="line"><span class="built_in">mv</span> -r /usr/tmp/tool /opt    //递归剪切目录中所有文件和文件夹</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>拷贝目录（cp）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> /usr/tmp/tool /opt       //将/usr/tmp目录下的tool目录复制到 /opt目录下面</span><br><span class="line"><span class="built_in">cp</span> -r /usr/tmp/tool /opt    //递归剪复制目录中所有文件和文件夹</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>搜索目录（find）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /bin -name <span class="string">&#x27;a*&#x27;</span>        //查找/bin目录下的所有以a开头的文件或者目录</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>查看当前目录（pwd）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span>                         //显示当前位置路径</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><ol>
+<li><p>新增文件（touch）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span>  a.txt  //在当前目录下创建名为a的txt文件（文件不存在），如果文件存在，将文件时间属性修改为当前系统时间</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除文件（rm）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> 文件名              //删除当前目录下的文件</span><br><span class="line"><span class="built_in">rm</span> -f 文件名           //删除当前目录的的文件（不询问）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑文件（vi、vim）</p>
+</li>
+</ol>
+   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">vi 文件名              //打开需要编辑的文件</span><br><span class="line">--进入后，操作界面有三种模式：命令模式（<span class="built_in">command</span> mode）、插入模式（Insert mode）和底行模式（last line mode）</span><br><span class="line">命令模式</span><br><span class="line">-刚进入文件就是命令模式，通过方向键控制光标位置，</span><br><span class="line">-使用命令<span class="string">&quot;dd&quot;</span>删除当前整行</span><br><span class="line">-使用命令<span class="string">&quot;/字段&quot;</span>进行查找</span><br><span class="line">-按<span class="string">&quot;i&quot;</span>在光标所在字符前开始插入</span><br><span class="line">-按<span class="string">&quot;a&quot;</span>在光标所在字符后开始插入</span><br><span class="line">-按<span class="string">&quot;o&quot;</span>在光标所在行的下面另起一新行插入</span><br><span class="line">-按<span class="string">&quot;：&quot;</span>进入底行模式</span><br><span class="line">插入模式</span><br><span class="line">-此时可以对文件内容进行编辑，左下角会显示 <span class="string">&quot;-- 插入 --&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">-按&quot;</span>ESC<span class="string">&quot;进入底行模式</span></span><br><span class="line"><span class="string">底行模式</span></span><br><span class="line"><span class="string">-退出编辑：      :q</span></span><br><span class="line"><span class="string">-强制退出：      :q!</span></span><br><span class="line"><span class="string">-保存并退出：    :wq</span></span><br><span class="line"><span class="string">## 操作步骤示例 ##</span></span><br><span class="line"><span class="string">1.保存文件：按&quot;</span>ESC<span class="string">&quot; -&gt; 输入&quot;</span>:<span class="string">&quot; -&gt; 输入&quot;</span>wq<span class="string">&quot;,回车     //保存并退出编辑</span></span><br><span class="line"><span class="string">2.取消操作：按&quot;</span>ESC<span class="string">&quot; -&gt; 输入&quot;</span>:<span class="string">&quot; -&gt; 输入&quot;</span>q!<span class="string">&quot;,回车     //撤销本次修改并退出编辑</span></span><br><span class="line"><span class="string">## 补充 ##</span></span><br><span class="line"><span class="string">vim +10 filename.txt                   //打开文件并跳到第10行</span></span><br><span class="line"><span class="string">vim -R /etc/passwd                     //以只读模式打开文件</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>查看文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> a.txt          //查看文件最后一屏内容</span><br><span class="line">less a.txt         //PgUp向上翻页，PgDn向下翻页，<span class="string">&quot;q&quot;</span>退出查看</span><br><span class="line">more a.txt         //显示百分比，回车查看下一行，空格查看下一页，<span class="string">&quot;q&quot;</span>退出查看</span><br><span class="line"><span class="built_in">tail</span> -100 a.txt    //查看文件的后100行，<span class="string">&quot;Ctrl+C&quot;</span>退出查看</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>。。。</p>
+<h3 id="打包与解压"><a href="#打包与解压" class="headerlink" title="打包与解压"></a>打包与解压</h3><ol>
+<li><p>说明</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   .zip、.rar        //windows系统中压缩文件的扩展名</span><br><span class="line">   .tar              //Linux中打包文件的扩展名</span><br><span class="line">   .gz               //Linux中压缩文件的扩展名</span><br><span class="line">   .tar.gz           //Linux中打包并压缩文件的扩展名</span><br><span class="line"></span><br><span class="line">2.  打包文件</span><br><span class="line"></span><br><span class="line">   ~~~bash</span><br><span class="line">   tar -zcvf 打包压缩后的文件名 要打包的文件</span><br><span class="line">   参数说明：z：调用gzip压缩命令进行压缩; c：打包文件; v：显示运行过程; f：指定文件名;</span><br><span class="line">   示例：</span><br><span class="line">   tar -zcvf a.tar file1 file2,...      //多个文件压缩打包</span><br></pre></td></tr></table></figure></li>
+<li><p>解压文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf a.tar                      //解包至当前目录</span><br><span class="line">tar -zxvf a.tar -C /usr------        //指定解压的位置</span><br><span class="line">unzip test.zip             //解压*.zip文件 </span><br><span class="line">unzip -l test.zip          //查看*.zip文件的内容</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="其他常用命令"><a href="#其他常用命令" class="headerlink" title="其他常用命令"></a>其他常用命令</h3><p>🏎️🛵🛴🚲🏍️</p>
+<h3 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h3><ol>
+<li><p>防火墙操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">service iptables status      //查看iptables服务的状态</span><br><span class="line">service iptables start       //开启iptables服务</span><br><span class="line">service iptables stop        //停止iptables服务</span><br><span class="line">service iptables restart     //重启iptables服务</span><br><span class="line">chkconfig iptables off       //关闭iptables服务的开机自启动</span><br><span class="line">chkconfig iptables on        //开启iptables服务的开机自启动</span><br><span class="line"><span class="comment">##centos7 防火墙操作</span></span><br><span class="line">systemctl status firewalld.service     //查看防火墙状态</span><br><span class="line">systemctl stop firewalld.service       //关闭运行的防火墙</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld.service    //永久禁止防火墙服务</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改主机名（CentOS 7）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl set-hostname 主机名</span><br></pre></td></tr></table></figure></li>
+<li><p>查看网络</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改IP</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">修改网络配置文件，文件地址：/etc/sysconfig/network-scripts/ifcfg-eth0</span><br><span class="line">------------------------------------------------</span><br><span class="line">主要修改以下配置：  </span><br><span class="line">TYPE=Ethernet               //网络类型</span><br><span class="line">BOOTPROTO=static            //静态IP</span><br><span class="line">DEVICE=ens00                //网卡名</span><br><span class="line">IPADDR=192.168.1.100        //设置的IP</span><br><span class="line">NETMASK=255.255.255.0       //子网掩码</span><br><span class="line">GATEWAY=192.168.1.1         //网关</span><br><span class="line">DNS1=192.168.1.1            //DNS</span><br><span class="line">DNS2=8.8.8.8                //备用DNS</span><br><span class="line">ONBOOT=<span class="built_in">yes</span>                  //系统启动时启动此设置</span><br><span class="line">-------------------------------------------------</span><br><span class="line">修改保存以后使用命令重启网卡：service network restart</span><br></pre></td></tr></table></figure></li>
+<li><p>配置映射</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">修改文件： vi /etc/hosts</span><br><span class="line">在文件最后添加映射地址，示例如下：</span><br><span class="line">192.168.1.101  node1</span><br><span class="line">192.168.1.102  node2</span><br><span class="line">192.168.1.103  node3</span><br><span class="line">配置好以后保存退出，输入命令：ping node1 ，可见实际 ping 的是 192.168.1.101。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看进程</p>
+</li>
+</ol>
+   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -ef         //查看所有正在运行的进程</span><br><span class="line">ps -ef | grep xxxx</span><br></pre></td></tr></table></figure>
+<p>   ps -ef : 查看本机所有的进程； </p>
+<p>   grep xxxx代表过滤找到条件xxxx的进程<br>7. 结束进程</p>
+   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> pid       //杀死该pid的进程</span><br><span class="line"><span class="built_in">kill</span> -9 pid    //强制杀死该进程   </span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li><p>查看链接</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ping IP        //查看与此IP地址的连接情况</span><br><span class="line">netstat -an    //查看当前系统端口</span><br><span class="line">netstat -an | grep 8080     //查看指定端口</span><br></pre></td></tr></table></figure></li>
+<li><p>快速清屏</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctrl+l        //清屏，往上翻可以查看历史操作</span><br></pre></td></tr></table></figure></li>
+<li><p>远程主机</p>
+</li>
+</ol>
+<pre><code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh IP       //远程主机，需要输入用户名和密码</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="Ubuntu初始化"><a href="#Ubuntu初始化" class="headerlink" title="Ubuntu初始化"></a>Ubuntu初始化</h2><h3 id="初始化配置"><a href="#初始化配置" class="headerlink" title="初始化配置"></a>初始化配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置root密码</span></span><br><span class="line"><span class="built_in">sudo</span> passwd root</span><br><span class="line"><span class="comment"># 设定静态IP</span></span><br><span class="line"><span class="built_in">sudo</span> nano /etc/netplan/50-cloud-init.yaml</span><br><span class="line">在文件中找到下面这行代码：dhcp4: <span class="literal">true</span></span><br><span class="line">将其替换为以下内容：</span><br><span class="line">dhcp4: <span class="literal">false</span></span><br><span class="line">addresses: [IP地址/子网掩码]</span><br><span class="line">gateway4: 网关地址</span><br><span class="line">nameservers:</span><br><span class="line">  addresses: [DNS服务器地址]</span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line">dhcp4: <span class="literal">false</span></span><br><span class="line">addresses: [192.168.0.100/24]</span><br><span class="line">gateway4: 192.168.0.1</span><br><span class="line">nameservers:</span><br><span class="line">  addresses: [8.8.8.8]</span><br><span class="line">保存并退出，运行以下命令来应用配置并重启网络服务：</span><br><span class="line"><span class="built_in">sudo</span> netplan apply</span><br><span class="line"><span class="built_in">sudo</span> systemctl restart networking</span><br></pre></td></tr></table></figure>
+
+<p><strong>远程访问主机</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install openssh-server</span><br></pre></td></tr></table></figure>
+
+<p>安装完成后，请确保 OpenSSH 服务器已启动。通过运行以下命令来检查它的状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl status ssh</span><br></pre></td></tr></table></figure>
+
+<p>如果 OpenSSH 服务器尚未启动，通过运行以下命令来启动它：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start ssh</span><br></pre></td></tr></table></figure>
+
+<p>设定 OpenSSH 服务器随系统启动而自动启动，运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> ssh</span><br></pre></td></tr></table></figure>
+
+<p><strong>换源（Ubuntu 24.04 LTS版本之前）</strong></p>
+<p>首先，打开终端并运行以下命令来备份源列表文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> /etc/apt/sources.list /etc/apt/sources.list.bak</span><br></pre></td></tr></table></figure>
+
+<p>然后，运行以下命令来打开源列表文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> gedit /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+
+<p>在文件中，删除原来的内容，并粘贴以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.cloud.aliyuncs.com/ubuntu jammy main restricted</span><br><span class="line">deb http://mirrors.cloud.aliyuncs.com/ubuntu jammy-updates main restricted</span><br><span class="line">deb http://mirrors.cloud.aliyuncs.com/ubuntu jammy universe</span><br><span class="line">deb http://mirrors.cloud.aliyuncs.com/ubuntu jammy-updates universe</span><br><span class="line">deb http://mirrors.cloud.aliyuncs.com/ubuntu jammy multiverse</span><br><span class="line">deb http://mirrors.cloud.aliyuncs.com/ubuntu jammy-updates multiverse</span><br><span class="line">deb http://mirrors.cloud.aliyuncs.com/ubuntu jammy-backports main restricted universe multiverse</span><br><span class="line">deb http://mirrors.cloud.aliyuncs.com/ubuntu jammy-security main restricted</span><br><span class="line">deb http://mirrors.cloud.aliyuncs.com/ubuntu jammy-security universe</span><br><span class="line">deb http://mirrors.cloud.aliyuncs.com/ubuntu jammy-security multiverse</span><br></pre></td></tr></table></figure>
+
+<p>保存文件并退出。</p>
+<p>最后，运行以下命令来更新源列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br></pre></td></tr></table></figure>
+
+<p>也可以通过运行以下命令来恢复备份的源列表文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mv</span> /etc/apt/sources.list.bak /etc/apt/sources.list</span><br><span class="line"><span class="built_in">sudo</span> apt update</span><br></pre></td></tr></table></figure>
+
+<p><strong>换源（Ubuntu 24.04 LTS）</strong></p>
+<p>24.04LTS 后，apt源<code>source.list</code>的位置替换到了<code>/etc/apt/sources.list.d/ubuntu.sources</code>中</p>
+<p>1.备份源文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">cp</span> /etc/apt/sources.list.d/ubuntu.sources  /etc/apt/sources.list.d/ubuntu.sources.bak</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>编辑源地址</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/apt/sources.list.d/ubuntu.sources</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>填入阿里云镜像</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 阿里云</span></span><br><span class="line">Types: deb</span><br><span class="line">URIs: http://mirrors.aliyun.com/ubuntu/</span><br><span class="line">Suites: noble noble-updates noble-security</span><br><span class="line">Components: main restricted universe multiverse</span><br><span class="line">Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>更新源列表</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>更新系统软件包，输入以下命令：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<p>其他几份国内源如下：</p>
+<p><em>清华源</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释</span></span><br><span class="line">Types: deb</span><br><span class="line">URIs: http://mirrors.tuna.tsinghua.edu.cn/ubuntu/</span><br><span class="line">Suites: noble noble-updates noble-security</span><br><span class="line">Components: main restricted universe multiverse</span><br><span class="line">Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
+
+<p><em>中科大源</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Types: deb</span><br><span class="line">URIs: http://mirrors.ustc.edu.cn/ubuntu/</span><br><span class="line">Suites: noble noble-updates noble-security</span><br><span class="line">Components: main restricted universe multiverse</span><br><span class="line">Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
+
+<p><em>网易163源</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Types: deb</span><br><span class="line">URIs: http://mirrors.163.com/ubuntu/</span><br><span class="line">Suites: noble noble-updates noble-security</span><br><span class="line">Components: main restricted universe multiverse</span><br><span class="line">Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>设置主机名称</strong></p>
+<p>默认主机的 hostname 都是随机生成，不方便识别，这里以 <code>ubuntu-study</code> 为实例作为主机名进行设置。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> hostnamectl set-hostname ubuntu-study <span class="comment"># 设置主机名</span></span><br><span class="line"><span class="built_in">sudo</span> hostnamectl <span class="comment"># 查看主机名</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>设置完成之后，需要退出终端重新登录就可以看到自定义主机名。</p>
+</blockquote>
+<p><strong>终端配色终端配色</strong></p>
+<p>为了设置终端颜色，需要对 <code>~/.bashrc</code> 文件中的 PS1 变量进行定制，<strong>值得注意的是这个修改仅对当前用户生效</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;# 终端配色</span></span><br><span class="line"><span class="string">export export PS1=&#x27;\[\033[01;33m\]\u@\h\[\033[01;31m\] \W\$\[\033[00m\] &#x27;&quot;</span> &gt;&gt; ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>配置完成后，终端配色如下</p>
+<p><img src="/../images/202404031425834.png" alt="image-20240403142526803"></p>
+<p><strong>添加必要系统工具</strong></p>
+<p>安装 <code>vim</code> 编辑器、网络请求 <code>wget</code>、<code>curl</code>以及压缩与解压缩软件等。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install -y \</span><br><span class="line">  vim \</span><br><span class="line">  wget \</span><br><span class="line">  curl \</span><br><span class="line">  cmake \</span><br><span class="line">  g++ \</span><br><span class="line">  tree \</span><br><span class="line">  git \</span><br><span class="line">  zip \</span><br><span class="line">  unzip</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置时区</strong></p>
+<p>将服务器的时区设置为中国地区。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> timedatectl set-timezone Asia/Shanghai</span><br><span class="line"><span class="built_in">sudo</span> timedatectl set-local-rtc 0</span><br><span class="line"><span class="built_in">sudo</span> timedatectl set-ntp 1</span><br></pre></td></tr></table></figure>
+
+<p><strong>配置默认的编辑器</strong></p>
+<p>Ubuntu 系统默认的文件编辑器是 nano 而不是 Vim，那么怎么设置成 Vim 呢？</p>
+<p>执行下面的命令选择将 Vim 设置为服务器默认的编辑器。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> update-alternatives --config editor</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h3><h4 id="vm-tools"><a href="#vm-tools" class="headerlink" title="vm-tools"></a>vm-tools</h4><p>当使用vm虚拟机使用ubuntu时，需要安装vm-tools</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vm的工具</span></span><br><span class="line"><span class="built_in">sudo</span> apt -y install open-vm-tools</span><br><span class="line"><span class="comment"># 安装下面的，可以让我们在主机与虚拟机之间复制粘贴</span></span><br><span class="line"><span class="built_in">sudo</span> apt -y install open-vm-tools-desktop</span><br></pre></td></tr></table></figure>
+
+<h4 id="软件中心"><a href="#软件中心" class="headerlink" title="软件中心"></a>软件中心</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install plasma-discover</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="安装与卸载-deb文件"><a href="#安装与卸载-deb文件" class="headerlink" title="安装与卸载.deb文件"></a>安装与卸载.deb文件</h3><p><strong>安装</strong></p>
+<ul>
+<li><p>使用默认的软件中心</p>
+</li>
+<li><p>在命令行中使用<code>dpkg</code>安装<code>.deb</code>文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果你想对 deb 文件使用 apt 命令，像这样使用它:</span></span><br><span class="line">sudo apt install path_to_deb_file</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果你想对将要安装的 deb 软件包使用 dpkg 命令:</span></span><br><span class="line">sudo dpkg -i path_to_deb_file</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果你在安装 deb 软件包的过程中得到一个依赖项的错误，你可以使用下面的命令来修复依赖项的问题：</span></span><br><span class="line">sudo apt install -f</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>卸载</strong></p>
+<ul>
+<li><p>使用apt命令移除deb软件包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt remove program_name</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果不知道安装程序的`program_name`</span></span><br><span class="line">sudo apt list --installed | grep xxx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用dpkg命令移除deb软件包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">你可以使用 dpkg 来找到已安装程序的名称：</span></span><br><span class="line">dpkg -l | grep edge</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ii  microsoft-edge-stable                      116.0.1938.81-1                         amd64        The web browser from Microsoft</span><br></pre></td></tr></table></figure>
+
+<p>在上面的命令输出中的 ii 意味着软件包已经被正确地安装。现在，你有了程序名称，你可以使用 dpkg 命令来移除它：</p>
+<p><code>dpkg -r program_name</code></p>
+</li>
+</ul>
+<h2 id="CentOS初始化"><a href="#CentOS初始化" class="headerlink" title="CentOS初始化"></a>CentOS初始化</h2><p>下面以<code>CentOS7 </code>为例，进行初始化相关配置:</p>
+<h3 id="换源"><a href="#换源" class="headerlink" title="换源"></a>换源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">首先对默认的软件源进行备份</span></span><br><span class="line">mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入 yum 源文件夹</span></span><br><span class="line">cd /etc/yum.repos.d/</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这里以CentOS7为例</span></span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果wget命令不生效，说明还没有安装wget工具，输入yum -y install wget 回车进行安装，或者使用</span></span><br><span class="line">curl -O http://mirrors.aliyun.com/repo/Centos-7.repo </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">清理并重建缓存</span></span><br><span class="line">sudo yum clean all</span><br><span class="line">sudo yum makecache</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">验证更新</span></span><br><span class="line">sudo yum update</span><br></pre></td></tr></table></figure>
+
+<h3 id="常用软件安装"><a href="#常用软件安装" class="headerlink" title="常用软件安装"></a>常用软件安装</h3><blockquote>
+<p>如果使用的最小化安装，常用的工具我们需要手动进行安装</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install -y vim wget curl epel-release gcc net-tools ntpdate psmisc unzip</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Tab补全</span></span><br><span class="line">yum install bash-completion</span><br></pre></td></tr></table></figure>
+
+<h3 id="关闭防火墙-可选"><a href="#关闭防火墙-可选" class="headerlink" title="关闭防火墙(可选)"></a>关闭防火墙(可选)</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl disable firewalld</span><br></pre></td></tr></table></figure>
+
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><h3 id="与Linux传输文件"><a href="#与Linux传输文件" class="headerlink" title="与Linux传输文件"></a>与Linux传输文件</h3><p>使用<code>scp</code>命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp C://Windows文件.txt root@192.168.10.131:/home/Linux文件位置</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><h3 id="1Panel面版"><a href="#1Panel面版" class="headerlink" title="1Panel面版"></a>1Panel面版</h3><p>我们可以通过安装可视化运维<code>1Panel</code>面版，方便常见的操作</p>
+<p>下面前往官网地址：<a target="_blank" rel="noopener" href="https://1panel.cn/docs/installation/online_installation/">在线安装 - 1Panel 文档</a> 在安装部署选择自己的系统</p>
+<h3 id="JDK安装"><a href="#JDK安装" class="headerlink" title="JDK安装"></a>JDK安装</h3><ol>
+<li><p>下载 JDK 或将提前下载好的安装文件上传至 <code>/opt/software</code></p>
+<p>前往<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/#java8">Java Downloads | Oracle</a>，选择<a target="_blank" rel="noopener" href="https://www.oracle.com/webapps/redirect/signon?nexturl=https://download.oracle.com/otn/java/jdk/8u451-b10/8a1589aa0fe24566b4337beee47c2d29/jdk-8u451-linux-i586.tar.gz">jdk-8u451-linux-i586.tar.gz</a> 进行下载</p>
+</li>
+<li><p>解压</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /opt/module</span><br><span class="line">tar -zxvf jdk-8u451-linux-i586.tar.gz -C /opt/module</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改<code> /etc/profile</code>，设置环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">此处JAVA_HOME为你下载的版本，在/opt/module 目录下</span></span><br><span class="line">export JAVA_HOME=/opt/module/jdk1.8.0_451</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>刷新环境</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证环境</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果报错：-bash: /opt/module/jdk1.8.0_451/bin/java: /lib/ld-linux.so.2: bad ELF interpreter: 没有那个文件或目录</span></span><br><span class="line"> sudo yum install glibc.i686</span><br><span class="line"><span class="meta prompt_"> # </span><span class="language-bash">安装完成后再次测试</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Maven安装"><a href="#Maven安装" class="headerlink" title="Maven安装"></a>Maven安装</h3><p>前往官网下载 <strong>Apache Maven</strong>安装包，官方下载地址：<a target="_blank" rel="noopener" href="https://maven.apache.org/download.cgi">https://maven.apache.org/download.cgi</a></p>
+<p><img src="/../images/202504212139828.png" alt="Apache Maven下载"></p>
+<p>解压下载的 Maven 安装包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">我将安装包放到了 /opt/software 目录下，执行解压，解压到 /opt/module</span></span><br><span class="line">tar -zxvf apache-maven-3.9.9-bin.tar.gz -C /opt/module</span><br><span class="line"></span><br><span class="line">注意：apache-maven-3.6.3-bin.tar.gz是我下载的安装包名称，请修改为你下载的安装包名称。</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置Maven 国内镜像地址</strong>（这里采用阿里云）</p>
+<p>找到<code>Maven文件夹</code>下的<code>conf文件夹</code>（我目录为：&#x2F;opt&#x2F;module&#x2F;apache-maven-3.9.9&#x2F;conf）编辑<strong>settings.xml</strong>文件，添加如下代码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;mirror&gt; </span><br><span class="line">    &lt;id&gt;alimaven&lt;/id&gt; </span><br><span class="line">    &lt;name&gt;aliyun maven&lt;/name&gt; </span><br><span class="line">    &lt;url&gt;https://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt; </span><br><span class="line">    &lt;mirrorOf&gt;central&lt;/mirrorOf&gt; </span><br><span class="line">&lt;/mirror&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置 Maven 本地仓库文件目录</strong>（主要用于保存下载的jar文件）</p>
+<p>首先确定jar保存在哪里（我保存的目录为：&#x2F;opt&#x2F;module&#x2F;apache-maven-3.9.9&#x2F;LocalJAR  ）可以通过mkdir 命令创建文件目录，建议保存在Maven目录下），编辑<strong>settings.xml配置文件</strong>，添加如下代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;localRepository&gt;/opt/module/apache-maven-3.9.9/LocalJAR&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>指定JDK版本</strong>（设置Maven创建的工程的JDK版本）</p>
+<p>添加如下代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;profile&gt;</span><br><span class="line">  &lt;id&gt;jdk-1.8&lt;/id&gt;</span><br><span class="line">  &lt;activation&gt;</span><br><span class="line">    &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">    &lt;jdk&gt;1.8&lt;/jdk&gt;</span><br><span class="line">  &lt;/activation&gt;</span><br><span class="line">  &lt;properties&gt;</span><br><span class="line">    &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;</span><br><span class="line">    &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;</span><br><span class="line">    &lt;maven.compiler.compilerVersion&gt;1.8&lt;/maven.compiler.compilerVersion&gt;</span><br><span class="line">  &lt;/properties&gt;</span><br><span class="line">&lt;/profile&gt;</span><br></pre></td></tr></table></figure>
+
+<p>最终删除注释整个配置如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;settings xmlns=&quot;http://maven.apache.org/SETTINGS/1.2.0&quot;</span><br><span class="line">          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">          xsi:schemaLocation=&quot;http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd&quot;&gt;</span><br><span class="line">	&lt;localRepository&gt;/opt/module/apache-maven-3.9.9/LocalJAR&lt;/localRepository&gt;</span><br><span class="line">	&lt;pluginGroups&gt;</span><br><span class="line">	&lt;/pluginGroups&gt;</span><br><span class="line">	&lt;proxies&gt;</span><br><span class="line">	&lt;/proxies&gt;</span><br><span class="line">	&lt;servers&gt;</span><br><span class="line">	&lt;/servers&gt;</span><br><span class="line">	&lt;mirrors&gt;</span><br><span class="line">		&lt;mirror&gt;</span><br><span class="line">			&lt;id&gt;alimaven&lt;/id&gt;</span><br><span class="line">			&lt;name&gt;aliyun maven&lt;/name&gt;</span><br><span class="line">			&lt;url&gt;https://maven.aliyun.com/nexus/content/groups/public/&lt;/url&gt;</span><br><span class="line">			&lt;mirrorOf&gt;central&lt;/mirrorOf&gt;</span><br><span class="line">		&lt;/mirror&gt;</span><br><span class="line">	&lt;/mirrors&gt;</span><br><span class="line">	&lt;profiles&gt;</span><br><span class="line">		&lt;profile&gt;</span><br><span class="line">			&lt;id&gt;jdk-1.8&lt;/id&gt;</span><br><span class="line">			&lt;activation&gt;</span><br><span class="line">				&lt;activeByDefault&gt;true&lt;/activeByDefault&gt;</span><br><span class="line">				&lt;jdk&gt;1.8&lt;/jdk&gt;</span><br><span class="line">			&lt;/activation&gt;</span><br><span class="line">			&lt;properties&gt;</span><br><span class="line">				&lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;</span><br><span class="line">				&lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;</span><br><span class="line">				&lt;maven.compiler.compilerVersion&gt;1.8&lt;/maven.compiler.compilerVersion&gt;</span><br><span class="line">			&lt;/properties&gt;</span><br><span class="line">		&lt;/profile&gt;</span><br><span class="line">	&lt;/profiles&gt;</span><br><span class="line">&lt;/settings&gt;</span><br></pre></td></tr></table></figure>
+
+<p><strong>配置Maven环境变量</strong></p>
+<p>打开环境变量配置文件命令：<code>vim /etc/profile</code>，添加如下代码在最后：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export MAVEN_HOME=/opt/module/apache-maven-3.9.9		（这是我的maven路径，请查看你们具体路径）</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin:$MAVEN_HOME/bin</span><br></pre></td></tr></table></figure>
+
+<p><strong>重新加载配置文件</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看是否安装成功</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h2><h3 id="java项目"><a href="#java项目" class="headerlink" title="java项目"></a>java项目</h3><p>达成<code>jar</code>包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
+
+<p>运行<code>jar</code>包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar demoa.jar</span><br></pre></td></tr></table></figure>
+
+<p>后台运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> java -jar demo.jar &gt;temp.txt &amp;</span><br></pre></td></tr></table></figure>
+
+<p>可通过<code>jobs</code>查看后台任务</p>
+<h3 id="Vue项目"><a href="#Vue项目" class="headerlink" title="Vue项目"></a>Vue项目</h3><p>vue3使用Router的history模式，nginx其他页面报错：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    index  /data/dist/index.html;</span><br><span class="line">    try_files $uri $uri/ /index.html;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="docker一键部署"><a href="#docker一键部署" class="headerlink" title="docker一键部署"></a>docker一键部署</h3><ul>
+<li>Java项目</li>
+</ul>
+<p>将打完包jar包的文件（例如：<code>tem-1.0.jar</code>）放在服务器目标目录下，新建两个文件：<code>Dockerfile</code>、<code>start.sh</code>，格式如下：</p>
+<p><strong>Dockerfile</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基于指定版本的Java镜像</span></span><br><span class="line">FROM openjdk:8</span><br><span class="line"><span class="comment"># 添加Java应用的JAR包到容器中</span></span><br><span class="line">ADD tem-1.0.jar /app.jar</span><br><span class="line"><span class="comment"># 暴露应用端口</span></span><br><span class="line">EXPOSE 8080</span><br><span class="line"><span class="comment"># 运行jar包</span></span><br><span class="line">ENTRYPOINT [<span class="string">&quot;java&quot;</span>,<span class="string">&quot;-jar&quot;</span>,<span class="string">&quot;app.jar&quot;</span>,<span class="string">&quot;--spring.profiles.active=prod&quot;</span>]</span><br></pre></td></tr></table></figure>
+
+<p><strong>start.sh</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker stop tem</span><br><span class="line">docker <span class="built_in">rm</span> tem</span><br><span class="line">docker build -t tem .</span><br><span class="line">docker run -d -p 8080:8080 -v /etc/localtime:/etc/localtime:ro -e TZ=Asia/Shanghai --network=host --name tem tem</span><br><span class="line">docker <span class="built_in">cp</span> /usr/share/fonts/ tem:/usr/share/</span><br></pre></td></tr></table></figure>
+
+<p>保证目标目录下存放了：<code>要运行的项目jar包</code>、<code>Dockerfile</code>、<code>start.sh</code>，添加<code>start.sh</code>可执行权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> u+x start.sh</span><br></pre></td></tr></table></figure>
+
+<p>运行脚本即可一键将java项目打包docker镜像并运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./start.sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>前端工程项目</li>
+</ul>
+<p>准备好前端工程已生成好的<code>dist</code>文件夹，一般进行压缩上传<code>dist.zip</code>、<code>default.conf</code>nginx配置文件、<code>Dockerfile</code>、<code>start.sh</code></p>
+<p><strong>default.conf</strong>：针对后端接口的nginx配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">	server 127.0.0.1:8080; <span class="comment">#后端项目的api访问地址</span></span><br><span class="line">&#125;</span><br><span class="line">client_max_body_size 600M;</span><br><span class="line">proxy_connect_timeout 300s;</span><br><span class="line">proxy_read_timeout 300s;</span><br><span class="line">server &#123;</span><br><span class="line">    listen       9090;</span><br><span class="line">    listen  [::]:9090;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">        try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">   location ^~/api &#123;</span><br><span class="line">		proxy_set_header Host <span class="variable">$http_host</span>;</span><br><span class="line">		proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">		proxy_set_header REMOTE-HOST <span class="variable">$remote_addr</span>;</span><br><span class="line">		proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">		proxy_pass http://127.0.0.1:8080/;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">    error_page   500 502 503 504  /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">        root   /usr/share/nginx/html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Dockerfile</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定nginx版本</span></span><br><span class="line">FROM nginx:1.26</span><br><span class="line"><span class="comment"># 添加作者说明</span></span><br><span class="line">MAINTAINER wwj</span><br><span class="line"><span class="comment"># 删除镜像中的default.conf文件</span></span><br><span class="line">RUN <span class="built_in">rm</span> /etc/nginx/conf.d/default.conf</span><br><span class="line"><span class="comment"># 将项目的default.conf复制到/etc/nginx/conf.d/</span></span><br><span class="line">ADD default.conf /etc/nginx/conf.d/</span><br><span class="line"><span class="comment"># 将项目的dist文件夹下的所有文件复制到镜像/usr/share/nginx/html/目录下</span></span><br><span class="line">COPY dist/ /usr/share/nginx/html/</span><br></pre></td></tr></table></figure>
+
+<p><strong>start.sh</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf dist</span><br><span class="line">unzip dist.zip</span><br><span class="line">docker stop tem-front</span><br><span class="line">docker <span class="built_in">rm</span> tem-front</span><br><span class="line">docker build -t tem-front .</span><br><span class="line">docker run -d -p 9090:9090 -v /etc/localtime:/etc/localtime:ro -e TZ=Asia/Shanghai --network=host  --name tem-front tem-front</span><br></pre></td></tr></table></figure>
+
+<h3 id="若依框架实战"><a href="#若依框架实战" class="headerlink" title="若依框架实战"></a>若依框架实战</h3><p><a target="_blank" rel="noopener" href="https://gitee.com/y_project/RuoYi-Vue">RuoYi-Vue: 🎉前后端分离权限管理系统(gitee.com)</a></p>
+<p>搭建好Mysql、redis，将文件中的<code>SQL</code>导入数据库，在<code>application.yml</code>中配置好数据据ip地址</p>
+<p>将后端打包为<code>jar</code>包：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package</span><br></pre></td></tr></table></figure>
+
+<p>或者使用IDEA的Maven</p>
+<p><img src="/../images/image-20230713093337886.png" alt="image-20230713093337886"></p>
+<p>打包成功后，将<code>jar</code>包复制到服务器，使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar ruoyi-vue.jar</span><br></pre></td></tr></table></figure>
+
+<p>前端使用生成模式打包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build:prod</span><br></pre></td></tr></table></figure>
+
+<p>将打包后的<code>dist</code>放到服务器</p>
+<h3 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a>nginx配置</h3><p>在<code>ngiex</code>进行配置修改：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server</span><br><span class="line">    &#123;</span><br><span class="line">        listen 80;</span><br><span class="line">        server_name ry-vue;</span><br><span class="line">        index index.html index.htm index.php;</span><br><span class="line">        root /workspace/ui/dist;</span><br><span class="line"></span><br><span class="line">		location /prod-api/ &#123;</span><br><span class="line">            proxy_set_header Host $http_host;</span><br><span class="line">            proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">            proxy_set_header REMOTE-HOST $remote_addr;</span><br><span class="line">            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">            proxy_pass http://ip:8080/;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./nginx -s -reload   <span class="comment">#重启nginx</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置nginx让他负载均衡转发</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">upstream ruoyi&#123;</span><br><span class="line">    server 192.168.109.102:8080 weight=5; #weight为权重，权重越高，请求的服务更多</span><br><span class="line">    server 192.168.109.103:8080 weight=3;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    #charset koi8-r;</span><br><span class="line"></span><br><span class="line">    #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        root   /workspace/dist;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location /prod-api/ &#123;</span><br><span class="line">        proxy_set_header Host $http_host;</span><br><span class="line">        proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">        proxy_set_header REMOTE-HOST $remote_addr;</span><br><span class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">        proxy_pass http://ruoyi/;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>静态资源404</li>
+</ul>
+<p>在nginx配置后端接口，加上<code>^~</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location ^~ /api/ &#123;</span><br><span class="line">	proxy_pass http://localhost:9090/api/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="在Windows中安装nginx"><a href="#在Windows中安装nginx" class="headerlink" title="在Windows中安装nginx"></a>在Windows中安装nginx</h3><p>从官网进行下载：<a target="_blank" rel="noopener" href="https://nginx.org/en/download.html">nginx</a>，下载后放到一个没有空格，没有中文的目录下：</p>
+<p><img src="/../images/image-20230914170723270.png" alt="image-20230914170723270"></p>
+<p>在此处，进入<code>cmd</code>：输入命令 <code>nginx.exe</code>，即可启动，如果没有报错，及启动正常，</p>
+<p><strong>关闭nginx</strong>，关闭当前的命令行窗口，nginx不会停止，关闭有两种方式：</p>
+<ul>
+<li>在<code>cmd</code>中输入：<code>nginx.exe -s stop</code> 即可关闭</li>
+<li>在任务管理器中进行关闭：</li>
+</ul>
+<p><img src="/../images/image-20230914171118369.png" alt="image-20230914171118369"></p>
+<h2 id="服务器配置代理"><a href="#服务器配置代理" class="headerlink" title="服务器配置代理"></a>服务器配置代理</h2><p>需要准备3个文件：</p>
+<ol>
+<li><p>先下载对应版本的clash <a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases/download/v1.17.0/clash-linux-amd64-v1.17.0.gz">clash-linux-amd64-v1.17.0.gz</a></p>
+</li>
+<li><p>在windows中打开clash，打开配置文件所在的文件夹，将配置文件<strong>复制出来改名</strong>为<code>config.yml</code></p>
+</li>
+</ol>
+<p><img src="/../images/image-20230812155458152.png" alt="image-20230812155458152"></p>
+<p><img src="/../images/image-20230812155718403.png" alt="image-20230812155718403"></p>
+<ol start="3">
+<li>在上一级目录中，复制<code>Country.mmdb</code></li>
+</ol>
+<p><img src="/../images/image-20230812155944811.png" alt="image-20230812155944811"></p>
+<p>将准备好的三个文件放到新建文件夹<code>clash</code>中，上传到服务器 <code>/opt</code>中，进入<code>/opt/clash</code></p>
+<p><img src="/../images/image-20230812222852638.png" alt="image-20230812222852638"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">解压文件</span></span><br><span class="line">gunzip clash-linux-amd64-v1.17.0.gz</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重命名为clash 赋予权限</span></span><br><span class="line">mv clash-linux-amd64-v1.17.0 clash</span><br><span class="line">chmod +x clash</span><br><span class="line">执行 ./clash --help 进行测试，如果执行失败，说明下载错了版本，需重新下载对应版本</span><br><span class="line">./clash --help</span><br></pre></td></tr></table></figure>
+
+<h3 id="将clash设为守护进程"><a href="#将clash设为守护进程" class="headerlink" title="将clash设为守护进程"></a>将clash设为守护进程</h3><blockquote>
+<p>键入<code>cd /etc/systemd/system</code><br>然后<code>vim clash.service</code> 文件内容如下，直接复制粘贴即可(按i进入插入模式，然后shift+Insert粘贴)，然后退出保存(ESC + <code>:wq</code>)</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=clash-core</span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=/opt/clash/clash -f /opt/clash/config.yml -d /opt/clash/</span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<h3 id="在终端中启用clash"><a href="#在终端中启用clash" class="headerlink" title="在终端中启用clash"></a>在终端中启用clash</h3><p>#可将下面两行放入~&#x2F;.bashrc中，否则仅对当次终端有效。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">针对当前用户</span><br><span class="line">vim ~/.bashrc</span><br><span class="line">针对所有用户</span><br><span class="line">vim /etc/profile</span><br><span class="line"><span class="built_in">export</span> http_proxy=<span class="string">&quot;http://127.0.0.1:7890&quot;</span></span><br><span class="line"><span class="built_in">export</span> https_proxy=<span class="string">&quot;http://127.0.0.1:7890&quot;</span></span><br><span class="line"></span><br><span class="line">修改后可以使用命令使其立即生效</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">可将下面两行放入~/.bashrc中，否则仅对当次终端有效。</span></span><br><span class="line">export http_proxy=&quot;http://127.0.0.1:7890&quot;</span><br><span class="line">export https_proxy=&quot;http://127.0.0.1:7890&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查看环境变量</span></span><br><span class="line">export</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">启动clash</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl start clash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">把clash设为开机自启</span></span><br><span class="line">systemctl enable clash.service</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">检查是否开机自启</span></span><br><span class="line">systemctl is-enabled clash.service</span><br></pre></td></tr></table></figure>
+
+<p>测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -i google.com</span><br></pre></td></tr></table></figure>
+
+<p>关闭clash</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">终止clash服务</span></span><br><span class="line">systemctl stop clash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">关闭开机自启</span></span><br><span class="line">systemctl disable clash</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">删除设置的环境变量</span></span><br><span class="line">unset http_proxy</span><br><span class="line">unset https_proxy</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="搭建VsCode-Web"><a href="#搭建VsCode-Web" class="headerlink" title="搭建VsCode Web"></a>搭建VsCode Web</h2><p>安装<code>code-server</code>，可以从GitHub网址进行选择<a target="_blank" rel="noopener" href="https://github.com/coder/code-server%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%98%AFlinux%EF%BC%8C">https://github.com/coder/code-server，如果是linux，</a> amd的可以直接点击下面的链接进行下载：<a target="_blank" rel="noopener" href="https://github.com/coder/code-server/releases/download/v4.16.1/code-server-4.16.1-linux-amd64.tar.gz">code-server-4.16.1-linux-amd64.tar.gz</a></p>
+<p>在服务器宝塔安装<code>Node.js版本管理器</code></p>
+<p>将下载的压缩包复制到路径<code>/www/wwwroot/</code>下，重名为<code>code_server</code>，添加node项目，启动选择的命令选择自定义</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/www/wwwroot/code_server/bin/code-server --port 9999 --host 0.0.0.0 --auth password</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../images/image-20230909201839632.png" alt="image-20230909201839632"></p>
+<h2 id="Jupyter"><a href="#Jupyter" class="headerlink" title="Jupyter"></a>Jupyter</h2><h3 id="安装-Anaconda"><a href="#安装-Anaconda" class="headerlink" title="安装 Anaconda"></a>安装 Anaconda</h3><p>下载Anaconda最新安装程序 <strong><a href="https://link.zhihu.com/?target=https://www.anaconda.com/products/individual%23Downloads">https://www.anaconda.com/products/i</a></strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.anaconda.com/archive/Anaconda3-2021.05-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<p>运行安装程序:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh Anaconda3-2021.05-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+
+<p>安装过程中敲回车和输入yes同意许可即可</p>
+<p>安装完成重新登录即可</p>
+<h3 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h3><ul>
+<li>安装jupyter包</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install jupyter </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>生成默认配置文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config --allow-root</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>随后我们往配置文件写入一些内容</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置可以访问的ip, 默认是localhost, 将其改为 &#x27;*&#x27;</span></span><br><span class="line">c.NotebookApp.ip = <span class="string">&#x27;*&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 笔记本的默认打开目录, 自己设置</span></span><br><span class="line">c.NotebookApp.notebook_dir = <span class="string">&#x27;/home/jupyter/documents/jupyter_notebook&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 笔记本启动后是否打开浏览器, 设为 False即可</span></span><br><span class="line">c.NotebookApp.open_browser = False</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认访问端口, 可自己修改</span></span><br><span class="line">c.NotebookApp.port = 9999</span><br><span class="line"></span><br><span class="line"><span class="comment"># jupyterlab是否显示quit按钮,我设为false以免自己不小心按到把服务停了</span></span><br><span class="line">c.NotebookApp.quit_button = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果使用root用户运行,将下列值改为True即可, 运行时也可加参数将其改为True</span></span><br><span class="line">c.NotebookApp.allow_root = False</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置密码</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook password</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改好配置文件之后, 运行如下命令启动笔记本</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure>
+
+<h3 id="后台运行"><a href="#后台运行" class="headerlink" title="后台运行"></a>后台运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> jupyter notebook --no-browser --ip=0.0.0.0 --allow-root &amp;</span><br></pre></td></tr></table></figure>
+
+<p>用&amp;让命令后台运行, 并把标准输出写入jupyter.log中</p>
+<p>nohup表示no hang up, 就是不挂起, 这个命令执行后即使终端退出, Jupyter也不会停止运行.</p>
+<h3 id="关闭后台运行的Jupyter"><a href="#关闭后台运行的Jupyter" class="headerlink" title="关闭后台运行的Jupyter"></a>关闭后台运行的Jupyter</h3><ol>
+<li>找到Jupyter进程PID(关闭在前面后台执行的进程的步骤，首先找到其进程PID)</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep xxxx</span><br></pre></td></tr></table></figure>
+
+<p>ps -ef : 查看本机所有的进程；<br>grep xxxx代表过滤找到条件xxxx的进程</p>
+<ol start="2">
+<li>kill掉Jupyter进程</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9  PID</span><br></pre></td></tr></table></figure>
+
+<p>kill -9 具体的进程的PID</p>
+<h2 id="Minio对象存储搭建"><a href="#Minio对象存储搭建" class="headerlink" title="Minio对象存储搭建"></a>Minio对象存储搭建</h2><p>可以通过直接在<strong>Linux安装</strong>，或者通过<strong>Docker安装（推荐）</strong></p>
+<h3 id="在docker中安装"><a href="#在docker中安装" class="headerlink" title="在docker中安装"></a>在docker中安装</h3><p>拉取并运行<strong>mino</strong>，将网页控制台与Api接口的端口的9000，9001映射出来，其中的<strong>MINIO_ROOT_USER</strong>与<strong>MINIO_ROOT_PASSWORD</strong>为网页登录的用户名与密码。将主机的 <code>/home/data</code> 目录映射到容器的 <code>/data </code>目录，存储的文件保存到本机的<code>/home/data</code>中，主机的 <code>/home/config</code> 目录映射到容器的 <code>/root/.minio</code> 目录。<br><code>自处minio/minio:RELEASE.2025-04-22T22-12-26Z 为最新版带有管理端版本的Minio，最新版为社区版，不带管理端的版本为minio/minio</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 拉取镜像</span></span><br><span class="line">docker pull minio/minio:RELEASE.2025-04-22T22-12-26Z</span><br><span class="line"><span class="comment"># 启动服务</span></span><br><span class="line">docker run -d -p 9000:9000 -p 9001:9001 \</span><br><span class="line">--name minio \</span><br><span class="line">--restart=always \</span><br><span class="line">-v /data/minio:/data \</span><br><span class="line">-e <span class="string">&quot;MINIO_ROOT_USER=minioadmin&quot;</span> \</span><br><span class="line">-e <span class="string">&quot;MINIO_ROOT_PASSWORD=minioadmin&quot;</span> \</span><br><span class="line">-v /home/config:/root/.minio \</span><br><span class="line">minio/minio:RELEASE.2025-04-22T22-12-26Z server /data --console-address <span class="string">&quot;:9001&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>启动：ip:9000，进入控制台Web，输入刚才设置的用户名与密码</p>
+<p><img src="/../images/20230221212701394.png" alt="20230221212701394.png"></p>
+<p>创建<strong>新的密钥</strong>，也就是创建一个用户，分配为管理员，方便下面进行读写：</p>
+<p><img src="/../images/202312101553371.png" alt="202312101553371.png"></p>
+<h3 id="在SpringBoot中使用"><a href="#在SpringBoot中使用" class="headerlink" title="在SpringBoot中使用"></a>在SpringBoot中使用</h3><p>配置依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- minio --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.minio<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>minio<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.3.7<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在application.yml中配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">minio:</span></span><br><span class="line">  <span class="comment"># 访问的url</span></span><br><span class="line">  <span class="attr">endpoint:</span> <span class="string">http://192.168.10.100</span></span><br><span class="line">  <span class="comment"># API的端口</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">9001</span></span><br><span class="line">  <span class="comment"># 密钥</span></span><br><span class="line">  <span class="attr">accessKey:</span> </span><br><span class="line">  <span class="attr">secretKey:</span> </span><br><span class="line">  <span class="attr">secure:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">bucket-name:</span> <span class="string">picture</span> <span class="comment"># 桶名</span></span><br><span class="line">  <span class="attr">image-size:</span> <span class="number">10455760</span>    <span class="comment"># 图片文件最大为10M</span></span><br><span class="line">  <span class="attr">file-size:</span> <span class="number">1073741824</span>   <span class="comment"># 文件最大为1G</span></span><br></pre></td></tr></table></figure>
+
+<p>需在包config下新建类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io.minio.MinioClient;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.context.properties.ConfigurationProperties;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span>: java version 1.8</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: WWJ</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span>: 2023-02-21 22:20</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;minio&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyMinioProperties</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String endpoint;</span><br><span class="line">    <span class="keyword">private</span> Integer port;</span><br><span class="line">    <span class="keyword">private</span> String accessKey;</span><br><span class="line">    <span class="keyword">private</span> String secretKey;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> secure;</span><br><span class="line">    <span class="keyword">private</span> String bucketName;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">long</span> imageSize;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">long</span> fileSize;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MinioClient <span class="title function_">minioClient</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">MinioClient</span> <span class="variable">minioClient</span> <span class="operator">=</span> MinioClient.builder()</span><br><span class="line">                .credentials(accessKey, secretKey)</span><br><span class="line">                .endpoint(endpoint, port, secure)</span><br><span class="line">                .build();</span><br><span class="line">        <span class="keyword">return</span> minioClient;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用文件处理的工具类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.rongmei.mushroomProject.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.rongmei.mushroomProject.config.MyMinioProperties;</span><br><span class="line"><span class="keyword">import</span> io.minio.*;</span><br><span class="line"><span class="keyword">import</span> io.minio.errors.ErrorResponseException;</span><br><span class="line"><span class="keyword">import</span> io.minio.errors.InsufficientDataException;</span><br><span class="line"><span class="keyword">import</span> io.minio.errors.InvalidResponseException;</span><br><span class="line"><span class="keyword">import</span> io.minio.errors.XmlParserException;</span><br><span class="line"><span class="keyword">import</span> io.minio.http.Method;</span><br><span class="line"><span class="keyword">import</span> io.minio.messages.Bucket;</span><br><span class="line"><span class="keyword">import</span> io.minio.messages.Item;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.io.FilenameUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.FastByteArrayOutputStream;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.annotation.Resource;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletOutputStream;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.security.NoSuchAlgorithmException;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span>: java version 1.8</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@Author</span>: WWJ</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span>:</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span>: 2023-02-21 22:33</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MinioUtil</span> &#123;</span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> MyMinioProperties prop;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> MinioClient minioClient;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查看存储bucket是否存在</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">bucketExists</span><span class="params">(String bucketName)</span> &#123;</span><br><span class="line">        Boolean found;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> found;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建存储bucket</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">makeBucket</span><span class="params">(String bucketName)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            minioClient.makeBucket(MakeBucketArgs.builder()</span><br><span class="line">                    .bucket(bucketName)</span><br><span class="line">                    .build());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除存储bucket</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">removeBucket</span><span class="params">(String bucketName)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            minioClient.removeBucket(RemoveBucketArgs.builder()</span><br><span class="line">                    .bucket(bucketName)</span><br><span class="line">                    .build());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取全部bucket</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Bucket&gt; <span class="title function_">getAllBuckets</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            List&lt;Bucket&gt; buckets = minioClient.listBuckets();</span><br><span class="line">            <span class="keyword">return</span> buckets;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 文件上传</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> file 文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">upload</span><span class="params">(MultipartFile file)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (file.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">String</span> <span class="variable">originalFilename</span> <span class="operator">=</span> file.getOriginalFilename();</span><br><span class="line">        <span class="type">String</span> <span class="variable">uuid</span> <span class="operator">=</span> UUID.randomUUID().toString().replace(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">ext</span> <span class="operator">=</span> <span class="string">&quot;.&quot;</span> + FilenameUtils.getExtension(originalFilename);</span><br><span class="line">        <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> uuid + ext;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">PutObjectArgs</span> <span class="variable">objectArgs</span> <span class="operator">=</span> PutObjectArgs.builder().bucket(prop.getBucketName()).object(fileName)</span><br><span class="line">                    .stream(file.getInputStream(), file.getSize(), -<span class="number">1</span>).contentType(file.getContentType()).build();</span><br><span class="line">            <span class="comment">//文件名称相同会覆盖</span></span><br><span class="line">            minioClient.putObject(objectArgs);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> fileName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 预览图片</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">preview</span><span class="params">(String fileName)</span> &#123;</span><br><span class="line">        <span class="comment">// 查看文件地址</span></span><br><span class="line">        <span class="type">GetPresignedObjectUrlArgs</span> <span class="variable">build</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GetPresignedObjectUrlArgs</span>().builder().bucket(prop.getBucketName()).object(fileName).method(Method.GET).build();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> minioClient.getPresignedObjectUrl(build);</span><br><span class="line">            <span class="keyword">return</span> url;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 文件下载</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName 文件名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> res      response</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> Boolean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">download</span><span class="params">(String fileName, HttpServletResponse res)</span> &#123;</span><br><span class="line">        <span class="type">GetObjectArgs</span> <span class="variable">objectArgs</span> <span class="operator">=</span> GetObjectArgs.builder().bucket(prop.getBucketName())</span><br><span class="line">                .object(fileName).build();</span><br><span class="line">        <span class="keyword">try</span> (<span class="type">GetObjectResponse</span> <span class="variable">response</span> <span class="operator">=</span> minioClient.getObject(objectArgs)) &#123;</span><br><span class="line">            <span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="type">int</span> len;</span><br><span class="line">            <span class="keyword">try</span> (<span class="type">FastByteArrayOutputStream</span> <span class="variable">os</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FastByteArrayOutputStream</span>()) &#123;</span><br><span class="line">                <span class="keyword">while</span> ((len = response.read(buf)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                    os.write(buf, <span class="number">0</span>, len);</span><br><span class="line">                &#125;</span><br><span class="line">                os.flush();</span><br><span class="line">                <span class="type">byte</span>[] bytes = os.toByteArray();</span><br><span class="line">                res.setCharacterEncoding(<span class="string">&quot;utf-8&quot;</span>);</span><br><span class="line">                <span class="comment">// 设置强制下载不打开</span></span><br><span class="line">                <span class="comment">// res.setContentType(&quot;application/force-download&quot;);</span></span><br><span class="line">                res.addHeader(<span class="string">&quot;Content-Disposition&quot;</span>, <span class="string">&quot;attachment;fileName=&quot;</span> + fileName);</span><br><span class="line">                <span class="keyword">try</span> (<span class="type">ServletOutputStream</span> <span class="variable">stream</span> <span class="operator">=</span> res.getOutputStream()) &#123;</span><br><span class="line">                    stream.write(bytes);</span><br><span class="line">                    stream.flush();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查看文件对象</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 存储bucket内文件对象信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Item&gt; <span class="title function_">listObjects</span><span class="params">()</span> &#123;</span><br><span class="line">        Iterable&lt;Result&lt;Item&gt;&gt; results = minioClient.listObjects(</span><br><span class="line">                ListObjectsArgs.builder().bucket(prop.getBucketName()).build());</span><br><span class="line">        List&lt;Item&gt; items = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">for</span> (Result&lt;Item&gt; result : results) &#123;</span><br><span class="line">                items.add(result.get());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> items;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取路径下文件列表</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> prefix     文件名称</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> recursive  是否递归查找，如果是false,就模拟文件夹结构查找</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 二进制流</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> Iterable&lt;Result&lt;Item&gt;&gt; <span class="title function_">listObjects</span><span class="params">(String prefix, <span class="type">boolean</span> recursive)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> minioClient.listObjects(ListObjectsArgs.builder().bucket(prop.getBucketName()).prefix(prefix).recursive(recursive).build());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     * <span class="doctag">@throws</span> Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">remove</span><span class="params">(String fileName)</span> &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            minioClient.removeObject(RemoveObjectArgs.builder().bucket(prop.getBucketName()).object(fileName).build());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在controller层即可调用工具类</p>
+<p>上传对象</p>
+<p><img src="/../images/image-20230222170646249.png" alt="image-20230222170646249.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取桶内所有图片URL</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/find&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;ObjectDTO&gt; <span class="title function_">findAll</span><span class="params">(<span class="meta">@RequestParam(defaultValue = &quot;&quot;)</span> String filename)</span> <span class="keyword">throws</span> IOException, InvalidKeyException, InvalidResponseException, InsufficientDataException, NoSuchAlgorithmException, ServerException, InternalException, XmlParserException, ErrorResponseException &#123;</span><br><span class="line">        ArrayList&lt;ObjectDTO&gt; objectDTOS = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        Iterable&lt;Result&lt;Item&gt;&gt; results = minioUtil.listObjects(filename, <span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">for</span> (Result&lt;Item&gt; result: results) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">fileName</span> <span class="operator">=</span> result.get().objectName();</span><br><span class="line">            <span class="type">String</span> <span class="variable">address</span> <span class="operator">=</span> minioUtil.preview(fileName);</span><br><span class="line">            <span class="type">String</span> <span class="variable">url</span> <span class="operator">=</span> StringUtils.substringBefore(address, <span class="string">&quot;?&quot;</span>);</span><br><span class="line">            <span class="type">ObjectDTO</span> <span class="variable">objectDTO</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectDTO</span>(fileName, url);</span><br><span class="line">            objectDTOS.add(objectDTO);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> objectDTOS;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8/" rel="tag"># 对象存储</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/04/%E5%9C%A8%E7%BA%BF%E9%9F%B3%E4%B9%90%E6%92%AD%E6%94%BE%E5%99%A8/" rel="prev" title="在线音乐播放器">
+                  <i class="fa fa-angle-left"></i> 在线音乐播放器
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/06/16/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95/" rel="next" title="推荐算法">
+                  推荐算法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phils</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
