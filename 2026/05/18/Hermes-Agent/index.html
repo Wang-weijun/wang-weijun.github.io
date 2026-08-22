@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/img/iconfont.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/img/iconfont.png">
+  <link rel="mask-icon" href="/img/iconfont.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wang-weijun.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Hermes Agent在Windows WSL2安装部署">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hermes Agent">
+<meta property="og:url" content="http://wang-weijun.github.io/2026/05/18/Hermes-Agent/index.html">
+<meta property="og:site_name" content="Phils的杂货铺">
+<meta property="og:description" content="Hermes Agent在Windows WSL2安装部署">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20260520083531511.png">
+<meta property="og:image" content="http://wang-weijun.github.io/images/image-20260520084338945.png">
+<meta property="article:published_time" content="2026-05-18T09:10:53.000Z">
+<meta property="article:modified_time" content="2026-08-22T17:10:50.037Z">
+<meta property="article:author" content="Phils">
+<meta property="article:tag" content="hermes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://wang-weijun.github.io/images/image-20260520083531511.png">
+
+
+<link rel="canonical" href="http://wang-weijun.github.io/2026/05/18/Hermes-Agent/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://wang-weijun.github.io/2026/05/18/Hermes-Agent/","path":"2026/05/18/Hermes-Agent/","title":"Hermes Agent"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Hermes Agent | Phils的杂货铺</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Phils的杂货铺</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hermes-Agent"><span class="nav-number">1.</span> <span class="nav-text">Hermes Agent</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2"><span class="nav-number">1.1.</span> <span class="nav-text">安装部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows%E7%94%A8%E6%88%B7%EF%BC%9A%E5%85%88%E5%AE%89%E8%A3%85WSL2"><span class="nav-number">1.1.1.</span> <span class="nav-text">Windows用户：先安装WSL2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.2.</span> <span class="nav-text">一键安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">初始配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.4.</span> <span class="nav-text">开始使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%AF%9D%E4%B8%AD%E7%9A%84%E6%96%9C%E6%9D%A0%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.5.</span> <span class="nav-text">对话中的斜杠命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%88%9B%E6%96%B0"><span class="nav-number">1.2.</span> <span class="nav-text">核心创新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%85%A5%E7%A4%BE%E4%BA%A4%E5%AA%92%E4%BD%93"><span class="nav-number">1.3.</span> <span class="nav-text">接入社交媒体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%85%A5QQ"><span class="nav-number">1.3.1.</span> <span class="nav-text">接入QQ</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%85%A5%E5%BE%AE%E4%BF%A1"><span class="nav-number">1.3.2.</span> <span class="nav-text">接入微信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E8%B7%B5%E5%9C%BA%E6%99%AF"><span class="nav-number">1.4.</span> <span class="nav-text">实践场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A9-Agent-%E5%85%A8%E8%87%AA%E5%8A%A8%E5%88%B6%E4%BD%9C%E7%9F%A5%E8%AF%86%E8%AE%B2%E8%A7%A3%E8%A7%86%E9%A2%91"><span class="nav-number">1.4.1.</span> <span class="nav-text">让 Agent 全自动制作知识讲解视频</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Phils"
+      src="/img/profile.png">
+  <p class="site-author-name" itemprop="name">Phils</p>
+  <div class="site-description" itemprop="description">个人博客，IT，技术分享</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/wang-weijun" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;wang-weijun" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1191206969@qq.com" title="E-Mail → mailto:1191206969@qq.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://wang-weijun.github.io/2026/05/18/Hermes-Agent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/img/profile.png">
+      <meta itemprop="name" content="Phils">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Phils的杂货铺">
+      <meta itemprop="description" content="个人博客，IT，技术分享">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Hermes Agent | Phils的杂货铺">
+      <meta itemprop="description" content="Hermes Agent在Windows WSL2安装部署">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hermes Agent
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-18 17:10:53" itemprop="dateCreated datePublished" datetime="2026-05-18T17:10:53+08:00">2026-05-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-08-23 01:10:50" itemprop="dateModified" datetime="2026-08-23T01:10:50+08:00">2026-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%99%BA%E8%83%BD%E4%BD%93/" itemprop="url" rel="index"><span itemprop="name">智能体</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">Hermes Agent在Windows WSL2安装部署</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Hermes-Agent"><a href="#Hermes-Agent" class="headerlink" title="Hermes Agent"></a>Hermes Agent</h1><h2 id="安装部署"><a href="#安装部署" class="headerlink" title="安装部署"></a>安装部署</h2><p>环境要求：<br>操作系统：Linux、macOS、WSL2、Android (Termux)</p>
+<p>Python：3.11+（安装脚本会自动处理）</p>
+<p>Windows： ⚠ 不支持原生 Windows，请使用 WSL2</p>
+<h3 id="Windows用户：先安装WSL2"><a href="#Windows用户：先安装WSL2" class="headerlink" title="Windows用户：先安装WSL2"></a>Windows用户：先安装WSL2</h3><p>如果你使用 Windows，需要先安装 WSL2 (Windows Subsystem for Linux)。这是微软官方的 Linux 兼容层，性能接近原生。</p>
+<ol>
+<li><p>以管理员身份打开 PowerShell，执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启后，打开 Ubuntu 终端，设置用户名和密码</p>
+</li>
+<li><p>更新系统（建议换国内源加速）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 换清华源（可选，加速下载）</span></span><br><span class="line"><span class="built_in">sudo</span> sed -i <span class="string">&#x27;s|archive.ubuntu.com|mirrors.tuna.tsinghua.edu.cn|g&#x27;</span> /etc/apt/sources.list</span><br><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt upgrade -y</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="一键安装"><a href="#一键安装" class="headerlink" title="一键安装"></a>一键安装</h3><blockquote>
+<p><strong>关于 uv</strong></p>
+<p>Hermes Agent 使用 <a target="_blank" rel="noopener" href="https://docs.astral.sh/uv/">uv</a> 作为底层安装工具。 uv 是 Astral 团队用 Rust 开发的 Python 包管理器，集 pip + pyenv + virtualenv 于一体，速度比 pip 快 10-100 倍。 安装脚本会自动安装 uv，无需手动操作。</p>
+</blockquote>
+<p><strong>方式一：国内加速安装（推荐）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://ghfast.top/https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p>通过 ghfast.top 代理加速 GitHub 访问，自动安装 uv → Python 3.11 → 克隆仓库 → 安装依赖。</p>
+<p><strong>或</strong>使用Hermes Agent中文社区镜像源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://res1.hermesagent.org.cn/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p><strong>方式二：官方命令（可直连 GitHub 时）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p><strong>方式三：uv tool install（已有 uv 的用户）</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果你已经安装了 uv，可以直接从 PyPI 安装：</span></span><br><span class="line">uv tool install <span class="string">&quot;hermes-agent[cron,cli,pty,mcp]&quot;</span> --python 3.11</span><br></pre></td></tr></table></figure>
+
+<p>uv 会自动创建隔离环境，hermes 命令自动加入 PATH。 国内可加清华镜像：<code>--index-url https://pypi.tuna.tsinghua.edu.cn/simple</code>。 升级用 <code>uv tool upgrade hermes-agent</code>。</p>
+<p><strong>安装完成后验证</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bashrc    <span class="comment"># 重新加载 shell</span></span><br><span class="line">hermes --version   <span class="comment"># 应显示版本号</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>运行交互式设置向导</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hermes setup</span><br></pre></td></tr></table></figure>
+
+<p>向导会引导你选择 LLM 提供商和模型。</p>
+<h3 id="开始使用"><a href="#开始使用" class="headerlink" title="开始使用"></a>开始使用</h3><p><strong>启动交互式对话</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hermes</span><br></pre></td></tr></table></figure>
+
+<p>这会打开完整的终端界面 (TUI)，支持多行编辑、斜杠命令自动补全、对话历史和流式工具输出。</p>
+<p><strong>常用命令速查</strong></p>
+<table>
+<thead>
+<tr>
+<th>hermes</th>
+<th>启动交互式对话</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hermes model</td>
+<td>选择&#x2F;切换 LLM 模型</td>
+</tr>
+<tr>
+<td>hermes tools</td>
+<td>管理启用的工具集</td>
+</tr>
+<tr>
+<td>hermes config set</td>
+<td>修改配置项</td>
+</tr>
+<tr>
+<td>hermes gateway setup</td>
+<td>配置消息平台网关</td>
+</tr>
+<tr>
+<td>hermes gateway run</td>
+<td>启动消息网关（前台）</td>
+</tr>
+<tr>
+<td>hermes skills browse</td>
+<td>浏览可用技能</td>
+</tr>
+<tr>
+<td>hermes update</td>
+<td>更新到最新版本</td>
+</tr>
+<tr>
+<td>hermes doctor</td>
+<td>诊断问题</td>
+</tr>
+</tbody></table>
+<h3 id="对话中的斜杠命令"><a href="#对话中的斜杠命令" class="headerlink" title="对话中的斜杠命令"></a>对话中的斜杠命令</h3><p>在 CLI 或消息平台中，你可以使用以下斜杠命令控制 Agent：</p>
+<table>
+<thead>
+<tr>
+<th>&#x2F;new 或 &#x2F;reset</th>
+<th>开始新对话</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;model [模型名]</td>
+<td>切换模型</td>
+</tr>
+<tr>
+<td>&#x2F;personality [名称]</td>
+<td>设置个性</td>
+</tr>
+<tr>
+<td>&#x2F;retry</td>
+<td>重新生成上一条回复</td>
+</tr>
+<tr>
+<td>&#x2F;undo</td>
+<td>撤销上一轮对话</td>
+</tr>
+<tr>
+<td>&#x2F;compress</td>
+<td>压缩上下文（节省 token）</td>
+</tr>
+<tr>
+<td>&#x2F;usage</td>
+<td>查看 token 使用情况</td>
+</tr>
+<tr>
+<td>&#x2F;skills</td>
+<td>浏览技能列表</td>
+</tr>
+<tr>
+<td>&#x2F;stop</td>
+<td>中断当前任务</td>
+</tr>
+</tbody></table>
+<h2 id="核心创新"><a href="#核心创新" class="headerlink" title="核心创新"></a>核心创新</h2><p>Hermes Agent不是简单地调用LLM，而是通过内置的学习循环不断优化自身：</p>
+<ul>
+<li>自动从交互中生成Skill</li>
+<li>在使用中连续迭代技能</li>
+<li>主动持久化知识和用户偏好</li>
+<li>跨会话构建对用户的深度理解</li>
+</ul>
+<h2 id="接入社交媒体"><a href="#接入社交媒体" class="headerlink" title="接入社交媒体"></a>接入社交媒体</h2><h3 id="接入QQ"><a href="#接入QQ" class="headerlink" title="接入QQ"></a><strong>接入QQ</strong></h3><p>在WSL2界面输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hermes gateway setup</span><br></pre></td></tr></table></figure>
+
+<p>选择<code>QQ Bot</code>按下回车：</p>
+<p><img src="/../images/image-20260520083531511.png" alt="image-20260520083531511"></p>
+<p>选择第一个<code>Scan QR code to add bot automatically</code>，扫码登录，如显示以下：</p>
+<blockquote>
+<p>Open this URL in QQ on your phone:<br>  <a target="_blank" rel="noopener" href="https://q.qq.com/qqbot/openclaw/connect.html?task_id=xxxxxx">https://q.qq.com/qqbot/openclaw/connect.html?task_id=xxxxxx</a><br>  Tip: pip install qrcode  to display a scannable QR code here</p>
+</blockquote>
+<p>可直接打开URL，或者通过命令<code>pip install qrcode</code>安装二维码显示工具，安装后重新选择接入QQ</p>
+<blockquote>
+<p>如使用命令<code>pip install qrcode</code>提示找不到 pip，使用：<br>VIRTUAL_ENV&#x3D;~&#x2F;.hermes&#x2F;hermes-agent&#x2F;venv uv pip install qrcode</p>
+</blockquote>
+<p>最后执行<code>hermes gateway setup</code>，选择<strong>QQ Bot</strong></p>
+<p><img src="/../images/image-20260520084338945.png" alt="image-20260520084338945"></p>
+<p>连接成功后，选择第一项默认<code>Use DM pairing approval</code></p>
+<blockquote>
+<p>How should direct messages be authorized?<br>  ↑↓ navigate  ENTER&#x2F;SPACE select  ESC cancel</p>
+<p> → (●) Use DM pairing approval (recommended)<br>   (○) Allow all direct messages<br>   (○) Only allow listed user OpenIDs</p>
+</blockquote>
+<p>后续全部回车默认即可，等待重启网关后，通过QQ机器人进行对话。</p>
+<p><strong>高级配置</strong></p>
+<p>路径：</p>
+<blockquote>
+<p>~&#x2F;.hermes&#x2F;config.yaml</p>
+</blockquote>
+<p>示例：</p>
+<p>platforms:<br>qq:<br>enabled: true<br>extra:<br>markdown_support: true<br>dm_policy: “open”<br>group_policy: “open”</p>
+<h3 id="接入微信"><a href="#接入微信" class="headerlink" title="接入微信"></a>接入微信</h3><p>在WSL2界面输入命令：<code>hermes gateway setup</code>，选择<code>Weixin / WeChat</code>，选择扫码登录</p>
+<p>首次连接会提示：</p>
+<blockquote>
+<p>Here’s your pairing code: <code>599XXXXX</code></p>
+<p>Ask the bot owner to run:</p>
+<p><code>hermes pairing approve weixin 599XXXXX</code></p>
+</blockquote>
+<p>在WSL2界面输入：<code>hermes pairing approve weixin 599XXXXX</code>即可连接成功。</p>
+<h2 id="实践场景"><a href="#实践场景" class="headerlink" title="实践场景"></a>实践场景</h2><h3 id="让-Agent-全自动制作知识讲解视频"><a href="#让-Agent-全自动制作知识讲解视频" class="headerlink" title="让 Agent 全自动制作知识讲解视频"></a>让 Agent 全自动制作知识讲解视频</h3>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/hermes/" rel="tag"># hermes</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/04/22/%E7%A1%85%E8%B0%B7%E5%B0%8F%E6%99%BA/" rel="prev" title="硅谷小智">
+                  <i class="fa fa-angle-left"></i> 硅谷小智
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/08/22/DeepSeek-Harness/" rel="next" title="DeepSeek Harness">
+                  DeepSeek Harness <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Phils</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
